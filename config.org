@@ -52,3 +52,12 @@ Here are some additional functions/macros that could help you configure Doom:
 
  You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
  they are implemented.
+
+
+End the intro that they give. From here on out it's mostly just includes,
+because modularity is helpful.
+#+INCLUDE: juliaStuff.org
+
+
+various weird interface settings
+#+INCLUDE: evilSettings.org

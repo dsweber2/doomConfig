@@ -1,0 +1,38 @@
+#+TITLE: Julia Stuff
+First, let's define the current version of Julia
+#+BEGIN_SRC elisp
+(setq juliaVersion "1.5.2")
+#+END_SRC
+
+I've mostly borrowed this from https://www.gtrun.org/post/config/#julia.
+Apparently non-Jedi has been making an emacs interface for the lsp [[https://github.com/non-Jedi/lsp-julia.git][here.]]
+Also, this julia code doesn't actually need to be tangled, but should be run
+beforehand.
+#+BEGIN_SRC julia :tangle no
+juliaVersion = "1.5.2"
+using Pkg, PackageCompiler
+Pkg.activate("~/.julia/environments/newBase")
+Pkg.add("LanguageServer")
+create_sysimage(:LanguageServer,sysimage_path="/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
+#+END_SRC
+
+and now the actual code to be tangled into ~init.el~. It puths julia on the path
+and runs it.
+#+BEGIN_SRC elisp
+(use-package! lsp-julia
+  :config
+  (setenv "PATH"
+          (concat
+           "/home/dsweber/julia-" juliaVersion "/bin" ":"
+           (getenv "PATH")))
+  (add-hook 'julia-mode-hook 'lsp-mode)
+  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  (setq lsp-julia-default-environment "~/.julia/environments/newBase")
+  (setq lsp-julia-command (concat "/home/dsweber/julia-" juliaVersion "/bin/julia"
+                                  "-q/home/dsweber/julia-" juliaVersion "/lib/LspSysImage.so"))
+  ;;(setq lsp-folding-range-limit 100)
+  )
+#+END_SRC
+
+#+RESULTS:
+: t

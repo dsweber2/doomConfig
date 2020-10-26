@@ -1,0 +1,15 @@
+#+TITLE: Evil Settings
+because I have some odd preferences about how top middle bottom should work
+#+BEGIN_SRC elisp
+(after! evil
+  (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
+  (define-key evil-normal-state-map "L" 'evil-scroll-line-to-bottom)
+  (define-key evil-normal-state-map "H" 'evil-scroll-line-to-top)
+  (define-key evil-normal-state-map "zM" 'evil-window-middle)
+  (define-key evil-normal-state-map "zL" 'evil-window-bottom)
+  (define-key evil-normal-state-map "zH" 'evil-window-top)
+  (define-key evil-normal-state-map "zl" 'evil-scroll-left)
+  (define-key evil-normal-state-map "zH" 'evil-scroll-right)
+  (define-key evil-normal-state-map "zH" 'evil-window-top)
+  )
+#+END_SRC
