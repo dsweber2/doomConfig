@@ -1,0 +1,12 @@
+#+TITLE: Local Locations
+because not every computer is exactly the same
+#+BEGIN_SRC elisp
+
+#+END_SRC
+
+
+#+BEGIN_SRC elisp :tangle no
+(use-package! activity-watch-mode
+  :config
+  (global-activity-watch-mode))
+#+END_SRC

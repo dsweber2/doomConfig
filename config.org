@@ -3,6 +3,24 @@ Place your private configuration here! Remember, you do not need to run `doom
 sync` after modifying this file!
 
 
+Reference variables which are unique to a given computer (thus the separate file)
+#+INCLUDE: localLocations.org
+Here are some additional functions/macros that could help you configure Doom:
+ - `load!' for loading external *.el files relative to this one
+ - `use-package!' for configuring packages
+ - `after!' for running code after a package has loaded
+ - `add-load-path!' for adding directories to the `load-path', relative to
+   this file. Emacs searches the `load-path' when you load packages with
+   `require' or `use-package'.
+ - `map!' for binding new keys
+
+To get information about any of these functions/macros, move the cursor over
+the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+This will open documentation for it, including demos of how they are used.
+
+You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
+they are implemented.
+* fonts and theme 
 Doom exposes five (optional) variables for controlling fonts in Doom. Here are
 the three important ones:
   + `doom-font'
@@ -36,28 +54,156 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 
 
 
-Here are some additional functions/macros that could help you configure Doom:
 
- - `load!' for loading external *.el files relative to this one
- - `use-package!' for configuring packages
- - `after!' for running code after a package has loaded
- - `add-load-path!' for adding directories to the `load-path', relative to
-   this file. Emacs searches the `load-path' when you load packages with
-   `require' or `use-package'.
- - `map!' for binding new keys
+* Base Settings and new functions
 
- To get information about any of these functions/macros, move the cursor over
- the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
- This will open documentation for it, including demos of how they are used.
+camelCaseIsHowIRollInCode
+#+BEGIN_SRC elisp
+(add-hook 'prog-mode-hook 'subword-mode)
+#+END_SRC
 
- You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
- they are implemented.
+input via tex allows for easy unicode
+#+BEGIN_SRC elisp
+(setq default-input-method "TeX")
+#+END_SRC
 
+I don't like lockfiles, as they just create clutter
+#+BEGIN_SRC elisp
+(setq create-lockfiles nil)
+#+END_SRC
 
-End the intro that they give. From here on out it's mostly just includes,
-because modularity is helpful.
-#+INCLUDE: juliaStuff.org
+** New functions
+#+BEGIN_SRC elisp
+(defun add-electric-pairs (new-pairs)
+  (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
+#+END_SRC
+** Mark/unmark issues (currently off)
+#+BEGIN_SRC elisp :tangle no
+(global-set-key (kbd "M-n") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
+(global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-P") 'mc/unmark-previous-like-this)
+(global-set-key (kbd "C-c n") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M-]") 'mc/mark-sgml-tag-pair)
+#+END_SRC
 
+* Ace stuff
+So the default switch windows binding is too deep for my taste, so I'm switching
+it with the meta key of facemenu
+#+BEGIN_SRC elisp
+(after! ace-window
+  :config
+  (global-set-key (kbd "M-o") 'ace-window)
+  (global-set-key (kbd "C-x o") 'facemenu-menu)
+  (setq aw-dispatch-always 3)
+  (setq aw-kes '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?: ?'))
+  (setq aw-scome 'frame)
+  (setq aw-make-frame-char ?n)
+  (defvar aw-dispatch-alist
+    '((?x aw-delete-window "Delete Window")
+      (?m aw-move-window "Swap Windows")
+      (?c aw-copy-window "Move Window")
+      (?b aw-switch-buffer-in-window "Select Buffer")
+      (?p aw-flip-window "Flip Window")
+      (?o aw-switch-buffer-other-window "Switch Buffer in another window")
+      (?r aw-split-window-fair "Split fair window")
+      (?z aw-split-window-vert "Split Vertical Window")
+      (?v aw-split-widnow-horz "Split Window")
+      ))
+  )
+#+End_src
+* Modifying doom installed packages
+** company stuff:
+#+BEGIN_SRC elisp
+(after! company-dict
+  (setq company-dict-dir (concat user-emacs-directory "dict/"))
+  (add-to-list 'company-backends 'company-bibtex))
+#+END_SRC
+**  auctex
+#+BEGIN_SRC elisp
+(after! tex
+  (setq-default TeX-master nil)
+  (setq TeX-save-query nil)
+  (setq Tex-PDF-mode t))
+#+END_SRC
 
-various weird interface settings
-#+INCLUDE: evilSettings.org
+* Org settings
+org ref is excellent
+#+BEGIN_SRC elisp
+(use-package! org-ref
+  :config
+  (setq orgRefDir "~/allHail/LaTeX/")
+  (setq reftex-default-bibliography '(concat orgRefDir "oneBibToRuleThemAll.bib")
+        org-ref-bibliograph-notes '(concat orgRefDir "oneBibToRuleThemAll.org")
+        bibtex-completion-bibliography '(concat orgRefDir "oneBibToRuleThemAll.bib")
+        bibtex-completion-library-path '("~/home/dsweber/allHail/zoteroFiles")
+        bibtex-completion-notes-path '(concat orgRefDir "hem-bibtex-notes"))
+  )
+#+END_SRC
+this allows for pairing $ in org mode files
+#+BEGIN_SRC elisp
+(after! org
+  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
+
+  (defun add-electric-pairs (new-pairs)
+    (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
+  (add-hook 'org-mode-hook '(add-electric-pairs org-pairs))
+  )
+#+END_SRC
+
+* Julia Settings
+First, let's define the current version of Julia
+#+BEGIN_SRC elisp
+(setq juliaVersion "1.5.2")
+#+END_SRC
+
+I've mostly borrowed this from https://www.gtrun.org/post/config/#julia.
+Apparently non-Jedi has been making an emacs interface for the lsp [[https://github.com/non-Jedi/lsp-julia.git][here.]] Also,
+this julia code doesn't actually need to be tangled, but should be run
+beforehand.
+#+BEGIN_SRC julia :tangle no
+juliaVersion = "1.5.2"
+using Pkg, PackageCompiler
+Pkg.activate("~/.julia/environments/newBase")
+Pkg.add("LanguageServer")
+create_sysimage(:LanguageServer,
+                sysimage_path="/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
+#+END_SRC
+
+and now the actual code to be tangled into ~init.el~. It puths julia on the path
+and runs it.
+#+BEGIN_SRC elisp
+(use-package! lsp-julia
+  :config
+  (setenv "PATH"
+          (concat
+           "/home/dsweber/julia-" juliaVersion "/bin" ":"
+           (getenv "PATH")))
+  (add-hook 'julia-mode-hook 'lsp-mode)
+  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  (setq lsp-julia-default-environment "~/.julia/environments/newBase")
+  (setq lsp-julia-command (concat "~/julia-" juliaVersion "/bin/julia"
+                                  "-q/home/dsweber/julia-" juliaVersion "/lib/LspSysImage.so"))
+  ;;(setq lsp-folding-range-limit 100)
+  )
+(setq julia-indent-offset 4)
+#+END_SRC
+
+#+RESULTS:
+: t
+* Evil Settings
+
+because I have some odd preferences about how top middle bottom should work
+#+BEGIN_SRC elisp
+(after! evil
+  (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
+  (define-key evil-normal-state-map "L" 'evil-scroll-line-to-bottom)
+  (define-key evil-normal-state-map "H" 'evil-scroll-line-to-top)
+  (define-key evil-normal-state-map "zM" 'evil-window-middle)
+  (define-key evil-normal-state-map "zL" 'evil-window-bottom)
+  (define-key evil-normal-state-map "zH" 'evil-window-top)
+  (define-key evil-normal-state-map "zl" 'evil-scroll-left)
+  (define-key evil-normal-state-map "zH" 'evil-scroll-right)
+  (define-key evil-normal-state-map "zH" 'evil-window-top)
+  )
+#+END_SRC

@@ -49,5 +49,18 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-
+;; julia packages
 (package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
+;; evil packages
+(package! evil-quickscope)
+(package! evil-fringe-mark)
+
+;; org packages
+(package! org-ref)
+(package! company-bibtex)
+
+;; editor packages
+(package! ace-jump-buffer)
+;;(package! ace-jump)
+;; random stuff
+;;(package! activity-watch-mode)
