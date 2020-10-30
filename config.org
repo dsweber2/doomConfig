@@ -94,12 +94,12 @@ it with the meta key of facemenu
 (after! ace-window
   :config
   (global-set-key (kbd "M-o") 'ace-window)
-  (global-set-key (kbd "C-x o") 'facemenu-menu)
+  ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
   (setq aw-kes '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?: ?'))
   (setq aw-scome 'frame)
   (setq aw-make-frame-char ?n)
-  (defvar aw-dispatch-alist
+  (setq aw-dispatch-alist
     '((?x aw-delete-window "Delete Window")
       (?m aw-move-window "Swap Windows")
       (?c aw-copy-window "Move Window")
@@ -168,11 +168,10 @@ using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
 create_sysimage(:LanguageServer,
-                sysimage_path="/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
+                sysimage_path = "/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
 #+END_SRC
 
-and now the actual code to be tangled into ~init.el~. It puts julia on the path
-and runs it.
+and now the actual code to be tangled into ~init.el~.
 #+BEGIN_SRC elisp
 (use-package! lsp-julia
   :config
@@ -190,8 +189,16 @@ and runs it.
 (setq julia-indent-offset 4)
 #+END_SRC
 
-#+RESULTS:
-: t
+It appears that julia-repl also has some settings to adjust
+#+begin_src elisp
+(after! julia-repl
+        (setq julia-repl-executable-records
+              '((default "/home/dsweber/julia-1.5.2/bin/julia" :basedir
+                         nil)
+                 )
+        )
+)
+#+end_src
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work

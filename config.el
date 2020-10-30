@@ -19,12 +19,12 @@
 (after! ace-window
   :config
   (global-set-key (kbd "M-o") 'ace-window)
-  (global-set-key (kbd "C-x o") 'facemenu-menu)
+  ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
   (setq aw-kes '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?: ?'))
   (setq aw-scome 'frame)
   (setq aw-make-frame-char ?n)
-  (defvar aw-dispatch-alist
+  (setq aw-dispatch-alist
     '((?x aw-delete-window "Delete Window")
       (?m aw-move-window "Swap Windows")
       (?c aw-copy-window "Move Window")
@@ -33,7 +33,8 @@
       (?o aw-switch-buffer-other-window "Switch Buffer in another window")
       (?r aw-split-window-fair "Split fair window")
       (?z aw-split-window-vert "Split Vertical Window")
-      (?v aw-split-widnow-horz "Split Window")
+      (?v aw-split-window-horz "Split Window horizontally")
+      (?? aw-show-dispatch-help)
       ))
   )
 
@@ -80,6 +81,14 @@
   ;;(setq lsp-folding-range-limit 100)
   )
 (setq julia-indent-offset 4)
+
+(after! julia-repl
+        (setq julia-repl-executable-records
+              '((default "/home/dsweber/julia-1.5.2/bin/julia" :basedir
+                         nil)
+                 )
+        )
+)
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
