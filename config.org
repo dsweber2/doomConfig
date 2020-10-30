@@ -108,7 +108,8 @@ it with the meta key of facemenu
       (?o aw-switch-buffer-other-window "Switch Buffer in another window")
       (?r aw-split-window-fair "Split fair window")
       (?z aw-split-window-vert "Split Vertical Window")
-      (?v aw-split-widnow-horz "Split Window")
+      (?v aw-split-window-horz "Split Window horizontally")
+      (?? aw-show-dispatch-help)
       ))
   )
 #+End_src
@@ -170,7 +171,7 @@ create_sysimage(:LanguageServer,
                 sysimage_path="/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
 #+END_SRC
 
-and now the actual code to be tangled into ~init.el~. It puths julia on the path
+and now the actual code to be tangled into ~init.el~. It puts julia on the path
 and runs it.
 #+BEGIN_SRC elisp
 (use-package! lsp-julia
