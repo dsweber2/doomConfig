@@ -92,7 +92,6 @@ So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
 #+BEGIN_SRC elisp
 (after! ace-window
-  :config
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
@@ -100,17 +99,17 @@ it with the meta key of facemenu
   (setq aw-scome 'frame)
   (setq aw-make-frame-char ?n)
   (setq aw-dispatch-alist
-    '((?x aw-delete-window "Delete Window")
-      (?m aw-move-window "Swap Windows")
-      (?c aw-copy-window "Move Window")
-      (?b aw-switch-buffer-in-window "Select Buffer")
-      (?p aw-flip-window "Flip Window")
-      (?o aw-switch-buffer-other-window "Switch Buffer in another window")
-      (?r aw-split-window-fair "Split fair window")
-      (?z aw-split-window-vert "Split Vertical Window")
-      (?v aw-split-window-horz "Split Window horizontally")
-      (?? aw-show-dispatch-help)
-      ))
+        '((?x aw-delete-window "Delete Window")
+          (?m aw-move-window "Swap Windows")
+          (?c aw-copy-window "Move Window")
+          (?b aw-switch-buffer-in-window "Select Buffer")
+          (?p aw-flip-window "Flip Window")
+          (?o aw-switch-buffer-other-window "Switch Buffer in another window")
+          (?r aw-split-window-fair "Split fair window")
+          (?z aw-split-window-vert "Split Vertical Window")
+          (?v aw-split-window-horz "Split Window horizontally")
+          (?? aw-show-dispatch-help)
+          ))
   )
 #+End_src
 * Modifying doom installed packages
@@ -118,39 +117,59 @@ it with the meta key of facemenu
 #+BEGIN_SRC elisp
 (after! company-dict
   (setq company-dict-dir (concat user-emacs-directory "dict/"))
-  (add-to-list 'company-backends 'company-bibtex))
+  (add-to-list 'company-backends 'company-bibtex 'company-ispell))
 #+END_SRC
 **  auctex
 #+BEGIN_SRC elisp
 (after! tex
-  (setq-default TeX-master nil)
+  (setq-default TeX-master 'dwim)
   (setq TeX-save-query nil)
-  (setq Tex-PDF-mode t))
+  (setq Tex-PDF-mode t)
+  (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
+)
 #+END_SRC
-
+som
 * Org settings
-org ref is excellent
+org ref is excellent.
+
 #+BEGIN_SRC elisp
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
-  (setq reftex-default-bibliography '(concat orgRefDir "oneBibToRuleThemAll.bib")
-        org-ref-bibliograph-notes '(concat orgRefDir "oneBibToRuleThemAll.org")
-        bibtex-completion-bibliography '(concat orgRefDir "oneBibToRuleThemAll.bib")
-        bibtex-completion-library-path '("~/home/dsweber/allHail/zoteroFiles")
-        bibtex-completion-notes-path '(concat orgRefDir "hem-bibtex-notes"))
+  (setq reftex-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        org-ref-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        org-ref-bibliography-notes (concat orgRefDir "oneBibToRuleThemAll.org")
+        bibtex-completion-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        bibtex-completion-library-path "~/allHail/zoteroFiles"
+        bibtex-completion-notes-path (concat orgRefDir "hem-bibtex-notes"))
+  (add-hook 'org-mode-hook (define-key evil-normal-state-map "gc" 'org-ref-helm-insert-cite-link))
   )
 #+END_SRC
-this allows for pairing $ in org mode files
+
+I would like company do to things in org-mode yes please thankyou
 #+BEGIN_SRC elisp
 (after! org
-  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
-
-  (defun add-electric-pairs (new-pairs)
-    (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
-  (add-hook 'org-mode-hook '(add-electric-pairs org-pairs))
-  )
+  :config
+  (set-company-backend! 'org-mode 'company-ispell)
+)
 #+END_SRC
+
+this allows for pairing $ in org mode files, and makes compiling to LaTeX functional.
+#  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
+
+ #  (defun add-electric-pairs (new-pairs)
+ #    (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
+ #  (add-hook 'org-mode-hook '(add-electric-pairs org-pairs))
+ # (setq org-latex-pdf-process (quote ( "latexmk -shell-escape -bibtex -f -pdf %f")))
+ # )
+whenever you're over a latex fragment, it will compile. Also, get the resolution correct
+#+begin_src elisp
+(use-package! org-fragtog
+  :config
+  (add-hook 'org-mode-hook 'org-fragtog-mode)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+)
+#+end_src
 
 * Julia Settings
 First, let's define the current version of Julia
@@ -181,10 +200,15 @@ and now the actual code to be tangled into ~init.el~.
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp-mode)
   (add-hook 'ess-julia-mode-hook #'lsp-mode)
-  (setq lsp-julia-default-environment "~/.julia/environments/newBase")
-  (setq lsp-julia-command (concat "~/julia-" juliaVersion "/bin/julia"
-                                  "-q/home/dsweber/julia-" juliaVersion "/lib/LspSysImage.so"))
-  ;;(setq lsp-folding-range-limit 100)
+  ;;(setq lsp-julia-default-environment "~/.julia/environments/newBase")
+  (setq lsp-julia-timeout 12000)
+  ;; (add-to-list 'lsp-julia-flags (concat "-J /home/dsweber/julia-"
+  ;;                                       juliaVersion "/lib/lspSysImage.so"))
+  ;; (setq lsp-julia-command (concat "/home/dsweber/julia-"
+  ;;                                 juliaVersion "/bin/julia "
+  ;;                                 "-q -J /home/dsweber/julia-"
+  ;;                                 juliaVersion "/lib/lspSysImage.so"))
+  (setq lsp-enable-folding t)
   )
 (setq julia-indent-offset 4)
 #+END_SRC
@@ -199,6 +223,8 @@ It appears that julia-repl also has some settings to adjust
         )
 )
 #+end_src
+** TODOs
+- add julia-repl-mode hooks
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work

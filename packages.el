@@ -58,7 +58,7 @@
 ;; org packages
 (package! org-ref)
 (package! company-bibtex)
-
+(package! org-fragtog)
 ;; editor packages
 (package! ace-jump-buffer)
 ;;(package! ace-jump)
