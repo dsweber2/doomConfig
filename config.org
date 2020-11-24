@@ -53,7 +53,20 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 
 
 
-
+* TODOs
+** [ ] fix org-mode always having helm pop up
+** [ ] add julia-repl-mode hooks
+** [ ] add hook for +word-wrap-mode to julia-repl-mode
+** [ ] expand company usability
+** [ ] jupyter notebooks
+** [ ] get ob-ein functional/ some way of running interesting code in org mode
+** [ ] actually useful calculator
+because the built-in one uses polish notation
+** [ ] symon (if ever remote again)
+** Things to figure out
+- git timemachine in eevil
+- yasnippets
+- 
 
 * Base Settings and new functions
 
@@ -75,6 +88,11 @@ I don't like lockfiles, as they just create clutter
 electric pairs are better
 #+begin_src elisp
 (setq electric-pair-mode t)
+#+end_src
+
+auto-fill mode (hard wrapping is nice methinks)
+#+begin_src elisp
+(setq-default auto-fill-function 'do-auto-fill)
 #+end_src
 ** New functions
 #+BEGIN_SRC elisp
@@ -231,9 +249,6 @@ It appears that julia-repl also has some settings to adjust
         )
   )
 #+end_src
-** TODOs
-- add julia-repl-mode hooks
-- add hook for +word-wrap-mode to julia-repl-mode
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work

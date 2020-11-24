@@ -15,6 +15,8 @@
 
 (setq electric-pair-mode t)
 
+(setq-default auto-fill-function 'do-auto-fill)
+
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
