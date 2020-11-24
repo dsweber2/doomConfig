@@ -72,12 +72,16 @@ I don't like lockfiles, as they just create clutter
 (setq create-lockfiles nil)
 #+END_SRC
 
+electric pairs are better
+#+begin_src elisp
+(setq electric-pair-mode t)
+#+end_src
 ** New functions
 #+BEGIN_SRC elisp
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 #+END_SRC
-** Mark/unmark issues (currently off)
+** Mark/unmark matching (currently off)
 #+BEGIN_SRC elisp :tangle no
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
@@ -117,9 +121,10 @@ it with the meta key of facemenu
 #+BEGIN_SRC elisp
 (after! company-dict
   (setq company-dict-dir (concat user-emacs-directory "dict/"))
-  (add-to-list 'company-backends 'company-bibtex 'company-ispell))
+  (setq backends-for-everywhere '(company-bibtex company-ispell))
+  (setq company-backends (append company-backends backends-for-everywhere)))
 #+END_SRC
-**  auctex
+**  Auctex
 #+BEGIN_SRC elisp
 (after! tex
   (setq-default TeX-master 'dwim)
@@ -128,7 +133,7 @@ it with the meta key of facemenu
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
 )
 #+END_SRC
-som
+
 * Org settings
 org ref is excellent.
 
@@ -150,11 +155,12 @@ I would like company do to things in org-mode yes please thankyou
 #+BEGIN_SRC elisp
 (after! org
   :config
-  (set-company-backend! 'org-mode 'company-ispell)
-)
+  (setq org-startup-with-latex-preview t)
+  (setq org-startup-with-inline-images t)
+  )
 #+END_SRC
-
-this allows for pairing $ in org mode files, and makes compiling to LaTeX functional.
+this allows for pairing $ in org mode files, and makes compiling to LaTeX
+functional. TODO not sure why borked
 #  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
 
  #  (defun add-electric-pairs (new-pairs)
@@ -162,6 +168,7 @@ this allows for pairing $ in org mode files, and makes compiling to LaTeX functi
  #  (add-hook 'org-mode-hook '(add-electric-pairs org-pairs))
  # (setq org-latex-pdf-process (quote ( "latexmk -shell-escape -bibtex -f -pdf %f")))
  # )
+
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
 #+begin_src elisp
 (use-package! org-fragtog
@@ -174,7 +181,7 @@ whenever you're over a latex fragment, it will compile. Also, get the resolution
 * Julia Settings
 First, let's define the current version of Julia
 #+BEGIN_SRC elisp
-(setq juliaVersion "1.5.2")
+(setq juliaVersion "1.5.3")
 #+END_SRC
 
 I've mostly borrowed this from https://www.gtrun.org/post/config/#julia.
@@ -182,7 +189,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.5.2"
+juliaVersion = "1.5.3"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -216,15 +223,17 @@ and now the actual code to be tangled into ~init.el~.
 It appears that julia-repl also has some settings to adjust
 #+begin_src elisp
 (after! julia-repl
-        (setq julia-repl-executable-records
-              '((default "/home/dsweber/julia-1.5.2/bin/julia" :basedir
-                         nil)
-                 )
+  (setq julia-repl-executable-records
+        `((default ,(concat "/home/dsweber/julia-" juliaVersion
+                            "/bin/julia") :basedir
+                            nil)
+          )
         )
-)
+  )
 #+end_src
 ** TODOs
 - add julia-repl-mode hooks
+- add hook for +word-wrap-mode to julia-repl-mode
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work
@@ -239,5 +248,32 @@ because I have some odd preferences about how top middle bottom should work
   (define-key evil-normal-state-map "zl" 'evil-scroll-left)
   (define-key evil-normal-state-map "zH" 'evil-scroll-right)
   (define-key evil-normal-state-map "zH" 'evil-window-top)
+  (setq evil-cross-lines t) ;; fF etc go beyond the current line
+  (setq evil-want-Y-yank-to-eol 'nil)
   )
 #+END_SRC
+
+quickscope highlights what letters are unique for the purpose of jumping.
+#+begin_src elisp
+(use-package! evil-quickscope
+  :config
+  (global-evil-quickscope-mode 1)
+  (setq evil-quickscope-cross-lines t)
+  )
+#+end_src
+
+fringe marks are more legible
+#+begin_src elisp
+(use-package! evil-fringe-mark
+  :config
+  (global-evil-fringe-mark-mode))
+#+end_src
+
+evil numbers increments and decrements numbers. useful for adding numbers
+(repeat the command e.g. 45 times)
+#+begin_src elisp
+(after! evil-numbers
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  )
+#+end_src

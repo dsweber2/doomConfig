@@ -55,6 +55,7 @@
 (package! evil-quickscope)
 (package! evil-fringe-mark)
 
+
 ;; org packages
 (package! org-ref)
 (package! company-bibtex)

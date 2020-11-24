@@ -13,6 +13,8 @@
 
 (setq create-lockfiles nil)
 
+(setq electric-pair-mode t)
+
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
@@ -39,7 +41,8 @@
 
 (after! company-dict
   (setq company-dict-dir (concat user-emacs-directory "dict/"))
-  (add-to-list 'company-backends 'company-bibtex 'company-ispell))
+  (setq backends-for-everywhere '(company-bibtex company-ispell))
+  (setq company-backends (append company-backends backends-for-everywhere)))
 
 (after! tex
   (setq-default TeX-master 'dwim)
@@ -62,8 +65,9 @@
 
 (after! org
   :config
-  (set-company-backend! 'org-mode 'company-ispell)
-)
+  (setq org-startup-with-latex-preview t)
+  (setq org-startup-with-inline-images t)
+  )
 
 (use-package! org-fragtog
   :config
@@ -71,7 +75,7 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 )
 
-(setq juliaVersion "1.5.2")
+(setq juliaVersion "1.5.3")
 
 (use-package! lsp-julia
   :config
@@ -94,12 +98,13 @@
 (setq julia-indent-offset 4)
 
 (after! julia-repl
-        (setq julia-repl-executable-records
-              '((default "/home/dsweber/julia-1.5.2/bin/julia" :basedir
-                         nil)
-                 )
+  (setq julia-repl-executable-records
+        `((default ,(concat "/home/dsweber/julia-" juliaVersion
+                            "/bin/julia") :basedir
+                            nil)
+          )
         )
-)
+  )
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
@@ -111,4 +116,21 @@
   (define-key evil-normal-state-map "zl" 'evil-scroll-left)
   (define-key evil-normal-state-map "zH" 'evil-scroll-right)
   (define-key evil-normal-state-map "zH" 'evil-window-top)
+  (setq evil-cross-lines t) ;; fF etc go beyond the current line
+  (setq evil-want-Y-yank-to-eol 'nil)
+  )
+
+(use-package! evil-quickscope
+  :config
+  (global-evil-quickscope-mode 1)
+  (setq evil-quickscope-cross-lines t)
+  )
+
+(use-package! evil-fringe-mark
+  :config
+  (global-evil-fringe-mark-mode))
+
+(after! evil-numbers
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
   )
