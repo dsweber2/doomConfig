@@ -63,11 +63,13 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 ** [ ] actually useful calculator
 because the built-in one uses polish notation
 ** [ ] symon (if ever remote again)
+** [ ] evil-quickscope seems to have introduced an error into f
+** [ ] Give conda some keybindings
+e.g. conda-env-activate is good.
 ** Things to figure out
 - git timemachine in eevil
 - yasnippets
 - 
-
 * Base Settings and new functions
 
 camelCaseIsHowIRollInCode
@@ -151,7 +153,13 @@ it with the meta key of facemenu
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
 )
 #+END_SRC
-
+** aspell dictionary spell whatever you want to call it:
+#+begin_src elisp
+(after! aspell
+  (setq ispell-dictionary "en-custom")
+  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.pws")
+)
+#+end_src
 * Org settings
 org ref is excellent.
 
@@ -225,7 +233,8 @@ and now the actual code to be tangled into ~init.el~.
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp-mode)
   (add-hook 'ess-julia-mode-hook #'lsp-mode)
-  ;;(setq lsp-julia-default-environment "~/.julia/environments/newBase")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+
   (setq lsp-julia-timeout 12000)
   ;; (add-to-list 'lsp-julia-flags (concat "-J /home/dsweber/julia-"
   ;;                                       juliaVersion "/lib/lspSysImage.so"))
@@ -247,6 +256,7 @@ It appears that julia-repl also has some settings to adjust
                             nil)
           )
         )
+  :hook '(julia-repl-mode-hook +word-wrap-mode)
   )
 #+end_src
 * Evil Settings

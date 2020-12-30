@@ -53,6 +53,11 @@
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
 )
 
+(after! aspell
+  (setq ispell-dictionary "en-custom")
+  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.pws")
+)
+
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
@@ -87,7 +92,8 @@
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp-mode)
   (add-hook 'ess-julia-mode-hook #'lsp-mode)
-  ;;(setq lsp-julia-default-environment "~/.julia/environments/newBase")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+
   (setq lsp-julia-timeout 12000)
   ;; (add-to-list 'lsp-julia-flags (concat "-J /home/dsweber/julia-"
   ;;                                       juliaVersion "/lib/lspSysImage.so"))
@@ -106,6 +112,7 @@
                             nil)
           )
         )
+  :hook '(julia-repl-mode-hook +word-wrap-mode)
   )
 
 (after! evil
