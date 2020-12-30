@@ -102,7 +102,7 @@ auto-fill mode (hard wrapping is nice methinks)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 #+END_SRC
 ** Mark/unmark matching (currently off)
-#+BEGIN_SRC elisp :tangle no
+#+BEGIN_SRC elisp
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
@@ -153,12 +153,13 @@ it with the meta key of facemenu
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
 )
 #+END_SRC
+
 ** aspell dictionary spell whatever you want to call it:
 #+begin_src elisp
-(after! aspell
+(after! spell-fu
   (setq ispell-dictionary "en-custom")
-  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.pws")
-)
+  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.txt")
+  )
 #+end_src
 * Org settings
 org ref is excellent.
