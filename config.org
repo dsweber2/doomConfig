@@ -93,7 +93,7 @@ electric pairs are better
 #+end_src
 
 auto-fill mode (hard wrapping is nice methinks)
-#+begin_src elisp
+#+begin_src elisp tangle:no
 (setq-default auto-fill-function 'do-auto-fill)
 #+end_src
 ** New functions
@@ -213,6 +213,7 @@ First, let's define the current version of Julia
 (setq juliaVersion "1.5.3")
 #+END_SRC
 
+
 I've mostly borrowed this from https://www.gtrun.org/post/config/#julia.
 Apparently non-Jedi has been making an emacs interface for the lsp [[https://github.com/non-Jedi/lsp-julia.git][here.]] Also,
 this julia code doesn't actually need to be tangled, but should be run
@@ -234,8 +235,8 @@ and now the actual code to be tangled into ~init.el~.
           (concat
            "/home/dsweber/julia-" juliaVersion "/bin" ":"
            (getenv "PATH")))
-  (add-hook 'julia-mode-hook 'lsp-mode)
-  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  (add-hook 'julia-mode-hook 'lsp)
+  (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
   (setq lsp-julia-timeout 12000)

@@ -20,6 +20,13 @@
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
+(global-set-key (kbd "M-n") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
+(global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-P") 'mc/unmark-previous-like-this)
+(global-set-key (kbd "C-c n") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M-]") 'mc/mark-sgml-tag-pair)
+
 (after! ace-window
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
@@ -53,10 +60,10 @@
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
 )
 
-(after! aspell
+(after! spell-fu
   (setq ispell-dictionary "en-custom")
-  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.pws")
-)
+  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.txt")
+  )
 
 (use-package! org-ref
   :config
@@ -92,8 +99,8 @@
           (concat
            "/home/dsweber/julia-" juliaVersion "/bin" ":"
            (getenv "PATH")))
-  (add-hook 'julia-mode-hook 'lsp-mode)
-  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  (add-hook 'julia-mode-hook 'lsp)
+  (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
   (setq lsp-julia-timeout 12000)
