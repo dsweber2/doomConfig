@@ -1,0 +1,1085 @@
+#+TITLE: Elfeed Sources
+* root                                          :elfeed:
+** fiction                                     :fiction:
+*** comics                                    :comics:
+**** [[http://derelictcomic.com/rss.php][Derelict Comic]]
+title: Derelict Comic
+front webpage: http://www.derelictcomic.com
+**** [[http://birdandmoon.tumblr.com/rss][birdandmoon.com]]
+title: birdandmoon.com
+front webpage: https://birdandmoon.tumblr.com/
+**** [[http://www.phdcomics.com/gradfeed.php][PHD Comics]]
+title: PHD Comics
+front webpage: http://www.phdcomics.com
+**** [[http://www.shatteredstarlight.com/feed/][Shattered Starlight]]
+title: Shattered Starlight
+front webpage: https://www.shatteredstarlight.com
+**** [[http://sssscomic.com/ssss-feed.xml][Stand Still. Stay Silent - Webcomic feed]]
+title: Stand Still. Stay Silent - Webcomic feed
+front webpage: http://www.sssscomic.com
+**** [[http://feeds.feedburner.com/zenpencils][ZEN PENCILS]]
+title: ZEN PENCILS
+front webpage: https://www.zenpencils.com/
+**** [[http://www.last-halloween.com/posts.rss][The Last Halloween]]
+title: The Last Halloween
+front webpage: https://www.last-halloween.com/
+**** [[http://feeds.feedburner.com/AvasDemon][Ava's Demon]]
+title: Ava's Demon
+front webpage: https://www.avasdemon.com/
+**** [[http://what-if.xkcd.com/feed.atom][What If?]]
+title: What If?
+front webpage: https://what-if.xkcd.com/145/
+**** [[http://tapastic.com/rss/series/347][Fisheye Placebo]]
+title: Fisheye Placebo
+front webpage: https://tapas.io/series/347
+**** [[http://sfeertheory.livejournal.com/data/rss][SFEER theory]]
+title: SFEER theory
+front webpage: https://sfeertheory.livejournal.com/
+**** [[http://www.rsspect.com/rss/gunner.xml][Gunnerkrigg court]]
+title: Gunnerkrigg court
+front webpage: http://www.gunnerkrigg.com/
+**** [[http://shadowunit.org/ShadowFeed.xml][Shadow Feed]]
+title: Shadow Feed
+front webpage: http://www.shadowunit.org
+**** [[http://backend.deviantart.com/rss.xml?q=gallery%3Asigeel+sort%3Atime&amp;type=deviation][DeviantArt: sigeel's gallery]]
+title: DeviantArt: sigeel's gallery
+front webpage: https://www.deviantart.com/newest/?q=gallery%3Asigeel
+**** [[http://www.rsspect.com/rss/vagrant.xml][Hark, A Vagrant!]]
+title: Hark, A Vagrant!
+front webpage: http://www.harkavagrant.com
+**** [[http://hyperboleandahalf.blogspot.com/feeds/posts/default][Hyperbole and a Half]]
+title: Hyperbole and a Half
+front webpage: http://hyperboleandahalf.blogspot.com/
+**** [[http://rsspect.com/rss/qwantz.xml][Dinosaur Comics!]]
+title: Dinosaur Comics!
+front webpage: http://www.qwantz.com
+**** [[http://lizclimo.tumblr.com/rss][Hi, I'm Liz]]
+title: Hi, I'm Liz
+front webpage: https://lizclimo.tumblr.com/
+**** [[http://abstrusegoose.com/feed][Abstruse Goose]]
+title: Abstruse Goose
+front webpage: https://abstrusegoose.com
+**** [[http://oglaf.com/feeds/rss/][Oglaf!]]
+title: Oglaf!
+front webpage: https://www.oglaf.com/latest/
+**** [[http://theoatmeal.com/feed/rss][The Oatmeal - Comics, Quizzes, &amp; Stories]]
+title: The Oatmeal - Comics, Quizzes, &amp; Stories
+front webpage: http://theoatmeal.com/
+**** [[http://www.exocomics.com/feed][Extra Ordinary]]
+title: Extra Ordinary
+front webpage: https://www.exocomics.com
+**** [[http://www.darthsanddroids.net/rss.xml][Darths & Droids]]
+title: Darths &amp; Droids
+front webpage: http://www.darthsanddroids.net/
+**** [[http://www.feywinds.com/stuff/extras/feywindsfeed.rss][Fey Winds Feed]]
+title: Fey Winds Feed
+front webpage: https://www.feywinds.com
+**** [[http://tapastic.com/rss/series/1626][Thermohalia]]
+title: Thermohalia
+front webpage: https://tapas.io/series/1626
+**** [[http://www.jspowerhour.com/comics.rss][Junior Scientist Power Hour]]
+title: Junior Scientist Power Hour
+front webpage: https://www.jspowerhour.com/
+**** [[http://www.lackadaisycats.com/rss/][Lackadaisy Cats]]
+title: Lackadaisy Cats
+front webpage: http://www.lackadaisy.com
+**** [[http://www.marecomic.com/feed/][Mare Internum | A science fiction webcomic]]
+title: Mare Internum | A science fiction webcomic
+front webpage: https://www.marecomic.com
+**** [[http://www.giantitp.com/comics/oots.rss][Order of the Stick]]
+title: Order of the Stick
+front webpage: http://www.giantitp.com/Comics.html
+**** [[http://www.smbc-comics.com/rss.php][Saturday Morning Breakfast Cereal (updated daily)]]
+title: Saturday Morning Breakfast Cereal (updated daily)
+front webpage: https://www.smbc-comics.com/
+**** [[http://www.headlessbliss.com/rss.php][Headless Bliss]]
+title: Headless Bliss
+front webpage: https://www.headlessbliss.com/
+**** [[http://feeds.feedburner.com/satwcomic][Scandinavia and the World]]
+title: Scandinavia and the World
+front webpage: https://satwcomic.com
+**** [[http://xkcd.com/rss.xml][xkcd.com]]
+title: xkcd.com
+front webpage: https://xkcd.com/
+**** [[http://www.sfeertheory.com/rss.php][Comics – Sfeer Theory]]
+title: Comics – Sfeer Theory
+front webpage: https://sfeertheory.com
+**** [[http://www.webtoons.com/en/fantasy/sword-interval/rss?title_no=486][Sword Interval]]
+title: Sword Interval
+front webpage: https://www.webtoons.com/en/fantasy/sword-interval/list?title_no=486
+**** [[http://www.casualvillain.com/Unsounded/feed/][Unsounded]]
+title: Unsounded
+front webpage: http://www.casualvillain.com/Unsounded
+**** [[https://unsoundedupdates.tumblr.com/rss][Unsounded Comic Updates]]
+title: Unsounded Comic Updates
+front webpage: https://unsoundedupdates.tumblr.com/
+**** [[http://feeds.feedburner.com/wondermark][Wondermark]]
+title: Wondermark
+front webpage: http://wondermark.com
+**** [[http://sarahseeandersen.tumblr.com/rss][Sarah's Scribbles]]
+title: Sarah's Scribbles
+front webpage: https://sarahcandersen.com/
+**** [[http://www.viruscomix.com/rss.xml][SUBNORMALITY!]]
+title: SUBNORMALITY!
+front webpage: http://www.viruscomix.com/subnormality.html
+**** [[http://praguerace.com/rss.php][Prague Race]]
+title: Prague Race
+front webpage: https://www.praguerace.com/
+**** [[http://killsixbilliondemons.com/?feed=rss2][Kill Six Billion Demons]]
+title: Kill Six Billion Demons
+front webpage: https://killsixbilliondemons.com
+**** [[http://survivingtheworld.net/feed.xml][Surviving the World]]
+title: Surviving the World
+front webpage: http://www.survivingtheworld.net
+**** [[http://feeds.feedburner.com/Aikonia][Aikonia Webcomic]]
+title: Aikonia Webcomic
+front webpage: https://aikoniacomic.com/index.php
+**** [[http://pbfcomics.com/feed/feed.xml][The Perry Bible Fellowship]]
+title: The Perry Bible Fellowship
+front webpage: https://pbfcomics.com
+**** [[http://feeds2.feedburner.com/rsspect/fJur][Dresden Codak]]
+title: Dresden Codak
+front webpage: http://dresdencodak.com
+*** Web serials                               :serials:
+**** [[http://hpmor.com/rss.xml][Harry Potter and the Methods of Rationality - ad-free mirror]]
+title: Harry Potter and the Methods of Rationality - ad-free mirror
+front webpage: http://hpmor.com/
+**** [[https://twigserial.wordpress.com/feed/][Twig]]
+title: Twig
+front webpage: https://twigserial.wordpress.com
+**** [[https://www.parahumans.net/feed/][Parahumans 2]]
+title: Parahumans 2
+front webpage: https://www.parahumans.net
+**** [[http://unsongbook.com/?feed=rss2][Unsong]]
+title: Unsong
+front webpage: http://unsongbook.com
+**** [[http://pactwebserial.wordpress.com/feed/][Pact]]
+title: Pact
+front webpage: https://pactwebserial.wordpress.com
+*** general
+**** [[http://clarkesworldmagazine.com/feed/][Clarkesworld Magazine - Science Fiction & Fantasy]]
+title: Clarkesworld Magazine - Science Fiction &amp; Fantasy
+front webpage: http://clarkesworldmagazine.com
+** Non fiction
+**** [[http://scottleibrand.wordpress.com/feed/][Scott Leibrand's Blog]]
+title: Scott Leibrand's Blog
+front webpage: https://scottleibrand.wordpress.com
+** Journalism                                  :journalism:
+*** Investigative Journalism                  :investigative:
+**** [[http://cironline.org/rss.xml][The Center for Investigative Reporting]]
+title: The Center for Investigative Reporting
+front webpage: http://cironline.org/rss.xml
+
+**** [[https://www.themarshallproject.org/rss/recent.rss][The Marshall Project]]
+title: The Marshall Project
+front webpage: https://www.themarshallproject.org/
+**** [[http://www.icij.org/feeds/rss/projects.xml][ICIJ]]
+title: ICIJ
+front webpage: https://www.icij.org
+**** [[http://www.thebureauinvestigates.com/feed/][The Bureau of Investigative Journalism]]
+title: The Bureau of Investigative Journalism
+front webpage: https://www.thebureauinvestigates.com/
+**** [[https://bellingcat.com/feed/][Bellingcat]]
+title: Bellingcat
+front webpage: https://www.bellingcat.com
+**** [[http://pewresearch.org/rss.xml][Pew Research Center]]
+title: Pew Research Center
+front webpage: https://www.pewresearch.org
+**** [[http://www.publicintegrity.org/rss][Center for Public Integrity]]
+title: Center for Public Integrity
+front webpage: https://publicintegrity.org
+**** [[http://feeds.propublica.org/propublica/main][Articles and Investigations - ProPublica]]
+title: Articles and Investigations - ProPublica
+front webpage: https://www.propublica.org/feeds/54Ghome
+**** [[https://reportingproject.net/occrp/index.php/en?format=feed&amp;type=rss][OCCRP]]
+title: OCCRP
+front webpage: https://www.occrp.org/en
+
+**** [[http://people-press.org/rss.xml][Pew Research Center for the People]]
+title: Pew Research Center for the People
+front webpage: https://www.pewresearch.org/politics
+*** World news                                :world:
+**** [[http://feeds.feedburner.com/catoday][Current Affairs – GKToday]]
+title: Current Affairs – GKToday
+front webpage: https://www.gktoday.in
+**** [[http://feeds.bbci.co.uk/news/world/rss.xml][BBC News - World]]
+title: BBC News - World
+front webpage: https://www.bbc.co.uk/news/
+**** [[http://timesofindia.indiatimes.com/rssfeedsdefault.cms][The Times of India]]
+title: The Times of India
+front webpage: http://timesofindia.indiatimes.com
+**** [[http://www.nytimes.com/services/xml/rss/nyt/World.xml][NYT World News]]
+title: NYT &gt; World News
+front webpage: https://www.nytimes.com/section/world
+**** [[http://www.scmp.com/rss/hong_kong.xml][South China Morning Post]]
+title: South China Morning Post
+front webpage: https://www.scmp.com/rss/2/feed
+**** [[http://feeds.feedburner.com/japantimes][The Japan Times: All Stories]]
+title: The Japan Times: All Stories
+front webpage: https://www.japantimes.co.jp/
+**** [[http://online.wsj.com/xml/rss/3_7085.xml][WSJ.com: World News]]
+title: WSJ.com: World News
+front webpage: http://online.wsj.com/page/2_0006.html
+**** [[http://www.frontline.in/world-affairs/?service=rss][Frontline - World Affairs]]
+title: Frontline - World Affairs
+front webpage: https://frontline.thehindu.com/
+**** [[http://www.independent.co.uk/rss][The Independent]]
+title: The Independent
+front webpage: https://www.independent.co.uk/rss
+**** [[http://english.aljazeera.net/Services/Rss/?PostingId=2007731105943979989][AL JAZEERA ENGLISH (AJE)]]
+title: AL JAZEERA ENGLISH (AJE)
+front webpage: https://www.aljazeera.com
+**** [[http://rss.dw-world.de/rdf/rss-en-all][Deutsche Welle: DW-WORLD.DE]]
+title: Deutsche Welle: DW-WORLD.DE
+front webpage: http://www.dw.com/english/?maca=en-rss-en-all-1573-rdf
+**** [[http://feeds.guardian.co.uk/theguardian/world/rss][World news | The Guardian]]
+title: World news | The Guardian
+front webpage: https://www.theguardian.com/world
+**** [[http://timesofindia.indiatimes.com/rssfeedsdefault.cms][The Times of India]]
+title: The Times of India
+front webpage: http://timesofindia.indiatimes.com
+**** [[http://www.nzz.ch/rss/index.xml][NZZ – Neue Zürcher Zeitung | Aktuelle News, Hintergründe &amp; mehr]]
+title: NZZ – Neue Zürcher Zeitung | Aktuelle News, Hintergründe &amp; mehr
+front webpage: https://www.nzz.ch/startseite/
+**** [[http://www.smh.com.au/rssheadlines/federal-politics/article/rss.xml][Sydney Morning Herald - Politics / Federal]]
+title: Sydney Morning Herald - Politics / Federal
+front webpage: https://www.smh.com.au/rssheadlines
+**** [[http://www.irishtimes.com/feeds/rss/breaking/index.rss][The Irish Times - News]]
+title: The Irish Times - News
+front webpage: https://www.irishtimes.com/cmlink/the-irish-times-news-1.1319192
+**** [[https://www.theglobeandmail.com/rss/section/canada/][The Globe and Mail - Canada]]
+title: The Globe and Mail - Canada
+front webpage: https://www.theglobeandmail.com
+**** [[https://www.haaretz.com/bloomberg/cmlink/haaretz-com-headlines-rss-1.4605102][HAARETZ]]
+title: HAARETZ
+front webpage: https://www.haaretz.com/
+**** [[http://feeds.smh.com.au/rssheadlines/national.xml][The Sydney Morning Herald National Headlines]]
+title: The Sydney Morning Herald National Headlines
+front webpage: http://www.smh.com.au/national
+**** [[http://m.spiegel.de/international/index.rss][DER SPIEGEL - International]]
+title: DER SPIEGEL - International
+front webpage: https://www.spiegel.de/
+**** [[http://www.thedailystar.net/latest/rss/rss.xml][The Daily Star]]
+title: The Daily Star
+front webpage: https://www.thedailystar.net/
+**** [[https://english.cambodiadaily.com/feed/][The Cambodia Daily]]
+title: The Cambodia Daily
+front webpage: https://english.cambodiadaily.com
+**** [[http://mondediplo.com/backend][Le Monde diplomatique - English edition]]
+title: Le Monde diplomatique - English edition
+front webpage: https://mondediplo.com/
+**** [[http://www.humaniteinenglish.com/spip.php?page=backend][L'Humanité in English]]
+title: L'Humanité in English
+front webpage: http://www.humaniteinenglish.com/
+**** [[http://www.ledevoir.com/rss/manchettes.xml][Manchettes - Le Devoir]]
+title: Manchettes - Le Devoir
+front webpage: https://www.ledevoir.com
+
+*** Flagship                                  :flagship:
+**** [[http://www.economist.com/rss/the_world_this_week_rss.xml][The Economist]]
+title: The Economist
+front webpage: https://www.economist.com/the-world-this-week/
+**** [[http://www.wired.com/category/science-blogs/socialdimension/feed/][WIRED]]
+title: WIRED
+front webpage: https://www.wired.com
+**** [[https://www.vox.com/rss/future-perfect/index.xml][Vox - Future Perfect]]
+title: Vox - Future Perfect
+front webpage: https://www.vox.com/future-perfect
+**** [[http://feeds.feedburner.com/Best-Of-The-Atlantic][Best of The Atlantic]]
+title: Best of The Atlantic
+front webpage: https://www.theatlantic.com/
+**** [[http://www.newyorker.com/services/mrss/feeds/everything.xml][New Yorker]]
+title: Everything
+front webpage: https://www.newyorker.com/everything
+**** [[http://www.slate.com/articles.fulltext.all.10.rss][Slate]]
+**** [[http://online.wsj.com/xml/rss/3_7011.xml][Wall Street Journal]]
+title: Wall Street Journal
+front webpage: http://online.wsj.com
+**** [[https://www.axios.com/feeds/feed.rss][Axios]]
+title: Axios
+front webpage: https://www.axios.com/top/
+**** [[https://fivethirtyeight.com/features/feed/][Features – FiveThirtyEight]]
+title: Features – FiveThirtyEight
+front webpage: https://fivethirtyeight.com
+*** Science                                   :science:
+**** [[http://www.nature.com/news/rss.rdf][NatureNews - Most recent article...]]
+title: NatureNews - Most recent article...
+front webpage: http://www.nature.com/nature/rdf/news/most-recent
+**** [[http://www.sciencemag.org/rss/current.xml][Science: Current Issue]]
+title: Science: Current Issue
+front webpage: http://science.sciencemag.org
+**** [[http://www.theatlantic.com/feed/author/ed-yong/][Ed Yong | The Atlantic]]
+title: Ed Yong | The Atlantic
+front webpage: https://www.theatlantic.com/author/ed-yong/
+**** [[http://feeds.feedburner.com/AtlanticScienceAndTechnology][Science Atlantic]]
+title: The Atlantic: Technology
+front webpage: https://www.theatlantic.com/technology/
+**** [[http://www.vox.com/rss/science-and-health/index.xml][Vox - Science & Health]]
+title: Vox - Science &amp; Health
+front webpage: https://www.vox.com/science-and-health
+**** [[http://feeds.arstechnica.com/arstechnica/science][Science – Ars Technica]]
+title: Science – Ars Technica
+front webpage: https://arstechnica.com
+**** [[http://www.npr.org/rss/rss.php?id=1128][Health : NPR]]
+title: Health : NPR
+front webpage: https://www.npr.org/templates/story/story.php?storyId=1128
+**** [[http://www.jpl.nasa.gov/multimedia/rss/news.xml][News and Features - NASA's Jet Propulsion Laboratory]]
+title: News and Features - NASA's Jet Propulsion Laboratory
+front webpage: http://www.jpl.nasa.gov/news/
+**** [[http://thefern.org/feed/][Food and Environment Reporting Network]]
+title: Food and Environment Reporting Network
+front webpage: https://thefern.org
+**** [[http://usefulscience.org/rss.xml][Useful Science]]
+title: Useful Science
+front webpage: https://usefulscience.org/rss.xml
+**** [[http://rss.sciam.com/sciam/biology][Scientific American - Biology]]
+title: Scientific American - Biology
+front webpage: http://www.scientificamerican.com
+**** [[http://www.quantamagazine.org/feed/][Quanta Magazine]]
+title: Quanta Magazine
+front webpage: https://www.quantamagazine.org
+**** [[http://www.healthnewsreview.org/feed/][HealthNewsReview.org]]
+title: HealthNewsReview.org
+front webpage: https://www.healthnewsreview.org
+**** [[http://www.statnews.com/feed/][STAT]]
+title: STAT
+front webpage: https://www.statnews.com
+**** [[http://nautil.us/rss/all][Nautilus]]
+title: Nautilus
+front webpage: http://nautil.us/rss/all
+**** [[http://feeds.feedburner.com/NewAndUpdatedSummaries][Cochrane]]
+title: Cochrane
+front webpage: https://www.cochrane.org/new-and-updated.xml
+**** [[http://mappingignorance.org/feed/][Mapping Ignorance]]
+title: Mapping Ignorance
+front webpage: https://mappingignorance.org
+**** [[http://www.medicalnewstoday.com/rss/pharma_industry.xml][Medical News Today]]
+title: Medical News Today
+front webpage: http://www.medicalnewstoday.com
+
+*** Opinion                                   :opinion:
+**** [[http://www.gapminder.org/feed/][Gapminder]]
+title: Gapminder
+front webpage: https://www.gapminder.org
+**** [[http://foreignpolicy.com/feed/][Foreign Policy]]
+title: Foreign Policy
+front webpage: https://foreignpolicy.com
+**** [[http://feeds.feedburner.com/motherjones/main][Mother Jones]]
+title: article – Mother Jones
+front webpage: https://www.motherjones.com
+**** [[https://www.slowboring.com/feed][Slow boring]]                             :substack:
+Matt Yglasias does a substack
+*** Strident                                  :strident:
+**** [[http://editor.currentaffairs.org/feed/][Current Affairs]]
+title: Current Affairs | Culture &amp; Politics
+front webpage: https://editor.currentaffairs.org
+**** [[http://www.theamericanconservative.com/feed/][The American Conservative]]
+title: The American Conservative
+front webpage: https://www.theamericanconservative.com
+**** [[http://www.tnr.com/toc/topstories.rss][The New Republic]]
+title: The New Republic
+front webpage: https://newrepublic.com
+**** [[http://quillette.com/feed/][Quillette]]
+title: Quillette
+front webpage: https://quillette.com
+**** [[http://jacobinmag.com/issue/feed/][Issues – Jacobin]]
+title: Issues – Jacobin
+front webpage: https://www.jacobinmag.com
+
+*** Military                                  :military:
+**** [[http://warontherocks.com/feed/][War on the Rocks]]
+title: War on the Rocks
+front webpage: http://warontherocks.com
+
+**** [[http://smallwarsjournal.com/blog/atom.xml][Small Wars Journal]]
+title: Small Wars Journal
+front webpage: https://smallwarsjournal.com/
+*** Tech                                      :tech:
+**** [[http://www.vox.com/rss/technology/index.xml][Vox - Technology]]
+title: Vox - Technology
+front webpage: https://www.vox.com/technology
+**** [[http://www.theregister.co.uk/excerpts.rss][The Register]]
+title: The Register
+front webpage: https://www.theregister.com/
+
+<outline text="Specific reporters" title="Specific reporters"/>
+**** [[http://www.anandtech.com/rss/][AnandTech]]
+title: AnandTech
+front webpage: http://www.anandtech.com
+***
+
+**** [[http://feeds.technologyreview.com/technology_review_top_stories][MIT Technology Review]]
+title: MIT Technology Review
+front webpage: https://www.technologyreview.com
+**** [[http://feeds.feedburner.com/Phoronix][Phoronix]]
+title: Phoronix
+front webpage: http://www.phoronix.com/
+
+*** Local                                     :local:
+**** [[https://www.californiasun.co/feed.xml][California Sun]]
+title: California Sun
+front webpage: https://www.californiasun.co
+**** [[http://www.sfgate.com/xml/rss/bayarea.xml][Bay Area News]]
+title: Bay Area News
+front webpage: https://www.sfgate.com/bayarea/feed/Bay-Area-News-429.php
+**** [[http://www.ppic.org/main/rss.asp?type=blog][Public Policy Institute of California]]
+title: Public Policy Institute of California
+front webpage: https://www.ppic.org
+**** [[https://calmatters.org/feed/][CalMatters]]
+title: CalMatters
+front webpage: https://calmatters.org
+**** [[http://capitolweekly.net/feed/][Capitol Weekly]]
+title: Capitol Weekly
+front webpage: http://capitolweekly.net
+**** [[http://www.npr.org/rss/podcast.php?id=510005][KQED's The California Report]]
+title: KQED's The California Report
+front webpage: https://ww2.kqed.org/news/programs/the-california-report
+**** [[http://www.sacbee.com/news/local/?widgetName=rssfeed&amp;widgetContentId=713546&amp;getXmlFeed=true][Local News in Sacramento & Northern CA |]]
+title: Local News in Sacramento &amp; Northern CA |
+front webpage: https://www.sacbee.com/news/local/
+**** [[http://www.davisenterprise.com/feed/][Davis Enterprise]]
+title: Davis Enterprise
+front webpage: https://www.davisenterprise.com
+**** [[http://davisvanguard.org/feed/][Davis Vanguard]]
+title: Davis Vanguard
+front webpage: https://www.davisvanguard.org
+**** [[http://www.eastbayexpress.com/ebx/Rss.xml][East Bay Express]]
+title: East Bay Express
+front webpage: https://www.eastbayexpress.com
+
+*** Financial                                 :finance:
+**** [[http://www.creditslips.org/creditslips/atom.xml][Credit Slips]]
+title: Credit Slips
+front webpage: https://www.creditslips.org/creditslips/
+**** [[http://www.ft.com/rss/companies/technology][Technology sector]]
+title: Technology sector
+front webpage: https://www.ft.com/stream/6b32f2c1-da43-4e19-80b9-8aef4ab640d7
+**** [[http://www.ft.com/rss/markets/emerging][Emerging markets]]
+title: Emerging markets
+front webpage: https://www.ft.com/stream/fab33c6e-17a3-4c4b-b457-1c8e7aceff6d
+**** [[http://feeds.schwab.com/rss/market_investing_insights][Schwab: Market & Investing Insights]]
+title: Schwab: Market &amp; Investing Insights
+front webpage: http://cs.schwab.com/s/r?m=rbncqcg98fj1kxml7l3y74x2l7nl&amp;l=r108
+
+**** [[http://www.nytimes.com/services/xml/rss/nyt/Business.xml][NYT Business]]
+title: NYT &gt; Business
+front webpage: https://www.nytimes.com/section/business
+**** [[http://www.epi.org/feed/][Economic Policy Institute]]
+title: Economic Policy Institute
+front webpage: https://www.epi.org
+
+**** [[http://engineered.typepad.com/thoughts_on_business_engi/atom.xml][Engineered]]
+title: Engineered
+front webpage: https://engineered.typepad.com/thoughts_on_business_engi/
+** Blogs                                       :blog:
+*** Math                                      :math:
+**** [[http://punkrockor.wordpress.com/feed/][Punk Rock Operations Research]]
+title: Punk Rock Operations Research
+front webpage: https://punkrockor.com
+**** [[http://unapologetic.wordpress.com/feed/][The Unapologetic Mathematician]]
+title: The Unapologetic Mathematician
+front webpage: https://unapologetic.wordpress.com
+**** [[http://blogs.siam.org/feed/][SIAM Blogs]]
+title: SIAM Blogs
+front webpage: http://blogs.siam.org
+**** [[http://scientopia.org/blogs/goodmath/feed/][Good Math, Bad Math]]
+title: Good Math, Bad Math
+front webpage: http://goodmath.scientopia.org
+**** [[http://chromotopy.org/?feed=rss2][Chromotopy]]
+title: Chromotopy
+front webpage: http://jfo.chromotopy.org
+**** [[http://tcsmath.wordpress.com/feed/][tcs math]]
+title: tcs math
+front webpage: https://tcsmath.wordpress.com
+**** [[http://terrytao.wordpress.com/feed/][What's new]]
+title: What's new
+front webpage: https://terrytao.wordpress.com
+**** [[http://quomodocumque.wordpress.com/feed/][Quomodocumque]]
+title: Quomodocumque
+front webpage: https://quomodocumque.wordpress.com
+**** [[http://mathbabe.wordpress.com/feed/][mathbabe]]
+title: mathbabe
+front webpage: https://mathbabe.org
+**** [[http://jeremykun.wordpress.com/feed/][Math ∩ Programming]]
+title: Math ∩ Programming
+front webpage: https://jeremykun.com
+**** [[http://blog.computationalcomplexity.org/feeds/posts/default][Computational Complexity]]
+title: Computational Complexity
+front webpage: https://blog.computationalcomplexity.org/
+**** [[http://johncarlosbaez.wordpress.com/feed/][Azimuth]]
+title: Azimuth
+front webpage: https://johncarlosbaez.wordpress.com
+**** [[http://www.johndcook.com/blog/feed/][The Endeavour | John D. Cook]]
+title: The Endeavour | John D. Cook
+front webpage: https://www.johndcook.com/blog
+**** [[http://feeds.feedburner.com/daniel-lemire/atom][Daniel Lemire's blog]]
+title: Daniel Lemire's blog
+front webpage: https://lemire.me/blog
+**** [[http://rjlipton.wordpress.com/feed/][Gödel’s Lost Letter and P=NP]]
+title: Gödel’s Lost Letter and P=NP
+front webpage: https://rjlipton.wordpress.com
+**** [[http://cacm.acm.org/blogs/blog-cacm.rss][Communications of the ACM]]
+title: Communications of the ACM
+front webpage: https://cacm.acm.org/blogs/blog-cacm.rss
+**** [[http://polylogblog.wordpress.com/feed/][the polylogblog]]
+title: the polylogblog
+front webpage: https://polylogblog.wordpress.com
+**** [[http://geomblog.blogspot.com/feeds/posts/default][The Geomblog]]
+title: The Geomblog
+front webpage: http://blog.geomblog.org/
+**** [[http://sigfpe.blogspot.com/feeds/posts/default][A Neighborhood of Infinity]]
+title: A Neighborhood of Infinity
+front webpage: http://blog.sigfpe.com/
+**** [[http://pfzhang.wordpress.com/feed/][Pengfei's Notes]]
+title: Pengfei's Notes
+front webpage: https://pfzhang.wordpress.com
+**** [[http://blogs.ams.org/visualinsight/feed/][Visual Insight]]
+title: Visual Insight
+front webpage: https://blogs.ams.org/visualinsight
+*** Social Science                            :social:
+**** [[http://www.stat.columbia.edu/~cook/movabletype/mlm/atom.xml][Statistical Modeling, Causal Inference, and Social Science]]
+title: Statistical Modeling, Causal Inference, and Social Science
+front webpage: https://statmodeling.stat.columbia.edu
+**** [[http://relinquishment.org/feed/][relinquishment]]
+title: relinquishment
+front webpage: https://relinquishment.org
+**** [[http://abandonedfootnotes.blogspot.com/feeds/posts/default][Abandoned Footnotes]]
+title: Abandoned Footnotes
+front webpage: http://abandonedfootnotes.blogspot.com/
+
+**** [[http://www.badscience.net/feed/][Bad Science]]
+title: Bad Science
+front webpage: https://www.badscience.net
+**** [[http://peterturchin.com/blog/feed/][Peter Turchin]]
+title: Comments on:
+front webpage: http://peterturchin.com
+**** [[http://www.themoneyillusion.com/?feed=rss2][The Money Illusion]]
+title: TheMoneyIllusion
+front webpage: https://www.themoneyillusion.com
+**** [[http://feeds.feedburner.com/jasoncollins][Jason Collins blog]]
+title: Jason Collins blog
+front webpage: https://jasoncollins.blog
+**** [[http://election.princeton.edu/feed/][Princeton Election Consortium]]
+title: Princeton Election Consortium
+front webpage: https://election.princeton.edu
+**** [[http://glineq.blogspot.com/feeds/posts/default?alt=rss][globalinequality]]
+title: globalinequality
+by: Branko Milanovic
+front webpage: http://glineq.blogspot.com/
+**** [[http://www.marginalrevolution.com/marginalrevolution/index.rdf][Marginal Revolution]]
+title: Marginal Revolution
+front webpage: http://marginalrevolution.com
+**** [[https://randomcriticalanalysis.wordpress.com/feed/][Random Critical Analysis]]
+title: Random Critical Analysis
+front webpage: https://randomcriticalanalysis.com
+**** [[http://tompepinsky.com/feed/][Tom Pepinsky]]
+title: Tom Pepinsky
+front webpage: https://tompepinsky.com
+**** [[http://unenumerated.blogspot.com/feeds/posts/default][Unenumerated]]
+title: Unenumerated
+front webpage: http://unenumerated.blogspot.com/
+**** [[https://traditionsofconflict.com/blog?format=RSS][Blog - Traditions of Conflict]]
+title: Blog - Traditions of Conflict
+front webpage: https://traditionsofconflict.com/blog/
+**** [[http://piketty.blog.lemonde.fr/feed/][Le blog de Thomas Piketty]]
+title: Le blog de Thomas Piketty
+front webpage: https://www.lemonde.fr/blog/piketty
+**** [[http://fredrikdeboer.com/feed/][Fredrik deBoer]]
+title: Fredrik deBoer
+front webpage: https://fredrikdeboer.com
+
+*** Science                                   :science:
+**** [[http://jaymans.wordpress.com/feed/][JayMan's Blog]]
+title: JayMan's Blog
+front webpage: https://jaymans.wordpress.com
+**** [[http://www.datagenetics.com/feed/rss.xml][DataGenetics]]
+title: DataGenetics
+front webpage: https://datagenetics.com
+**** [[http://egtheory.wordpress.com/feed/][Theory, Evolution, and Games Group]]      :math:
+title: Theory, Evolution, and Games Group
+front webpage: https://egtheory.wordpress.com
+**** [[http://johnhawks.net/weblog/index.rss][john hawks weblog]]
+title: john hawks weblog
+front webpage: http://johnhawks.net/
+
+**** [[http://www.neuwritewest.org/blog?format=rss][NeuWrite West]]                           :neuro:
+title: NeuWrite West
+front webpage: http://www.neuwritewest.org/
+**** [[http://blogs.sciencemag.org/pipeline/feed][In the Pipeline]]
+title: Sciencemag
+front webpage: https://blogs.sciencemag.org/pipeline
+**** [[http://blogs.nature.com/nn/actionpotential/index.rdf][Action Potential]]                        :neuro:
+**** [[http://dynamicecology.wordpress.com/feed/][Dynamic Ecology]]
+title: Dynamic Ecology
+front webpage: https://dynamicecology.wordpress.com
+**** [[http://www.theness.com/neurologicablog/?feed=rss2][NeuroLogica Blog]]                        :neuro:
+title: NeuroLogica Blog
+front webpage: https://theness.com/neurologicablog
+**** [[http://backreaction.blogspot.com/feeds/posts/default][Sabine Hossenfelder: Backreaction]]
+title: Sabine Hossenfelder: Backreaction
+front webpage: http://backreaction.blogspot.com/
+**** [[http://www.math.columbia.edu/~woit/wordpress/?feed=rss2][Not Even Wrong]]
+title: Not Even Wrong
+front webpage: https://www.math.columbia.edu/~woit/wordpress
+**** [[https://mad.science.blog/feed/][qwerky science]]
+title: qwerky science
+front webpage: https://mad.science.blog
+**** [[http://www.realclimate.org/index.php/feed/atom/][RealClimate]]
+title: RealClimate
+front webpage: http://www.realclimate.org
+*** Rationalist                               :rats:
+**** [[http://slatestarcodex.com/feed/][Slate Star Codex]]
+title: Slate Star Codex
+front webpage: https://slatestarcodex.com
+**** [[https://old.reddit.com/r/gwern/.rss][Gwern posts and links]]
+**** [[https://gwern.substack.com/feed][Gwern substack]]
+**** [[http://acesounderglass.com/feed/][Aceso Under Glass]]
+title: Aceso Under Glass
+front webpage: https://acesounderglass.com
+**** [[https://mad.science.blog/feed/][qwerky science]]
+title: qwerky science
+front webpage: https://mad.science.blog
+**** [[https://unstableontology.com/feed/][Unstable Ontology]]
+title: Unstable Ontology
+front webpage: https://unstableontology.com
+**** [[http://planspace.org/rss.xml][plan ➔ space]]
+title: plan ➔ space
+front webpage: http://planspace.org/
+**** [[http://www.benkuhn.net/rss/][benkuhn.net]]
+title: benkuhn.net
+front webpage: https://www.benkuhn.net/
+**** [[http://carcinisation.com/feed/][Carcinisation]]
+title: Carcinisation
+front webpage: https://carcinisation.com
+**** [[https://rationalnewsletter.com/issues.atom][Rational Newsletter]]                     :aggregate:
+title: Rational Newsletter
+front webpage: https://rationalnewsletter.com
+**** [[http://themerelyreal.wordpress.com/feed/][The Merely Real]]
+title: The Merely Real
+front webpage: https://themerelyreal.wordpress.com
+**** [[https://everythingstudies.wordpress.com/feed/][Everything Studies]]
+title: Everything Studies
+front webpage: https://everythingstudies.com
+**** [[http://mindsarentmagic.wordpress.com/feed/][Minds aren't magic]]
+title: Minds aren't magic
+front webpage: https://mindsarentmagic.org
+**** [[http://srconstantin.wordpress.com/feed/][Otium]]
+title: Otium
+front webpage: https://srconstantin.wordpress.com
+**** [[https://thezvi.wordpress.com/feed/][Don't Worry About the Vase]]
+title: Don't Worry About the Vase
+front webpage: https://thezvi.wordpress.com
+**** [[http://putanumonit.com/feed/][Put A Number On It!]]
+title: Put A Number On It!
+front webpage: https://putanumonit.com
+**** [[https://applieddivinitystudies.com/atom.xml][Applied Divinity Studies]]
+title: Applied Divinity Studies
+front webpage: https://applieddivinitystudies.com/
+**** [[http://lukemuehlhauser.com/feed/][Luke Muehlhauser]]
+title: Luke Muehlhauser
+front webpage: http://lukemuehlhauser.com
+**** [[http://nothingismere.com/feed/][nothing is mere]]
+title: nothing is mere
+front webpage: https://nothingismere.com
+**** [[https://nintil.com/rss.xml][Nintil]]
+title: Nintil
+front webpage: https://nintil.com
+**** [[http://www.jefftk.com/news.rss][Jeff Kaufman's Writing]]
+title: Jeff Kaufman's Writing
+front webpage: https://www.jefftk.com/p
+**** [[http://subpixel.space/feed.xml][Subpixel Space]]
+title: Subpixel Space
+front webpage: http://subpixel.space
+**** [[http://thingofthings.wordpress.com/feed/][Thing of Things]]
+title: Thing of Things
+front webpage: https://thingofthings.wordpress.com
+**** [[http://aelkus.github.io/atom.xml][Adam Elkus]]
+title: Adam Elkus
+front webpage: http://aelkus.github.io
+*** History and its malcontents               :history:
+**** [[http://pseudoerasmus.com/feed/][pseudoerasmus]]
+title: pseudoerasmus
+front webpage: https://pseudoerasmus.com
+**** [[http://feeds.feedburner.com/RazibKhansTotalFeed][Razib Khan]]
+title: Razib Khan
+front webpage: http://www.razib.com/wordpress
+**** [[https://benlandautaylor.com/feed/][Ben Landau-Taylor]]
+title: Ben Landau-Taylor
+front webpage: https://benlandautaylor.com
+**** [[http://www.medievalists.net/feed/][Medievalists.net]]
+title: Medievalists.net
+front webpage: https://www.medievalists.net
+**** [[https://acoup.blog/feed/][A Collection of Unmitigated Pedantry]]
+title: A Collection of Unmitigated Pedantry
+front webpage: https://acoup.blog
+**** [[http://www.caitlingreen.org/feeds/posts/default][Caitlin Green]]
+title: Caitlin Green
+front webpage: https://www.caitlingreen.org/
+**** [[http://abandonedfootnotes.blogspot.com/feeds/posts/default][Abandoned Footnotes]]
+title: Abandoned Footnotes
+front webpage: http://abandonedfootnotes.blogspot.com/
+**** [[https://goingmedievalblog.wordpress.com/feed/][Going Medieval]]
+title: Going Medieval
+front webpage: https://going-medieval.com
+**** [[http://scholars-stage.blogspot.com/feeds/posts/default][The Scholar's Stage]]
+title: The Scholar's Stage
+front webpage: https://scholars-stage.blogspot.com/
+**** [[https://analog-antiquarian.net/feed/][The Analog Antiquarian]]
+title: The Analog Antiquarian
+front webpage: https://analog-antiquarian.net
+
+
+*** Machine Learning                          :machineLearning:
+**** [[https://dustinstansbury.github.io/theclevermachine/][The Clever Machine]]
+**** [[http://www.offconvex.org/feed.xml][Off the convex path]]
+title: Off the convex path
+front webpage: http://offconvex.github.io/
+**** [[http://www.thenetworkthinkers.com/feeds/posts/default][T N T : The Network Thinkers]]
+title: T N T : The Network Thinkers
+front webpage: http://www.thenetworkthinkers.com/
+**** [[http://feeds.feedburner.com/foldl/rss][foldl]]
+title: foldl
+front webpage: http://foldl.me
+**** [[http://www.inference.vc/rss/][inFERENCe]]
+title: inFERENCe
+front webpage: https://www.inference.vc/
+**** [[http://feeds.feedburner.com/daniel-lemire/atom][Daniel Lemire's blog]]
+title: Daniel Lemire's blog
+front webpage: https://lemire.me/blog
+**** [[http://pyevolve.sourceforge.net/wordpress/?feed=rss2][Terra Incognita]]
+title: Terra Incognita
+front webpage: https://blog.christianperone.com
+**** [[http://gormanalysis.com/feed/][GormAnalysis]]
+title: GormAnalysis
+front webpage: https://gormanalysis.com
+**** [[http://www.stochasticlifestyle.com/feed/][Stochastic Lifestyle]]
+title: Stochastic Lifestyle
+front webpage: http://www.stochasticlifestyle.com
+**** [[http://pyevolve.sourceforge.net/wordpress/?feed=rss2][Terra Incognita]]
+title: Terra Incognita
+front webpage: https://blog.christianperone.com
+**** [[http://justindomke.wordpress.com/feed/][Justin Domke's Weblog]]
+title: Justin Domke's Weblog
+front webpage: https://justindomke.wordpress.com
+
+**** [[https://parameterfree.wordpress.com/feed/][Parameter-free Learning and Optimization Algorithms]]
+title: Parameter-free Learning and Optimization Algorithms
+front webpage: https://parameterfree.com
+**** [[http://deepmind-ai.blogspot.com/feeds/posts/default][DeepMind AI]]
+title: DeepMind AI
+front webpage: http://deepmind-ai.blogspot.com/
+**** [[http://sebastianruder.com/rss/][Sebastian Ruder]]
+title: Sebastian Ruder
+front webpage: http://ruder.io/
+**** [[https://adeshpande3.github.io/adeshpande3.github.io/feed.xml][Adit Deshpande]]
+title: Adit Deshpande
+front webpage: https://adeshpande3.github.io
+**** [[http://severelytheoretical.wordpress.com/feed/][Severely Theoretical]]
+title: Severely Theoretical
+front webpage: https://severelytheoretical.wordpress.com
+**** [[http://xcorr.net/feed/][xcorr: comp neuro]]
+title: xcorr: comp neuro
+front webpage: https://xcorr.net
+**** [[https://medium.com/feed/intuitionmachine][Intuition Machine]]
+title: Intuition Machine
+front webpage: https://medium.com/intuitionmachine?source=rss----d777623c68cf---4
+**** [[http://nuit-blanche.blogspot.com/feeds/posts/default][Nuit Blanche]]
+title: Nuit Blanche
+front webpage: http://nuit-blanche.blogspot.com/
+**** [[http://colah.github.io/rss.xml][Colah's blog]]
+title: colah's blog
+front webpage: http://colah.github.io/
+**** [[http://mark.reid.name/iem/atom.xml][Inductio Ex Machina]]
+title: Inductio Ex Machina
+front webpage: http://mark.reid.name
+**** [[http://www.lightbluetouchpaper.org/feed/][Light Blue Touchpaper]]
+title: Light Blue Touchpaper
+front webpage: https://www.lightbluetouchpaper.org
+**** [[http://machinethoughts.wordpress.com/feed/][Machine Thoughts]]
+title: Machine Thoughts
+front webpage: https://machinethoughts.wordpress.com
+**** [[http://blogs.princeton.edu/imabandit/feed/][I’m a bandit]]
+title: I’m a bandit
+front webpage: https://blogs.princeton.edu/imabandit
+**** [[http://bair.berkeley.edu/blog/feed.xml][The Berkeley Artificial Intelligence Research Blog]]
+title: The Berkeley Artificial Intelligence Research Blog
+front webpage: http://bair.berkeley.edu/blog/
+**** [[http://iamtrask.github.io/feed.xml][i am trask]]
+title: i am trask
+front webpage: https://iamtrask.github.io/
+**** [[http://hunch.net/?feed=rss2][Machine Learning (Theory)]]
+title: Machine Learning (Theory)
+front webpage: https://hunch.net
+**** [[http://timvieira.github.io/blog/atom.xml][Graduate Descent]]
+title: Graduate Descent
+front webpage: https://timvieira.github.io/blog/
+**** [[http://gradientscience.org/feed.xml][gradient science]]
+title: gradient science
+front webpage: https://gradientscience.org/
+*** Computer Science                          :compSci:
+**** [[http://lambda-the-ultimate.org/rss.xml][Lambda the Ultimate]]
+title: Lambda the Ultimate
+front webpage: http://lambda-the-ultimate.org
+
+**** [[http://scottaaronson.com/blog/?feed=rss2][Shtetl-Optimized]]
+title: Shtetl-Optimized
+front webpage: https://www.scottaaronson.com/blog
+*** Neuro                                     :neuro:
+**** [[http://www.theness.com/neurologicablog/?feed=rss2][NeuroLogica Blog]]
+title: NeuroLogica Blog
+front webpage: https://theness.com/neurologicablog
+**** [[http://neurorexia.wordpress.com/feed/][Neurorexia]]
+title: Neurorexia
+front webpage: https://neurorexia.wordpress.com
+**** [[http://neuroamer.wordpress.com/feed/][Neuroamer]]
+title: Neuroamer
+front webpage: https://neuroamer.com
+**** [[http://wiringthebrain.blogspot.com/feeds/posts/default][Wiring the Brain]]
+title: Wiring the Brain
+front webpage: http://www.wiringthebrain.com/
+**** [[http://neuroskeptic.blogspot.com/feeds/posts/default][Neuroskeptic]]
+title: Neuroskeptic
+front webpage: http://neuroskeptic.blogspot.com/
+**** [[http://lawneuro.typepad.com/the-law-and-neuroscience-blog/atom.xml][The Law and Neuroscience Blog]]
+title: The Law and Neuroscience Blog
+front webpage: https://lawneuro.typepad.com/the-law-and-neuroscience-blog/
+**** [[http://blog.ketyov.com/feeds/posts/default][Oscillatory Thoughts]]
+title: Oscillatory Thoughts
+front webpage: http://blog.ketyov.com/
+*** other
+**** [[http://www.ritholtz.com/blog/feed/][The Big Picture]]
+title: The Big Picture
+front webpage: https://ritholtz.com
+**** [[http://www.calculatedriskblog.com/feeds/posts/default][Calculated Risk]]
+title: Calculated Risk
+front webpage: http://www.calculatedriskblog.com/
+
+**** [[http://www.ourworldindata.org/feed/][Our World in Data]]
+title: Our World in Data
+front webpage: https://ourworldindata.org
+**** [[http://www.antipope.org/charlie/blog-static/atom.xml][Charlie's Diary]]
+title: Charlie's Diary
+front webpage: http://www.antipope.org/charlie/blog-static/
+**** [[http://www.waggish.org/feed/][Waggish]]
+title: Waggish
+front webpage: https://www.waggish.org
+
+**** [[http://thebrowser.com/feed/][The Browser]]                             :aggregate:
+title: The Browser
+front webpage: https://thebrowser.com/
+** Podcasts                                    :podcast:
+**** [[https://rss.art19.com/future-perfect][Future Perfect]]
+title: Future Perfect
+front webpage: https://www.vox.com/future-perfect-podcast
+
+**** [[http://popupchinese.com/feeds/custom/sinica][Sinica Podcast - Weekly Discussion of Current Affairs in China]]
+title: Sinica Podcast - Weekly Discussion of Current Affairs in China
+front webpage: http://supchina.com/
+** Forums                                      :forum:
+**** [[http://effective-altruism.com/.rss][EA forum]]                                :EA:
+title: Newest Submissions
+front webpage: https://forum.effectivealtruism.org
+**** [[http://lesswrong.com/.rss][LessWrong]]
+title: LessWrong
+front webpage: https://www.lesswrong.com/
+**** [[http://rss.slashdot.org/Slashdot/slashdot][Slashdot]]
+title: Slashdot
+front webpage: https://slashdot.org/
+**** [[https://www.reddit.com/r/slatestarcodex.rss][Slatestar reddit]]
+**** [[https://news.ycombinator.com/rss][Hacker News]]
+title: Hacker News
+front webpage: https://news.ycombinator.com/
+** EA                                          :EA:
+**** [[http://80000hours.org/blog/feed.atom][80,000 Hours]]
+title: 80,000 Hours
+front webpage: https://80000hours.org
+**** [[https://openai.com/feed.xml][OpenAI]]
+title: OpenAI
+front webpage: https://openai.com/
+**** [[http://blog.givewell.net/?feed=rss2][The GiveWell Blog]]
+title: The GiveWell Blog
+front webpage: https://blog.givewell.org
+**** [[https://philiptrammell.com/blog/feed][Philip Trammell - Blog]]
+title: Philip Trammell - Blog
+front webpage: https://philiptrammell.com/blog
+**** [[http://www.openphilanthropy.org/blog/rss][Open Philanthropy]]
+title: Blog
+front webpage: https://www.openphilanthropy.org/
+**** [[http://feeds.feedburner.com/gwwc-blog][The Giving What We Can Blog]]
+title: The Giving What We Can Blog
+front webpage: https://www.givingwhatwecan.org
+**** [[http://feeds.feedburner.com/miriblog][ Machine Intelligence Research Institute ]]
+title:  Machine Intelligence Research Institute
+front webpage: https://intelligence.org
+**** [[http://www.clearerthinking.org/feed.xml][clearerthinking]]
+title: clearerthinking
+front webpage: https://www.clearerthinking.org/blog
+**** [[http://feeds.feedburner.com/TheLifeYouCanSave][The Life You Can Save]]
+title: The Life You Can Save
+front webpage: https://www.thelifeyoucansave.org
+**** [[http://www.rationality.org/feed.xml][CFAR | Center For Applied Rationality]]
+title: CFAR | Center For Applied Rationality
+front webpage: http://www.rationality.org/
+**** [[http://foundational-research.org/feed/][Center on Long-Term Risk]]
+title: Center on Long-Term Risk
+front webpage: https://longtermrisk.org
+**** [[http://www.givedirectly.org/blog_feed.php][GiveDirectly]]
+title: GiveDirectly
+front webpage: https://www.givedirectly.org
+
+** Music                                       :music:
+*** reddit                                    :reddit:
+**** [[https://www.reddit.com/r/listentothis.rss][listen to this]]
+**** [[https://www.reddit.com/r/LetsTalkMusic.rss][Lets Talk Music]]
+**** [[https://www.reddit.com/r/listentous.rss][listen to us]]
+**** [[https://www.reddit.com/r/mathrock.rss][math rock]]
+**** [[https://www.reddit.com/r/postrock.rss][Postrock]]
+**** [[https://www.reddit.com/r/progmetal.rss][Prog metal]]
+**** [[https://www.reddit.com/r/MusicForMusicians.rss][Music For Musicians]]
+*** reviews                                   :reviews:
+**** [[http://feeds.feedburner.com/stereogum/cBYa][Stereogum]]
+title: Stereogum
+front webpage: https://www.stereogum.com
+**** [[http://blog.amandapalmer.net/rss][Amanda Palmer Blog]]
+title: Amanda Palmer Blog
+front webpage: https://blog.amandapalmer.net
+**** [[http://pitchfork.com/rss/reviews/albums/][Pitchfork albums]]
+title: Album Reviews
+front webpage: https://pitchfork.com/feed-album-reviews
+**** [[http://www.therestisnoise.com/atom.xml][Alex Ross: The Rest Is Noise]]
+title: Alex Ross: The Rest Is Noise
+front webpage: https://www.therestisnoise.com/
+**** [[http://www.musicsnitch.com/feed/][music snitch]]
+title: music snitch
+front webpage: http://www.musicsnitch.com
+**** [[http://reviewstalker.com/feed/][REVIEW STALKER]]
+title: REVIEW STALKER
+front webpage: https://reviewstalker.com
+**** [[http://indymusic.wordpress.com/feed/][From Go To Whoa | The Latest & Greatest From Across The Hemispheres]]
+title: From Go To Whoa | The Latest &amp; Greatest From Across The Hemispheres
+front webpage: https://indymusic.wordpress.com
+**** [[http://bitr8.wordpress.com/feed/][BITR8]]
+title: BITR8
+front webpage: https://bitr8.wordpress.com
+**** [[http://www.headunderwater.com/rss][Head Underwater]]
+title: Head Underwater
+front webpage: https://www.headunderwater.com/
+**** [[http://starfrosch.ch/rss][starfrosch - download free mp3]]
+title: starfrosch - download free mp3
+front webpage: https://starfrosch.com
+**** [[http://www.npr.org/rss/rss.php?id=1039][NPR - Music]]
+title: NPR - Music
+front webpage: https://www.npr.org/templates/story/story.php?storyId=1039
+**** [[http://pitchfork.com/rss/reviews/best/tracks/][Best New Tracks - Pitchfork]]
+title: Best New Tracks - Pitchfork
+front webpage: https://pitchfork.com/reviews/best/tracks/
+**** [[http://www.metalhammer.co.uk/rss][Metal Hammer]]
+title: Metal Hammer
+front webpage: https://www.loudersound.com/feeds/all
+**** [[http://bloopsbleeps.com/feed/][Bloops / Bleeps]]
+title: Bloops / Bleeps
+front webpage: https://bloopsbleeps.com
+**** [[http://feeds.feedburner.com/songsillinois/iueu][songs:illinois]]
+title: songs:illinois
+front webpage: https://www.songsillinois.net
+**** [[http://www.theworldforgot.com/feed/][The World Forgot]]
+title: The World Forgot
+front webpage: http://www.theworldforgot.com
+**** [[http://www.swanfungus.com/feed][Swan Fungus]]
+title: Swan Fungus
+front webpage: https://swanfungus.com
+
+** YouTube                                     :YouTube:
+*** Serious                                   :serious:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A][DeepMind - YouTube]]
+title: DeepMind - YouTube
+front webpage: https://www.youtube.com/channel/UCP7jMXSY2xbc3KCAE0MHQ-A
+** Scholarly                                   :publication:
+*** Preprints                                 :preprint:
+**** [[http://compbiol.plosjournals.org/perlserv/?request=get-rss&amp;issn=1553-7358&amp;type=new-articles][PLOS Computational Biology: New Articles]]
+title: PLOS Computational Biology: New Articles
+**** [[http://hwmaint.biorxiv.highwire.org/cgi/collection/rss?coll_alias=neuroscience][bioRxiv Subject Collection: Neuroscience]]
+title: bioRxiv Subject Collection: Neuroscience
+front webpage: http://biorxiv.org
+*** Neuroscience                              :neuro:
+**** [[http://www.jneurosci.org/rss/current.xml][Journal of Neuroscience current issue]]
+title: Journal of Neuroscience current issue
+front webpage: http://www.jneurosci.org
+**** [[http://www.nature.com/neuro/current_issue/rss/][Nature Neuroscience]]
+title: Nature Neuroscience
+front webpage: http://feeds.nature.com/neuro/rss/current
+**** [[https://www.cambridge.org/core/rss/product/id/33B3051C485F2A27AC91F4A9BA87E6A6][Behavioral and Brain Sciences]]
+title: Behavioral and Brain Sciences
+front webpage: https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/latest-issue
+*** Machine Learning :ml:
+**** [[http://rss.sciencedirect.com/publication/science/08936080][Neural Networks ]]
+title: Neural Networks
+front webpage: https://www.sciencedirect.com/journal/neural-networks
+**** [[http://ieeexplore.ieee.org/rss/TOC34.XML][IEEE Transactions on Pattern Analysis and Machine Intelligence]]
+title: IEEE Transactions on Pattern Analysis and Machine Intelligence
+front webpage: http://ieeexplore.ieee.org
+*** Physics                                   :physics:
+**** [[http://ej.iop.org/rss/1367-2630/latestpapers.rdf][New Journal of Physics latest paper]]
+title: New Journal of Physics latest paper...
+front webpage: http://stacks.iop.org/1367-2630
+**** [[http://feeds.aps.org/rss/recent/prlsuggestions.xml][PRL Editors' Suggestions]]
+title: PRL Editors' Suggestions
+front webpage: http://journals.aps.org/prl/
+**** [[http://feeds.aps.org/rss/recent/prl.xml][Recent Articles in Phys. Rev. Lett.]]
+title: Recent Articles in Phys. Rev. Lett.
+front webpage: http://journals.aps.org/prl/
+*** Biology                                   :biology:
+**** [[http://biology.plosjournals.org/perlserv/?request=get-rss&amp;issn=1545-7885&amp;type=new-articles][PLoS Biology: New Articles]]
+title: PLoS Biology: New Articles
+front webpage: https://journals.plos.org/plosbiology/
+**** [[http://animalstudiesrepository.org/animsent/recent.rss][Animal Sentience]]
+title: Animal Sentience
+front webpage: https://www.wellbeingintlstudiesrepository.org/animsent
+**** [[http://link.springer.com/search.rss?facet-content-type=Article&amp;facet-journal-id=10071&amp;channel-name=Animal+Cognition][Latest Results for Animal Cognition]]
+title: Latest Results for Animal Cognition
+front webpage: http://link.springer.com
+*** Math and stats :mathStats:
+**** [[http://csdl.computer.org/rss/tpami.xml][IEEE Transactions on Pattern Analysis & Machine Intelligence]]
+title: IEEE Transactions on Pattern Analysis & Machine Intelligence
+front webpage: https://www.computer.org/csdl/journal/tp
+**** [[http://amstat.tandfonline.com/action/showFeed?ui=0&amp;mi=fksufb&amp;ai=4ep&amp;jc=uasa20&amp;type=etoc&amp;feed=rss][tandf: Journal of the American Statistical Association: Table of Contents]]
+title: tandf: Journal of the American Statistical Association: Table of Contents
+front webpage: https://amstat.tandfonline.com/loi/uasa20?ai=4ep&amp;mi=fksufb&amp;af=R
+**** [[http://rss.sciencedirect.com/publication/science/00963003][ScienceDirect: Applied Mathematics and Computation]]
+title: ScienceDirect Publication: Applied Mathematics and Computation
+front webpage: https://www.sciencedirect.com/journal/applied-mathematics-and-computation
+**** [[http://onlinelibrary.wiley.com/rss/journal/10.1002/(ISSN)1097-0118][Wiley: Journal of Graph Theory: Table of Contents]]
+title: Wiley: Journal of Graph Theory: Table of Contents
+front webpage: https://onlinelibrary.wiley.com/journal/10970118?af=R
+**** [[http://link.springer.com/search.rss?facet-content-type=Article&amp;facet-journal-id=11511&amp;channel-name=Acta+Mathematica][Latest Results for Acta Mathematica]]
+title: Latest Results for Acta Mathematica
+front webpage: http://link.springer.com
+**** [[http://rss.sciencedirect.com/publication/science/15240703][ScienceDirect Publication: Graphical Models]]
+title: ScienceDirect Publication: Graphical Models
+front webpage: https://www.sciencedirect.com/journal/graphical-models
+**** [[http://onlinelibrary.wiley.com/rss/journal/10.1002/(ISSN)1097-0312][Wiley: Communications on Pure and Applied Mathematics]]
+title: Wiley: Communications on Pure and Applied Mathematics: Table of Contents
+front webpage: https://onlinelibrary.wiley.com/journal/10970312?af=R
+**** [[http://distill.pub/rss.xml][Distill]]
+title: Distill
+front webpage: https://distill.pub
+**** [[http://rss.sciencedirect.com/publication/science/6699][ACHA]]
+title: ScienceDirect Publication: Applied and Computational Harmonic Analysis
+front webpage: http://www.sciencedirect.com
+**** [[http://projecteuclid.org/feeds/euclid.aaa_article_rss.xml][Abstract and Applied Analysis Articles (Project Euclid)]]
+title: Abstract and Applied Analysis Articles (Project Euclid)
+front webpage: http://projecteuclid.org/euclid.aaa
+**** [[http://rss.sciencedirect.com/publication/science/00963003][ScienceDirect Publication: Applied Mathematics and Computation]]
+title: ScienceDirect Publication: Applied Mathematics and Computation
+front webpage: https://www.sciencedirect.com/journal/applied-mathematics-and-computation
+**** [[http://ieeexplore.ieee.org/rss/TOC18.XML][IEEE Transactions on Information Theory - new TOC]]
+title: IEEE Transactions on Information Theory - new TOC
+front webpage: http://ieeexplore.ieee.org
+*** Search Alerts                             :search terms:
+**** [[http://emails2rss.appspot.com/rss?id=15e22baa083200477c0bced0d622d0f2c9ce][Google scholar alerts]]
+title: emails2rss.appspot.com/rss?id=15e22baa083200477c0bced0d622d0f2c9ce
+front webpage: http://emails2rss.appspot.com/rss?id=15e22baa083200477c0bced0d622d0f2c9ce
+*** General
+**** [[http://www.nature.com/nature/current_issue/rss][Nature]]
+title: Nature
+front webpage: http://feeds.nature.com/nature/rss/current

@@ -51,12 +51,10 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
 #+END_SRC
 
-
-
 * TODOs
-** [ ] fix org-mode always having helm pop up
-** [ ] add julia-repl-mode hooks
-** [ ] add hook for +word-wrap-mode to julia-repl-mode
+** [x] fix org-mode always having helm pop up
+** [x] add julia-repl-mode hooks
+** [ ] add +hook+ functional hook for +word-wrap-mode to julia-repl-mode
 ** [ ] expand company usability
 ** [ ] jupyter notebooks
 ** [ ] get ob-ein functional/ some way of running interesting code in org mode
@@ -64,12 +62,29 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 because the built-in one uses polish notation
 ** [ ] symon (if ever remote again)
 ** [ ] evil-quickscope seems to have introduced an error into f
+** [ ] evil-jump-item is taking precedence over magit
+this is probably not my problem tbh. just stay up to date w/doom
+** [ ] spell-check personal dictionary is a bit weird
 ** [ ] Give conda some keybindings
-e.g. conda-env-activate is good.
+e.g. conda-env-activate is good. also run-python
+** Various elfeed ideas
+*** [ ] sort numerically using elfeed score
+**** [ ] normalize scores based on throughput rate
+So that recency matters, but so there is an equal probability of getting an
+article from each source.
+*** [ ] Sort by old and exclude high frequency
+*** [ ] run update-elfeed when nothing else is happening or has happened recently
+
 ** Things to figure out
 - git timemachine in eevil
 - yasnippets
-- 
+-
+
+* Useful variables
+doom folder location
+#+begin_src elisp
+(setq own-doom-home "/home/dsweber/.doom.d/")
+#+end_src
 * Base Settings and new functions
 
 camelCaseIsHowIRollInCode
@@ -158,7 +173,7 @@ it with the meta key of facemenu
 #+begin_src elisp
 (after! spell-fu
   (setq ispell-dictionary "en-custom")
-  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.txt")
+  (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 #+end_src
 * Org settings
@@ -304,5 +319,29 @@ evil numbers increments and decrements numbers. useful for adding numbers
 (after! evil-numbers
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  )
+#+end_src
+* Elfeed settings
+
+The actual feed list and general settings are over at elfeedSources
+#+begin_src elisp
+(setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
+#+end_src
+
+set default time window.
+#+begin_src elisp
+(after! elfeed
+  (setq elfeed-search-filter "@2-weeks-ago +unread"))
+#+end_src
+update feed when opening
+#+begin_src elisp
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+#+end_src
+
+The elfeed goodies collection. See customize for more values
+#+begin_src elisp
+(after! elfeed-goodies
+  (setq elfeed-goodies/entry-pane-position :bottom)
+  (elfeed-goodies/setup)
   )
 #+end_src

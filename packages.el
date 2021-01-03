@@ -65,3 +65,6 @@
 ;;(package! ace-jump)
 ;; random stuff
 ;;(package! activity-watch-mode)
+
+;; elfeed packages
+(package! elfeed-goodies)

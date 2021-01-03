@@ -7,6 +7,8 @@
 
 (setq display-line-numbers-type `relative)
 
+(setq own-doom-home "/home/dsweber/.doom.d/")
+
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (setq default-input-method "TeX")
@@ -62,7 +64,7 @@
 
 (after! spell-fu
   (setq ispell-dictionary "en-custom")
-  (setq ispell-personal-dictionary "/home/dsweber/.doom.d/personal.txt")
+  (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
 (use-package! org-ref
@@ -151,4 +153,16 @@
 (after! evil-numbers
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  )
+
+(setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
+
+(after! elfeed
+  (setq elfeed-search-filter "@2-weeks-ago +unread"))
+
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+
+(after! elfeed-goodies
+  (setq elfeed-goodies/entry-pane-position :bottom)
+  (elfeed-goodies/setup)
   )
