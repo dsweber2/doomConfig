@@ -32,7 +32,7 @@ the three important ones:
 
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font
 string. You generally only need these two:
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
        doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+END_SRC
@@ -40,7 +40,7 @@ string. You generally only need these two:
 There are two ways to load a theme. Both assume the theme is installed and
  available. You can either set `doom-theme' or manually load a theme with the
  `load-theme' function. This is the default:
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (setq doom-theme 'doom-one)
 #+END_SRC
 
@@ -48,7 +48,7 @@ There are two ways to load a theme. Both assume the theme is installed and
 
 This determines the style of line numbers in effect. If set to `nil', line
 numbers are disabled. For relative line numbers, set this to `relative'.
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (setq display-line-numbers-type `relative)
 #+END_SRC
 
@@ -124,28 +124,28 @@ Kardashian, Trump
 
 * Useful variables
 doom folder location
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (setq own-doom-home "/home/dsweber/.doom.d/")
 #+end_src
 * Base Settings and new functions
 
 camelCaseIsHowIRollInCode
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (add-hook 'prog-mode-hook 'subword-mode)
 #+END_SRC
 
 input via tex allows for easy unicode
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (setq default-input-method "TeX")
 #+END_SRC
 
 I don't like lockfiles, as they just create clutter
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (setq create-lockfiles nil)
 #+END_SRC
 
 electric pairs are better
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (setq electric-pair-mode t)
 #+end_src
 
@@ -154,12 +154,12 @@ auto-fill mode (hard wrapping is nice methinks)
 (setq-default auto-fill-function 'do-auto-fill)
 #+end_src
 ** New functions
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 #+END_SRC
 ** Mark/unmark matching (currently off)
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
@@ -171,7 +171,7 @@ auto-fill mode (hard wrapping is nice methinks)
 * Ace stuff
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (after! ace-window
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
@@ -195,14 +195,14 @@ it with the meta key of facemenu
 #+End_src
 * Modifying doom installed packages
 ** company stuff:
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (after! company-dict
   (setq company-dict-dir (concat user-emacs-directory "dict/"))
   (setq backends-for-everywhere '(company-bibtex company-ispell))
   (setq company-backends (append company-backends backends-for-everywhere)))
 #+END_SRC
 **  Auctex
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (after! tex
   (setq-default TeX-master 'dwim)
   (setq TeX-save-query nil)
@@ -212,7 +212,7 @@ it with the meta key of facemenu
 #+END_SRC
 
 ** aspell dictionary spell whatever you want to call it:
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (after! spell-fu
   (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
@@ -221,7 +221,7 @@ it with the meta key of facemenu
 * Org settings
 org ref is excellent.
 
-+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC elisp :tangle yes
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
@@ -235,16 +235,16 @@ org ref is excellent.
 (map! :leader
       :desc "insert a helm reference"
       "i c" 'org-ref-helm-insert-cite-link)
-+END_SRC
+#+END_SRC
 
 I would like company do to things in org-mode yes please thankyou
-+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (after! org
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
   )
-+END_SRC
+#+END_SRC
 this allows for pairing $ in org mode files, and makes compiling to LaTeX
 functional. TODO not sure why borked
 #  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
@@ -256,18 +256,19 @@ functional. TODO not sure why borked
  # )
 
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
-+begin_src elisp :tangle no
+#+begin_src elisp :tangle no
 (use-package! org-fragtog
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 )
-+end_src
+#+end_src
 
 * Julia Settings
 First, let's define the current version of Julia
-#+BEGIN_SRC elisp
-(setq juliaVersion "1.5.3")
+#+begin_src elisp :tangle yes
+(after! julia-repl 
+  (setq juliaVersion "1.5.3"))
 #+END_SRC
 
 
@@ -285,8 +286,10 @@ create_sysimage(:LanguageServer,
 #+END_SRC
 
 and now the actual code to be tangled into ~init.el~.
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (use-package! lsp-julia
+  :after
+  julia-repl
   :config
   (setenv "PATH"
           (concat
@@ -304,12 +307,13 @@ and now the actual code to be tangled into ~init.el~.
   ;;                                 "-q -J /home/dsweber/julia-"
   ;;                                 juliaVersion "/lib/lspSysImage.so"))
   (setq lsp-enable-folding t)
+  (setq julia-indent-offset 4)
   )
 (setq julia-indent-offset 4)
 #+END_SRC
 
 It appears that julia-repl also has some settings to adjust
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (after! julia-repl
   (setq julia-repl-executable-records
         `((default ,(concat "/home/dsweber/julia-" juliaVersion
@@ -323,7 +327,7 @@ It appears that julia-repl also has some settings to adjust
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work
-#+BEGIN_SRC elisp
+#+begin_src elisp :tangle yes
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
   (define-key evil-normal-state-map "L" 'evil-scroll-line-to-bottom)
@@ -340,7 +344,7 @@ because I have some odd preferences about how top middle bottom should work
 #+END_SRC
 
 quickscope highlights what letters are unique for the purpose of jumping.
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (use-package! evil-quickscope
   :config
   (global-evil-quickscope-mode 1)
@@ -349,7 +353,7 @@ quickscope highlights what letters are unique for the purpose of jumping.
 #+end_src
 
 fringe marks are more legible
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (use-package! evil-fringe-mark
   :config
   (global-evil-fringe-mark-mode))
@@ -357,7 +361,7 @@ fringe marks are more legible
 
 evil numbers increments and decrements numbers. useful for adding numbers
 (repeat the command e.g. 45 times)
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (after! evil-numbers
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
@@ -366,23 +370,23 @@ evil numbers increments and decrements numbers. useful for adding numbers
 * Elfeed settings
 
 The actual feed list and general settings are over at elfeedSources
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 #+end_src
 
 Set default time window.
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (after! elfeed
   (setq elfeed-search-filter "@2-weeks-ago +unread "))
 #+end_src
 
 update feed when idle for 5 minutes
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 ;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 #+end_src
 
 The elfeed goodies collection. See customize for more values
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (use-package! elfeed-goodies
   :config
   (setq elfeed-goodies/entry-pane-position :bottom)
@@ -390,14 +394,14 @@ The elfeed goodies collection. See customize for more values
   )
 #+end_src
 Display the date
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (after! elfeed
   (defun elfeed-search-format-date (date)
     (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
 #+end_src
 
 Elscore settings
-#+begin_src elisp
+#+begin_src elisp :tangle yes
 (use-package! elfeed-score
   :config
   (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))

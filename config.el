@@ -1,5 +1,3 @@
-
-
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
        doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
@@ -67,9 +65,32 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
-(setq juliaVersion "1.5.3")
+(use-package! org-ref
+  :config
+  (setq orgRefDir "~/allHail/LaTeX/")
+  (setq reftex-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        org-ref-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        org-ref-bibliography-notes (concat orgRefDir "oneBibToRuleThemAll.org")
+        bibtex-completion-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
+        bibtex-completion-library-path "~/allHail/zoteroFiles"
+        bibtex-completion-notes-path (concat orgRefDir "hem-bibtex-notes"))
+  )
+(map! :leader
+      :desc "insert a helm reference"
+      "i c" 'org-ref-helm-insert-cite-link)
+
+(after! org
+  :config
+  (setq org-startup-with-latex-preview t)
+  (setq org-startup-with-inline-images t)
+  )
+
+(after! julia-repl 
+  (setq juliaVersion "1.5.3"))
 
 (use-package! lsp-julia
+  :after
+  julia-repl
   :config
   (setenv "PATH"
           (concat
@@ -87,6 +108,7 @@
   ;;                                 "-q -J /home/dsweber/julia-"
   ;;                                 juliaVersion "/lib/lspSysImage.so"))
   (setq lsp-enable-folding t)
+  (setq julia-indent-offset 4)
   )
 (setq julia-indent-offset 4)
 
