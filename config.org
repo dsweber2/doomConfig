@@ -5,6 +5,7 @@ sync` after modifying this file!
 
 Reference variables which are unique to a given computer (thus the separate file)
 #+INCLUDE: localLocations.org
+* Overview
 Here are some additional functions/macros that could help you configure Doom:
  - `load!' for loading external *.el files relative to this one
  - `use-package!' for configuring packages
@@ -72,8 +73,49 @@ e.g. conda-env-activate is good. also run-python
 **** [ ] normalize scores based on throughput rate
 So that recency matters, but so there is an equal probability of getting an
 article from each source.
+elfeed-score assigns integers. probably best to bin at the level of day.
+Each feed gets a rate, and the score is rate*(date-today)
+
+To be concrete, lets say there's a feed w/100 entries a day, another w/1 a day, another w/10 a day, but all on the same day (long runs w/nothing)
+A couple of methods:
+ - +Scores constantly increase by ~10 every few days, with the 100 one+
+ - In some ways we're trying to approximate sort by taking first item from source 1, first item from source 2..., second item from source 1, etc.
+   + Every time we update the feed, rank each article as the (-n*10)th example from source y, and then adjust accordingly for other rules. This involves changing the score of *every* article when we update.
+   + This would be much easier if this were floats instead
+- Adjust the way the comparison works so when things are re-ranked, they use the date as well. Have the rate be feed dependent so that low-rate releases are less time sensitive.
+=elfeed-score-sort= is apparently the relevant function
+*****
+
+*** [ ] wider feed title and tags, narrower article title
 *** [ ] Sort by old and exclude high frequency
 *** [ ] run update-elfeed when nothing else is happening or has happened recently
+*** [ ] assign some leader key and keybindings
+this is to go to specific searches using bookmarks
+(defun actuator-elfeed-show-all ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "elfeed-all"))
+(defun actuator-elfeed-show-unread ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "elfeed-unread"))
+
+*** [ ] possibly add some entry-title colon headings
+entry-title: \(emacs\|org-mode\) Tags any blog post with "emacs" or "org-mode" in the title according to it's given and inherited tags (in the example above "emacs", "mustread" and "dev").
+
+*** [ ] things to filter out
+police reports in the local news section.
+;; Building subset feeds
+(add-hook 'elfeed-new-entry-hook
+          (elfeed-make-tagger :feed-url "example\\.com"
+                              :entry-title '(not "something interesting")
+                              :add 'junk
+                              :remove 'unread))
+
+**** Or put in a toxic category
+Kardashian, Trump
+
+*** [ ] default doesn't show podcasts
 
 ** Things to figure out
 - git timemachine in eevil
@@ -179,7 +221,7 @@ it with the meta key of facemenu
 * Org settings
 org ref is excellent.
 
-#+BEGIN_SRC elisp
++BEGIN_SRC elisp :tangle yes
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
@@ -193,16 +235,16 @@ org ref is excellent.
 (map! :leader
       :desc "insert a helm reference"
       "i c" 'org-ref-helm-insert-cite-link)
-#+END_SRC
++END_SRC
 
 I would like company do to things in org-mode yes please thankyou
-#+BEGIN_SRC elisp
++BEGIN_SRC elisp
 (after! org
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
   )
-#+END_SRC
++END_SRC
 this allows for pairing $ in org mode files, and makes compiling to LaTeX
 functional. TODO not sure why borked
 #  (defvar org-pairs '((?\$ ?\$)) "Electric pairs needed in org mode not in it")
@@ -214,13 +256,13 @@ functional. TODO not sure why borked
  # )
 
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
-#+begin_src elisp
++begin_src elisp :tangle no
 (use-package! org-fragtog
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 )
-#+end_src
++end_src
 
 * Julia Settings
 First, let's define the current version of Julia
@@ -328,20 +370,37 @@ The actual feed list and general settings are over at elfeedSources
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 #+end_src
 
-set default time window.
+Set default time window.
 #+begin_src elisp
 (after! elfeed
-  (setq elfeed-search-filter "@2-weeks-ago +unread"))
+  (setq elfeed-search-filter "@2-weeks-ago +unread "))
 #+end_src
-update feed when opening
+
+update feed when idle for 5 minutes
 #+begin_src elisp
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 #+end_src
 
 The elfeed goodies collection. See customize for more values
 #+begin_src elisp
-(after! elfeed-goodies
+(use-package! elfeed-goodies
+  :config
   (setq elfeed-goodies/entry-pane-position :bottom)
   (elfeed-goodies/setup)
+  )
+#+end_src
+Display the date
+#+begin_src elisp
+(after! elfeed
+  (defun elfeed-search-format-date (date)
+    (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
+#+end_src
+
+Elscore settings
+#+begin_src elisp
+(use-package! elfeed-score
+  :config
+  (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
+  (define-key elfeed-search-mode-map "a" elfeed-score-map)
   )
 #+end_src

@@ -728,7 +728,6 @@ front webpage: https://scholars-stage.blogspot.com/
 title: The Analog Antiquarian
 front webpage: https://analog-antiquarian.net
 
-
 *** Machine Learning                          :machineLearning:
 **** [[https://dustinstansbury.github.io/theclevermachine/][The Clever Machine]]
 **** [[http://www.offconvex.org/feed.xml][Off the convex path]]
@@ -867,7 +866,11 @@ front webpage: https://www.waggish.org
 **** [[http://thebrowser.com/feed/][The Browser]]                             :aggregate:
 title: The Browser
 front webpage: https://thebrowser.com/
-** Podcasts                                    :podcast:
+*** programming                               :programming:
+**** [[https://mac.into.sh/index.xml][mac into]]                                :emacs:
+**** [[https://nullprogram.com/feed/][Null Program]]                            :emacs:
+**** [[pragmaticemacs.com/feed/][Pragmatic Emacs]]                         :emacs:
+** Podcasts :podcast:
 **** [[https://rss.art19.com/future-perfect][Future Perfect]]
 title: Future Perfect
 front webpage: https://www.vox.com/future-perfect-podcast

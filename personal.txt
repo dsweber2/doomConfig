@@ -1,6 +1,7 @@
 Wondermark
 lsp
 magit
+multinomial
 personal_ws-1.1 en-custom 0
 softmax
 symon

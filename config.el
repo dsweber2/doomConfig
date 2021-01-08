@@ -67,32 +67,6 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
-(use-package! org-ref
-  :config
-  (setq orgRefDir "~/allHail/LaTeX/")
-  (setq reftex-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
-        org-ref-default-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
-        org-ref-bibliography-notes (concat orgRefDir "oneBibToRuleThemAll.org")
-        bibtex-completion-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
-        bibtex-completion-library-path "~/allHail/zoteroFiles"
-        bibtex-completion-notes-path (concat orgRefDir "hem-bibtex-notes"))
-  )
-(map! :leader
-      :desc "insert a helm reference"
-      "i c" 'org-ref-helm-insert-cite-link)
-
-(after! org
-  :config
-  (setq org-startup-with-latex-preview t)
-  (setq org-startup-with-inline-images t)
-  )
-
-(use-package! org-fragtog
-  :config
-  (add-hook 'org-mode-hook 'org-fragtog-mode)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-)
-
 (setq juliaVersion "1.5.3")
 
 (use-package! lsp-julia
@@ -158,11 +132,22 @@
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 
 (after! elfeed
-  (setq elfeed-search-filter "@2-weeks-ago +unread"))
+  (setq elfeed-search-filter "@2-weeks-ago +unread "))
 
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 
-(after! elfeed-goodies
+(use-package! elfeed-goodies
+  :config
   (setq elfeed-goodies/entry-pane-position :bottom)
   (elfeed-goodies/setup)
+  )
+
+(after! elfeed
+  (defun elfeed-search-format-date (date)
+    (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
+
+(use-package! elfeed-score
+  :config
+  (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
+  (define-key elfeed-search-mode-map "a" elfeed-score-map)
   )

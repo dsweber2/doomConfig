@@ -1,0 +1,17 @@
+;;; Elfeed score file                                     -*- lisp -*-
+((version 5)
+ ("title"
+  ("climate" 10 s nil nil 0 nil))
+ ("content")
+ ("title-or-content")
+ ("tag"
+  ((t :comics)
+   1000 nil 0)
+  ((t :music)
+   -100 nil 0)
+  ((t :world)
+   10 nil 0))
+ ("authors")
+ ("feed")
+ (mark nil)
+ ("adjust-tags"))
