@@ -89,8 +89,7 @@
   (setq juliaVersion "1.5.3"))
 
 (use-package! lsp-julia
-  :after
-  julia-repl
+  :after julia-repl eshell
   :config
   (setenv "PATH"
           (concat
@@ -159,7 +158,9 @@
 ;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 
 (use-package! elfeed-goodies
+  :after elfeed-score
   :config
+  (setq elfeed-goodies/entry-pane-position :bottom)
   (setq elfeed-goodies/entry-pane-position :bottom)
   (elfeed-goodies/setup)
   )
@@ -171,5 +172,22 @@
 (use-package! elfeed-score
   :config
   (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
-  (define-key elfeed-search-mode-map "a" elfeed-score-map)
+  (define-key elfeed-search-mode-map (kbd "i") elfeed-score-map)
+  (setq elfeed-search-print-entry-function 'elfeed-score-print-entry)
   )
+
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+
+(map! :leader
+      (:prefix ("e" . "elfeed")
+       :desc "elfeed-score-map" "m" #'elfeed-score-map
+       :desc "open feed"        "f" #'elfeed
+       :desc "update elfeed"    "u" #'elfeed-update
+       :desc "score entries"    "s" #'elfeed-score/score
+       :desc "add score rules"  "r" #'elfeed-score-load-score-file
+       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+       )
+      )

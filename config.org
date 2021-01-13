@@ -288,8 +288,7 @@ create_sysimage(:LanguageServer,
 and now the actual code to be tangled into ~init.el~.
 #+begin_src elisp :tangle yes
 (use-package! lsp-julia
-  :after
-  julia-repl
+  :after julia-repl eshell
   :config
   (setenv "PATH"
           (concat
@@ -386,9 +385,12 @@ update feed when idle for 5 minutes
 #+end_src
 
 The elfeed goodies collection. See customize for more values
+Elfeed Goodies Wide Threshold
 #+begin_src elisp :tangle yes
 (use-package! elfeed-goodies
+  :after elfeed-score
   :config
+  (setq elfeed-goodies/entry-pane-position :bottom)
   (setq elfeed-goodies/entry-pane-position :bottom)
   (elfeed-goodies/setup)
   )
@@ -399,12 +401,50 @@ Display the date
   (defun elfeed-search-format-date (date)
     (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
 #+end_src
-
+update the feed whenever emacs is idle for 10 minutes
+#+begin_src elisp :tangle no
+(run-with-idle-timer 600 't #'elfeed-update)
+#+end_src
 Elscore settings
 #+begin_src elisp :tangle yes
 (use-package! elfeed-score
   :config
   (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
-  (define-key elfeed-search-mode-map "a" elfeed-score-map)
+  (define-key elfeed-search-mode-map (kbd "i") elfeed-score-map)
+  (setq elfeed-search-print-entry-function 'elfeed-score-print-entry)
   )
 #+end_src
+
+(defun actuator-elfeed-show-all ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "elfeed-all"))
+(defun actuator-elfeed-show-unread ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "elfeed-unread"))
+
+function to toggle warning level
+#+begin_src elisp :tangle yes
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+#+end_src
+
+general keybindings
+#+begin_src elisp
+  (map! :leader
+        (:prefix ("e" . "elfeed")
+         :desc "elfeed-score-map" "m" #'elfeed-score-map
+         :desc "open feed"        "f" #'elfeed
+         :desc "update elfeed"    "u" #'elfeed-update
+         :desc "score entries"    "s" #'elfeed-score/score
+         :desc "add score rules"  "r" #'elfeed-score-load-score-file
+         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+         )
+        )
+#+end_src
+
+
+combine the elfeed-score-print-entry and elfeed-goodies
