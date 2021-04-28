@@ -52,71 +52,6 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
 #+END_SRC
 
-* TODOs
-** [x] fix org-mode always having helm pop up
-** [x] add julia-repl-mode hooks
-** [ ] add +hook+ functional hook for +word-wrap-mode to julia-repl-mode
-** [ ] expand company usability
-** [ ] jupyter notebooks
-** [ ] get ob-ein functional/ some way of running interesting code in org mode
-** [ ] actually useful calculator
-because the built-in one uses polish notation
-** [ ] symon (if ever remote again)
-** [ ] evil-quickscope seems to have introduced an error into f
-** [ ] evil-jump-item is taking precedence over magit
-this is probably not my problem tbh. just stay up to date w/doom
-** [ ] spell-check personal dictionary is a bit weird
-** [ ] Give conda some keybindings
-e.g. conda-env-activate is good. also run-python
-** Various elfeed ideas
-*** [ ] sort numerically using elfeed score
-**** [ ] normalize scores based on throughput rate
-So that recency matters, but so there is an equal probability of getting an
-article from each source.
-elfeed-score assigns integers. probably best to bin at the level of day.
-Each feed gets a rate, and the score is rate*(date-today)
-
-To be concrete, lets say there's a feed w/100 entries a day, another w/1 a day, another w/10 a day, but all on the same day (long runs w/nothing)
-A couple of methods:
- - +Scores constantly increase by ~10 every few days, with the 100 one+
- - In some ways we're trying to approximate sort by taking first item from source 1, first item from source 2..., second item from source 1, etc.
-   + Every time we update the feed, rank each article as the (-n*10)th example from source y, and then adjust accordingly for other rules. This involves changing the score of *every* article when we update.
-   + This would be much easier if this were floats instead
-- Adjust the way the comparison works so when things are re-ranked, they use the date as well. Have the rate be feed dependent so that low-rate releases are less time sensitive.
-=elfeed-score-sort= is apparently the relevant function
-*****
-
-*** [ ] wider feed title and tags, narrower article title
-*** [ ] Sort by old and exclude high frequency
-*** [ ] run update-elfeed when nothing else is happening or has happened recently
-*** [ ] assign some leader key and keybindings
-this is to go to specific searches using bookmarks
-(defun actuator-elfeed-show-all ()
-  (interactive)
-  (bookmark-maybe-load-default-file)
-  (bookmark-jump "elfeed-all"))
-(defun actuator-elfeed-show-unread ()
-  (interactive)
-  (bookmark-maybe-load-default-file)
-  (bookmark-jump "elfeed-unread"))
-
-*** [ ] possibly add some entry-title colon headings
-entry-title: \(emacs\|org-mode\) Tags any blog post with "emacs" or "org-mode" in the title according to it's given and inherited tags (in the example above "emacs", "mustread" and "dev").
-
-*** [ ] things to filter out
-police reports in the local news section.
-;; Building subset feeds
-(add-hook 'elfeed-new-entry-hook
-          (elfeed-make-tagger :feed-url "example\\.com"
-                              :entry-title '(not "something interesting")
-                              :add 'junk
-                              :remove 'unread))
-
-**** Or put in a toxic category
-Kardashian, Trump
-
-*** [ ] default doesn't show podcasts
-
 ** Things to figure out
 - git timemachine in eevil
 - yasnippets
@@ -149,9 +84,15 @@ electric pairs are better
 (setq electric-pair-mode t)
 #+end_src
 
-auto-fill mode (hard wrapping is nice methinks)
+auto-fill mode (hard wrapping is +nice+ not nice methinks)
 #+begin_src elisp tangle:no
-(setq-default auto-fill-function 'do-auto-fill)
+(setq-default auto-fill-function nil)
+#+end_src
+
+word wrap should be on everywhere
+#+begin_src elisp
+(after! +word-wrap
+  (setq +gobal-word-wrap-mode +1))
 #+end_src
 ** New functions
 #+begin_src elisp :tangle yes
@@ -205,6 +146,7 @@ it with the meta key of facemenu
 #+begin_src elisp :tangle yes
 (after! tex
   (setq-default TeX-master 'dwim)
+  (setq TeX-master 'dwim)
   (setq TeX-save-query nil)
   (setq Tex-PDF-mode t)
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
@@ -243,6 +185,7 @@ I would like company do to things in org-mode yes please thankyou
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
+  ;;(setq org)
   )
 #+END_SRC
 this allows for pairing $ in org mode files, and makes compiling to LaTeX
@@ -256,12 +199,12 @@ functional. TODO not sure why borked
  # )
 
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
-#+begin_src elisp :tangle no
+#+begin_src elisp :tangle yes
 (use-package! org-fragtog
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-)
+  )
 #+end_src
 
 * Julia Settings
@@ -347,6 +290,7 @@ quickscope highlights what letters are unique for the purpose of jumping.
 (use-package! evil-quickscope
   :config
   (global-evil-quickscope-mode 1)
+  (add-hook 'org-agenda-mode-hook 'turn-off-evil-quickscope-mode)
   (setq evil-quickscope-cross-lines t)
   )
 #+end_src

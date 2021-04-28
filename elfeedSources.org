@@ -587,6 +587,9 @@ front webpage: https://www.lemonde.fr/blog/piketty
 **** [[http://fredrikdeboer.com/feed/][Fredrik deBoer]]
 title: Fredrik deBoer
 front webpage: https://fredrikdeboer.com
+**** [[https://noahpinion.substack.com/feed][Noahpinion]]
+**** [[https://jabberwocking.com/?feed=atom][jabberwalking]]
+**** [[https://feeds.feedburner.com/visualcapitalist][Visual Capitalist]]
 
 *** Science                                   :science:
 **** [[http://jaymans.wordpress.com/feed/][JayMan's Blog]]
@@ -631,6 +634,9 @@ front webpage: http://www.realclimate.org
 **** [[http://slatestarcodex.com/feed/][Slate Star Codex]]
 title: Slate Star Codex
 front webpage: https://slatestarcodex.com
+**** [[https://astralcodexten.substack.com/feed][Astral Codex Ten]]
+title: Astral Codex Ten
+front webpage: https://astralcodexten.substack.com/
 **** [[https://old.reddit.com/r/gwern/.rss][Gwern posts and links]]
 **** [[https://gwern.substack.com/feed][Gwern substack]]
 **** [[http://acesounderglass.com/feed/][Aceso Under Glass]]
@@ -870,6 +876,7 @@ front webpage: https://thebrowser.com/
 **** [[https://mac.into.sh/index.xml][mac into]]                                :emacs:
 **** [[https://nullprogram.com/feed/][Null Program]]                            :emacs:
 **** [[pragmaticemacs.com/feed/][Pragmatic Emacs]]                         :emacs:
+**** [[https://www.murilopereira.com/the-values-of-emacs-the-neovim-revolution-and-the-vscode-gorilla/][mperiera]]                                :emacs:
 ** Podcasts :podcast:
 **** [[https://rss.art19.com/future-perfect][Future Perfect]]
 title: Future Perfect
@@ -993,10 +1000,108 @@ title: Swan Fungus
 front webpage: https://swanfungus.com
 
 ** YouTube                                     :YouTube:
-*** Serious                                   :serious:
+*** Very youtube                              :very:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCRDVE5L1LTWhmPAKKbUBGtg][Jocat]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCkVdb9Yr8fc05_VbAVfskCA][Matt Colville]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCioZY1p0bZ4Xt-yodw8_cBQ][How to drink]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCyRhIGDUKdIOw07Pd8pHxCw][SU&SD]]
+**** [[https://www.youtube.com/c/tested][Adam Savage's Tested]]
+*** *Philes                                   :philes:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCXCxNFxw6iq-Mh4uIjYvufg][Jackson Crawford]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA][Compterphile]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCUHW94eEFW7hkUMVaZz4eDg][Minute Physics]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCeiYXex_fwgYDonaTcSIk6w][Minute Earth]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCy0tKL1T7wFoYcxCe0xjN6Q][Technology connections]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCvpQ-l09fCVxJd3urZbxzHg][British museum]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCYeF244yNGuFefuFKqxIAXw][Royal institute]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw][3Blue1Brown]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC3CBOpT2-NRvoc2ecFMDCsA][Crime pays but botany doesn't]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC1_uAIS3r8Vu6JjXWvastJg][Mathologer]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCtESv1e7ntJaLJYKIO1FoYw][Periodic videos]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC8YehF3ubdf1HMijXfwPTag][PLOS media]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCAL3JXZSzSm8AlZyD3nQdBA][Primitive technology]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew][Sixty symbols]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC6107grRI4m0o2-emgoDnAA][Smarter every day]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCxr2d4As312LulcajAkKJYw][Townsends]]
+*** Poooop
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCq6aw03lNILzV96UvEAASfQ][Bill wurtz]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCH6vXjt-BA7QHl0KnfL-7RQ][Simon's Cat]]
+*** ScienceMusic                              :science:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCtKlYeKEKARPgS3DqdE_vsQ][Merle hazard]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCTev4RNBiu6lqtx8z1e87fQ][Acapella Science]]
+*** Swords                                    :swords:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC3WIohkLkH4GFoMrrWVZZFA][Skallagrim]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCkmMACUKpQeIxN9D9ARli1Q][Shadiversity]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC9pgQfOXRsp4UKrI8q0zjXQ][Lindybeige]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCSIvk78tK2TiviLQn4fSHaw][Up and atom]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA][Veritasium]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCOGeU-1Fig3rrDjhm9Zs_wg][Vihart]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCt3QIly_CdcnTtau_7xD5sA][Viviharhartt]]
+
+*** Deutsch                                   :deutsch:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCSa4RnmvfBbLgkEwqCUNGXQ][Sommers Weltliteratur to go]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCCAI6jmeW5hWz2-jaLPqLUQ][Marija]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCo__Dg1nHUtaL8mM7MtwKsQ][ze frank]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCVpankR4HtoAVtYnFDUieYA][ze frank2]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCZwegPHTG4gvnR0WLzaq5OQ][Anja]]
+
+*** Music                                     :music:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC8QTGWPODHWfbLl0mZh51tA][Sarah Donner]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCWubfmD-UY92kgCct3PXvZQ][Asian Shoegaze]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCh-PyMficPzVAihCJkFJVAA][David Bruce]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCijAv0fIQIzkFE34-ETr9-Q][Kat Edmonson]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC3I2GFN_F8WudD_2jUZbojA][KEXP]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCBxEf1UWDjbIEoh2MAQR7zQ][King Crimson]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCuyL6pUjQT5DzQ-ct_DGt8w][Lake Street Dive]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC8R8FRt1KcPiR-rtAflXmeg][Nahre Sol]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC4eYXhJI4-7wSWc8UNRwD4A][NPR]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCORIeT1hk6tYBuntEXsguLg][Postmodern Jukebox]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCebyBCG2i893i9hbo1mImpQ][Sarah Longfield]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCl_dlV_7ofr4qeP1drJQ-qg][Tantacrul]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCZAeB33ImAGsdxKpDtI0xQw][Ted Yoder]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC-wdveKCDbbjK0_rzR2XhVA][where post rock dwells]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCRs41MXZpAhXgiD4KjTjabg][Xefox music]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCRbIKMyRCDT-J47uJ26ehqw][Acapella Trudbol]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCHXabV5Rpb189xfscq-zq7Q][Andrey Vinogradov]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCLuHOqDilyLQT4NPXQuVN4Q][Ben Levin]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCTCbNf0OL6zh_oNAOWeqpSQ][Blue false indigo]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCKH9HfYY_GEcyltl2mbD5lA][Caravan Palace]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCIxKC4diMwlxX49hcgnQMCw][Concerbandland]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UChFYEy5Ni_3WC7pf8QWT7IQ][Elif'in Hecesi]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC1F1EVFBl3Kg7_aUvQ-nBOg][I am kawehi]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCtmY49Zn4l0RMJnTWfV7Wsg][Jacob Collier]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCBr7ASZED_BEUcwiqS7XQUA][Mindy Gledhill]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCLH_hNllzMmE0Xv7tNAsGdg][Mr. B]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCJ-HFvJmT57fZeX7NAuWSAw][Mree]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCSEOK9G-A2oCyZwdGesCpIg][Patty Gurdy]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCximsD7EJ38jzCNgfP_YTmA][Pawel Zadrozniak]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCMWdd9xaGXlgYHaTB8p4mdg][Radical face]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC9rqoXhRpbIJ2N867HeEUZQ][Sam Robson]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCxjaNoT_OwjIcikXHtVGrjg][Sofie Mae]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCS6RRU53yk8AEXmpmh0DpIw][Steam powered giraffe]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCCmfZuv1KR-WpKt6s-FJPmQ][Steve seagulls]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCknVpWR6m2Ijzkqo-aPXs_g][Stoned meadow of doom]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCxUheFf_jVsSkxW9DBd_6bA][8-bit big band]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC2OZT8igJg9k72NNpbMgqmQ][Staves]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCf0uVkfr1g6PhD1QwtNE3kg][Decemberists]]
+
+*** Math                                       :math:
 **** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A][DeepMind - YouTube]]
 title: DeepMind - YouTube
 front webpage: https://www.youtube.com/channel/UCP7jMXSY2xbc3KCAE0MHQ-A
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCW1C2xOfXsIzPgjXyuhkw9g][Simons Institute]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCEfASxwPxzsHlG5Rf1-4K9w][Centre for EA]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCamugMiftSeZo4EjdtePPyw][DeepMath]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC_iZswakCKAw4HZw0UiB3Ig][Global priorities institute]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCvp7jsbXjx2k8sGEkdtWCAw][London Mathematical society]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCcr5vuAH5TPlYox-QLj4ySw][Alan turing institute]]
+
+*** Thonkpieces                               :thonkpiece:
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCbmNph6atAoGfqLoCL_duAg][Talks at google]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC3XTzVzaHQEd30rQbuvCtTQ][Last Week Tonight]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCoiTVuiMdqBRMSBGMEcmxCw][The aspen institute]]
+**** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCNvsIonJdJ5E4EXMa65VYpA][ContraPoints]]
+
 ** Scholarly                                   :publication:
 *** Preprints                                 :preprint:
 **** [[http://compbiol.plosjournals.org/perlserv/?request=get-rss&amp;issn=1553-7358&amp;type=new-articles][PLOS Computational Biology: New Articles]]
@@ -1031,7 +1136,13 @@ front webpage: http://journals.aps.org/prl/
 **** [[http://feeds.aps.org/rss/recent/prl.xml][Recent Articles in Phys. Rev. Lett.]]
 title: Recent Articles in Phys. Rev. Lett.
 front webpage: http://journals.aps.org/prl/
-*** Biology                                   :biology:
+*** Dynamical Systems in Society              :dss:
+**** [[http://aip.scitation.org/feed/cha/most-recent][Chaos: An Interdisciplinary Journal of Nonlinear Science]]
+title: Chaos: An Interdisciplinary Journal of Nonlinear Science
+front page: https://aip.scitation.org/journal/cha
+**** [[http://escholarship.org/rss/unit/irows_cliodynamics][Cliodynamics]]
+title: Cliodynamics
+*** Biology :biology:
 **** [[http://biology.plosjournals.org/perlserv/?request=get-rss&amp;issn=1545-7885&amp;type=new-articles][PLoS Biology: New Articles]]
 title: PLoS Biology: New Articles
 front webpage: https://journals.plos.org/plosbiology/
@@ -1066,7 +1177,7 @@ front webpage: https://onlinelibrary.wiley.com/journal/10970312?af=R
 **** [[http://distill.pub/rss.xml][Distill]]
 title: Distill
 front webpage: https://distill.pub
-**** [[http://rss.sciencedirect.com/publication/science/6699][ACHA]]
+**** [[http://rss.sciencedirect.com/publication/science/10635203][ACHA]]
 title: ScienceDirect Publication: Applied and Computational Harmonic Analysis
 front webpage: http://www.sciencedirect.com
 **** [[http://projecteuclid.org/feeds/euclid.aaa_article_rss.xml][Abstract and Applied Analysis Articles (Project Euclid)]]
@@ -1086,3 +1197,5 @@ front webpage: http://emails2rss.appspot.com/rss?id=15e22baa083200477c0bced0d622
 **** [[http://www.nature.com/nature/current_issue/rss][Nature]]
 title: Nature
 front webpage: http://feeds.nature.com/nature/rss/current
+** Job boards                                  :jobs:
+**** [[https://80000hours.org/job-board/rss][80000 hours]]
