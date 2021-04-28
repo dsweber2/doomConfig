@@ -4,8 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   (quote
-    ((lsp--override-calculate-lisp-indent\? . t)
+   '((lsp--override-calculate-lisp-indent\? . t)
      (flycheck-disabled-checkers quote
                                  (emacs-lisp-checkdoc))
      (eval progn
@@ -17,9 +16,8 @@
                    (bound-and-true-p lisp-mode-symbol-regexp)
                    "\\(?:\\sw\\|\\s_\\|\\\\.\\)+")
                   "\\)")))
-             (add-to-list
-              (quote imenu-generic-expression)
-              (list "Functions" dirloc-lsp-defun-regexp 1)))
+             (add-to-list 'imenu-generic-expression
+                          (list "Functions" dirloc-lsp-defun-regexp 1)))
            (defvar lsp--override-calculate-lisp-indent\? nil "Whether to override `lisp-indent-function' with
               the updated `calculate-lisp-indent' definition from
               Emacs 28.")
@@ -204,10 +202,7 @@ is the buffer position of the start of the containing expression."
                       (t normal-indent)))))))
            (when
                (< emacs-major-version 28)
-             (advice-add
-              (function calculate-lisp-indent)
-              :around
-              (function wrap-calculate-lisp-indent))))))))
+             (advice-add #'calculate-lisp-indent :around #'wrap-calculate-lisp-indent))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

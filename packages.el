@@ -69,3 +69,4 @@
 ;; elfeed packages
 (package! elfeed-goodies)
 (package! elfeed-score)
+(package! elfeed-protocol)

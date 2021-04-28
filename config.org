@@ -207,11 +207,82 @@ whenever you're over a latex fragment, it will compile. Also, get the resolution
   )
 #+end_src
 
+** Org-anizing my life
+Current references for putting this together are [[http://doc.norang.ca/org-mode.html][norang]] and [[http://www.cachestocaches.com/2016/9/my-workflow-org-agenda/][Caches to Caches]].
+Enable my todos from these files to be collected by the agenda
+#+begin_src elisp :tangle yes
+(setq org-agenda-files (quote ("~/orgNotes"
+                               )))
+(setq +org-capture-projects-file "~/orgNotes/projects.org")
+(setq org-capture-todo-file "~/orgNotes/todo.org")
+(setq +org-capture-todo-file "~/orgNotes/todo.org")
+(setq org-priority-faces '((33 :foreground "green")
+                           (34 . warning)
+                           (35 . success)))
+#+end_src
+
+emacs settings (currently this file), EA related projects, blog writing,
+job-finding, sonar project, thesis, shopping, phone setup, existence chores, a refile bucket
+alternatively, doom has a thing where it's possible to file captures =SPC-X= to project specific files, all centralized in the [[~/org]] folder.
+Unfortunately, I'm not sure projectile projects really cleave what I'm up to at the joints; for example, the sonar project frequently involves fixing things in the scattering transform.
+These two are not mutually exclusive.
+Need to determine if the current state of e.g. this file is integrable.
+Also, the current location [[~/org]] isn't a good place for that, because it's already full of stuff for org.
+
+
+The list of keywords could use more processing; timestamp's in wait would be useful, though this doesn't seem to be working. should check back after restarting.
+#+begin_src elisp :tangle yes
+(setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
+                                (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
+#+end_src
+
+#+begin_src elisp :tangle yes
+(setq org-agenda-todo-ignore-deadlines 'near)
+(setq org-agenda-todo-ignore-scheduled 'future)
+#+end_src
+
+
+A review agenda mode
+#+begin_src elisp :tangle no
+(after! org
+  (add-to-list 'org-agenda-custom-commands
+               '("W" "Weekly review"
+                 agenda ""
+                 ((org-agenda-start-day "-7d")
+                  (org-agenda-span 14)
+                  (org-agenda-start-on-weekday 1)
+                  (org-agenda-start-with-log-mode '(closed))
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "^\\*\\* DONE "))))))
+#+end_src
+
+#+RESULTS:
+| W | Weekly review        | agenda                 |   | ((org-agenda-start-day -14d) (org-agenda-span 14) (org-agenda-start-on-weekday 1) (org-agenda-start-with-log-mode '(closed)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ^\*\* DONE ))) |
+| n | Agenda and all TODOs | ((agenda ) (alltodo )) |   |                                                                                                                                                                                                             |
+
+org priorities
+#+begin_src elisp :tangle yes
+(after! org
+  :config
+  (setq org-priority-highest 1)
+  (setq org-priority-lowest 64)
+  (setq org-priority-default 32))
+#+end_src
+
+#+begin_src elisp :tangle yes
+(after! org
+  :config
+  (setq org-agenda-sorting-strategy
+        '('(agenda habit-up time-up scheduled-down deadline-down category-keep)
+          '(todo category-keep priority-down)
+          '(tags priority-down category-keep)
+          '(search category-keep)))
+  )
+#+end_src
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
-(after! julia-repl 
-  (setq juliaVersion "1.5.3"))
+(after! julia-repl
+  (setq juliaVersion "1.6.0"))
 #+END_SRC
 
 
@@ -356,7 +427,48 @@ Elscore settings
   (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
   (define-key elfeed-search-mode-map (kbd "i") elfeed-score-map)
   (setq elfeed-search-print-entry-function 'elfeed-score-print-entry)
+  (elfeed-score-enable t)
+  ;; we'll make our own scoring function-- with blackjack and hookers!
+  (defcustom elfeed-equalize-random-rate (/ (+ (log 3) (/ (log 11) 2)) 100.0)
+    "the coefficient for converting scores to softmax eval. Default maps 100 to a
+        correct sorting probability of 99%)"
+    :group 'elfeed-equalize)
+  (defcustom elfeed-equalize-date-to-score 6048
+    "how many seconds correspond to a single score point. Default is 6048 so that
+         a week difference gives a score of 100"
+    :group 'elfeed-equalize)
+  (defcustom elfeed-equalize-random-rate (/ (+ (log 3) (/ (log 11) 2)) 100.0)
+    "the coefficient for converting scores to softmax eval. Default maps 100 to a
+        correct sorting probability of 99%)"
+    :group 'elfeed-equalize)
+
+  (defun softmax (x)
+    (let ((term (exp (* 2 x))))
+      (/ term (+ term 1)))
+    )
+  (defun rand ()
+    (/ (float (random most-positive-fixnum)) most-positive-fixnum))
+  (defun elfeed-score/softmax-sort (a b)
+    (let ((flip-prob (softmax (* elfeed-equalize-random-rate (- a b))))
+          (rolled-val (rand)))
+      (> flip-prob rolled-val)))
+  (defun elfeed-score/date-score (sec)
+    "convert a number of seconds into a score using rate c"
+    (/ sec elfeed-equalize-date-to-score))
+  (defun elfeed-score-softmax-swap (a b)
+    "Return non-nil if A should sort before B. This is a probabilistic
+    comparison that uses the date and the score"
+
+    (let* ((a-score (elfeed-score--get-score-from-entry a))
+           (b-score (elfeed-score--get-score-from-entry b))
+           (a-date  (elfeed-entry-date a))
+           (b-date  (elfeed-entry-date b)))
+      (elfeed-score/softmax-sort a-score b-score)
+      ))
+  (setq elfeed-search-sort-function #'elfeed-score-softmax-swap)
   )
+(setq a-date 3425)
+(setq b-date 3295)
 #+end_src
 
 (defun actuator-elfeed-show-all ()
