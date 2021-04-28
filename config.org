@@ -388,17 +388,6 @@ The actual feed list and general settings are over at elfeedSources
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 #+end_src
 
-Set default time window.
-#+begin_src elisp :tangle yes
-(after! elfeed
-  (setq elfeed-search-filter "@2-weeks-ago +unread "))
-#+end_src
-
-update feed when idle for 5 minutes
-#+begin_src elisp :tangle yes
-;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-#+end_src
-
 The elfeed goodies collection. See customize for more values
 Elfeed Goodies Wide Threshold
 #+begin_src elisp :tangle yes
@@ -416,10 +405,7 @@ Display the date
   (defun elfeed-search-format-date (date)
     (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
 #+end_src
-update the feed whenever emacs is idle for 10 minutes
-#+begin_src elisp :tangle no
-(run-with-idle-timer 600 't #'elfeed-update)
-#+end_src
+
 Elscore settings
 #+begin_src elisp :tangle yes
 (use-package! elfeed-score

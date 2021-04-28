@@ -194,11 +194,6 @@
 
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 
-(after! elfeed
-  (setq elfeed-search-filter "@2-weeks-ago +unread "))
-
-;;(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-
 (use-package! elfeed-goodies
   :after elfeed-score
   :config
