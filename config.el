@@ -15,11 +15,6 @@
 
 (setq electric-pair-mode t)
 
-(setq-default auto-fill-function nil)
-
-(after! +word-wrap
-  (setq +gobal-word-wrap-mode +1))
-
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
@@ -68,6 +63,10 @@
   (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
+
+:config
+(setq custom-suffixes '(".pdf" ".png" ".svg"))
+(setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
 
 (use-package! org-ref
   :config
@@ -127,7 +126,7 @@
   )
 
 (after! julia-repl
-  (setq juliaVersion "1.6.0"))
+  (setq juliaVersion "1.6.1"))
 
 (use-package! lsp-julia
   :after julia-repl eshell
@@ -254,18 +253,27 @@
 (setq a-date 3425)
 (setq b-date 3295)
 
+(setq elfeed-log-level 'debug)
+(toggle-debug-on-error)
+(setq elfeed-protocol-log-trace t)
+(use-package! elfeed-protocol
+  :config
+  (setq elfeed-use-curl t)
+  (elfeed-set-timeout 36000)
+  (setq elfeed-protocol-newsblur-maxpages 20)
+  (setq elfeed-curl-extra-arguments '("--cookie-jar" "/home/dsweber/tmp/newsblur-cookie"
+                                      "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
+  (defadvice elfeed (after configure-elfeed-feeds activate)
+    "Make elfeed-org autotags rules works with elfeed-protocol."
+    (setq elfeed-protocol-tags elfeed-feeds)
+    (setq elfeed-feeds (list
+                        (list "newsblur+https://HerCarverBidesDew@newsblur.com"
+                              :password-file "~/.newsblur"
+                              :autotags elfeed-protocol-tags))))
+  (elfeed-protocol-enable)
+  )
+
 (defun elfeed-score/toggle-debug-warn-level ()
   (if (eq elfeed-score-log-level 'debug)
       (setq elfeed-score-log-level 'warn)
     (setq elfeed-score-log-level 'debug)))
-
-  (map! :leader
-        (:prefix ("e" . "elfeed")
-         :desc "elfeed-score-map" "m" #'elfeed-score-map
-         :desc "open feed"        "f" #'elfeed
-         :desc "update elfeed"    "u" #'elfeed-update
-         :desc "score entries"    "s" #'elfeed-score/score
-         :desc "add score rules"  "r" #'elfeed-score-load-score-file
-         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-         )
-        )

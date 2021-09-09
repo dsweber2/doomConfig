@@ -85,7 +85,7 @@ electric pairs are better
 #+end_src
 
 auto-fill mode (hard wrapping is +nice+ not nice methinks)
-#+begin_src elisp tangle:no
+#+begin_src elisp :tangle no
 (setq-default auto-fill-function nil)
 #+end_src
 
@@ -159,6 +159,13 @@ it with the meta key of facemenu
   (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
+#+end_src
+
+** Projectile
+#+begin_src emacs-lisp :tangle yes
+:config
+(setq custom-suffixes '(".pdf" ".png" ".svg"))
+(setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
 #+end_src
 * Org settings
 org ref is excellent.
@@ -282,7 +289,7 @@ org priorities
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
 (after! julia-repl
-  (setq juliaVersion "1.6.0"))
+  (setq juliaVersion "1.6.1"))
 #+END_SRC
 
 
@@ -406,7 +413,7 @@ Display the date
     (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
 #+end_src
 
-Elscore settings
+** Elscore settings
 #+begin_src elisp :tangle yes
 (use-package! elfeed-score
   :config
@@ -456,7 +463,30 @@ Elscore settings
 (setq a-date 3425)
 (setq b-date 3295)
 #+end_src
-
+** +Teeny Tiny Rss+ Newsblur
+getting another server to handle fetching data from other servers and phone access.
+#+begin_src emacs-lisp :tangle yes
+(setq elfeed-log-level 'debug)
+(toggle-debug-on-error)
+(setq elfeed-protocol-log-trace t)
+(use-package! elfeed-protocol
+  :config
+  (setq elfeed-use-curl t)
+  (elfeed-set-timeout 36000)
+  (setq elfeed-protocol-newsblur-maxpages 20)
+  (setq elfeed-curl-extra-arguments '("--cookie-jar" "/home/dsweber/tmp/newsblur-cookie"
+                                      "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
+  (defadvice elfeed (after configure-elfeed-feeds activate)
+    "Make elfeed-org autotags rules works with elfeed-protocol."
+    (setq elfeed-protocol-tags elfeed-feeds)
+    (setq elfeed-feeds (list
+                        (list "newsblur+https://HerCarverBidesDew@newsblur.com"
+                              :password-file "~/.newsblur"
+                              :autotags elfeed-protocol-tags))))
+  (elfeed-protocol-enable)
+  )
+#+end_src
+** keybindings
 (defun actuator-elfeed-show-all ()
   (interactive)
   (bookmark-maybe-load-default-file)
