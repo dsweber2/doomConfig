@@ -167,6 +167,12 @@ it with the meta key of facemenu
 (setq custom-suffixes '(".pdf" ".png" ".svg"))
 (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
 #+end_src
+
+** counsel/ivy
+#+begin_src emacs-lisp :tangle yes
+(after! counsel
+  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
+#+end_src
 * Org settings
 org ref is excellent.
 
@@ -298,7 +304,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.5.3"
+juliaVersion = "1.6.1"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -317,7 +323,8 @@ and now the actual code to be tangled into ~init.el~.
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp)
   (add-hook 'ess-julia-mode-hook #'lsp)
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+  (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
 
   (setq lsp-julia-timeout 12000)
   ;; (add-to-list 'lsp-julia-flags (concat "-J /home/dsweber/julia-"
