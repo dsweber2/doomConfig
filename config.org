@@ -325,16 +325,12 @@ and now the actual code to be tangled into ~init.el~.
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
-
   (setq lsp-julia-timeout 12000)
-  ;; (add-to-list 'lsp-julia-flags (concat "-J /home/dsweber/julia-"
-  ;;                                       juliaVersion "/lib/lspSysImage.so"))
-  ;; (setq lsp-julia-command (concat "/home/dsweber/julia-"
-  ;;                                 juliaVersion "/bin/julia "
-  ;;                                 "-q -J /home/dsweber/julia-"
-  ;;                                 juliaVersion "/lib/lspSysImage.so"))
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
+
+  (setq lsp-julia-format-indents nil)
+  (setq lsp-enable-indentation nil)
   )
 (setq julia-indent-offset 4)
 #+END_SRC
