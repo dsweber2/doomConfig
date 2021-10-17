@@ -508,7 +508,7 @@ function to toggle warning level
 #+end_src
 
 general keybindings
-#+begin_src elisp
+#+begin_src elisp :tangle yes
   (map! :leader
         (:prefix ("e" . "elfeed")
          :desc "elfeed-score-map" "m" #'elfeed-score-map

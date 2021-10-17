@@ -277,3 +277,14 @@
   (if (eq elfeed-score-log-level 'debug)
       (setq elfeed-score-log-level 'warn)
     (setq elfeed-score-log-level 'debug)))
+
+  (map! :leader
+        (:prefix ("e" . "elfeed")
+         :desc "elfeed-score-map" "m" #'elfeed-score-map
+         :desc "open feed"        "f" #'elfeed
+         :desc "update elfeed"    "u" #'elfeed-update
+         :desc "score entries"    "s" #'elfeed-score/score
+         :desc "add score rules"  "r" #'elfeed-score-load-score-file
+         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+         )
+        )
