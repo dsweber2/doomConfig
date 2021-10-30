@@ -58,6 +58,7 @@
 
 ;; org packages
 (package! org-ref)
+(package! citeproc)
 (package! company-bibtex)
 (package! org-fragtog)
 ;; editor packages
