@@ -89,6 +89,7 @@
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
+  (defun native-comp-available-p () nil)
   ;;(setq org)
   )
 
@@ -142,6 +143,7 @@
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)

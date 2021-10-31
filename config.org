@@ -198,6 +198,7 @@ I would like company do to things in org-mode yes please thankyou
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
+  (defun native-comp-available-p () nil)
   ;;(setq org)
   )
 #+END_SRC
