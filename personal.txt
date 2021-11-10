@@ -1,4 +1,4 @@
-personal_ws-1.1 en 234
+personal_ws-1.1 en 235
 AUCs
 Amari
 AppendixFits
@@ -201,6 +201,7 @@ secondOutputDelta
 secondOutputNoise
 secondOutputSine
 sfAlone
+sharkfin
 shearlet
 sigmoidal
 singleCoordinate

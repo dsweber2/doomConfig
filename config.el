@@ -130,7 +130,7 @@
   )
 
 (after! julia-repl
-  (setq juliaVersion "1.6.1"))
+  (setq juliaVersion "1.6.3"))
 
 (use-package! lsp-julia
   :after julia-repl eshell
@@ -143,6 +143,9 @@
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
+  (setq lsp-julia-command (concat
+           "/home/dsweber/julia-" juliaVersion "/bin/julia"
+           ))
   (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)

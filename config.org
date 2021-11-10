@@ -296,7 +296,7 @@ org priorities
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
 (after! julia-repl
-  (setq juliaVersion "1.6.1"))
+  (setq juliaVersion "1.6.3"))
 #+END_SRC
 
 
@@ -305,7 +305,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.6.1"
+juliaVersion = "1.6.3"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -326,6 +326,9 @@ and now the actual code to be tangled into ~init.el~.
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
   (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
+  (setq lsp-julia-command (concat
+           "/home/dsweber/julia-" juliaVersion "/bin/julia"
+           ))
   (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
