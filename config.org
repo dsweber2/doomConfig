@@ -32,7 +32,7 @@ the three important ones:
 
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font
 string. You generally only need these two:
-#+begin_src elisp :tangle yes
+#+begin_src elisp
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
        doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+END_SRC
@@ -40,7 +40,7 @@ string. You generally only need these two:
 There are two ways to load a theme. Both assume the theme is installed and
  available. You can either set `doom-theme' or manually load a theme with the
  `load-theme' function. This is the default:
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq doom-theme 'doom-one)
 #+END_SRC
 
@@ -48,7 +48,7 @@ There are two ways to load a theme. Both assume the theme is installed and
 
 This determines the style of line numbers in effect. If set to `nil', line
 numbers are disabled. For relative line numbers, set this to `relative'.
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq display-line-numbers-type `relative)
 #+END_SRC
 
@@ -59,12 +59,12 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 
 * Useful variables
 doom folder location
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq own-doom-home "/home/dsweber/.doom.d/")
 #+end_src
 * Base Settings and new functions
 handling reloading magit-status buffers
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 (after! persp-mode
   (persp-def-buffer-save/load
    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
@@ -75,22 +75,22 @@ handling reloading magit-status buffers
                           (magit-status buf-dir))))))
 #+end_src
 camelCaseIsHowIRollInCode
-#+begin_src elisp :tangle yes
+#+begin_src elisp
 (add-hook 'prog-mode-hook 'subword-mode)
 #+END_SRC
 
 input via tex allows for easy unicode
-#+begin_src elisp :tangle yes
+#+begin_src elisp
 (setq default-input-method "TeX")
 #+END_SRC
 
 I don't like lockfiles, as they just create clutter
-#+begin_src elisp :tangle yes
+#+begin_src elisp
 (setq create-lockfiles nil)
 #+END_SRC
 
 electric pairs are better
-#+begin_src elisp :tangle yes
+#+begin_src elisp
 (setq electric-pair-mode t)
 #+end_src
 
@@ -105,12 +105,12 @@ word wrap should be on everywhere
   (setq +gobal-word-wrap-mode +1))
 #+end_src
 ** New functions
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 #+END_SRC
 ** Mark/unmark matching (currently off)
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-N") 'mc/unmark-next-like-this)
 (global-set-key (kbd "M-p") 'mc/mark-previous-like-this)
@@ -122,7 +122,7 @@ word wrap should be on everywhere
 * Ace stuff
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! ace-window
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
@@ -146,14 +146,14 @@ it with the meta key of facemenu
 #+End_src
 * Modifying doom installed packages
 ** company stuff:
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! company-dict
   (setq company-dict-dir (concat user-emacs-directory "dict/"))
   (setq backends-for-everywhere '(company-bibtex company-ispell))
   (setq company-backends (append company-backends backends-for-everywhere)))
 #+END_SRC
 **  Auctex
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! tex
   (setq-default TeX-master 'dwim)
   (setq TeX-master 'dwim)
@@ -164,7 +164,7 @@ it with the meta key of facemenu
 #+END_SRC
 
 ** aspell dictionary spell whatever you want to call it:
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! spell-fu
   (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
@@ -172,21 +172,22 @@ it with the meta key of facemenu
 #+end_src
 
 ** Projectile
-#+begin_src emacs-lisp :tangle yes
-:config
-(setq custom-suffixes '(".pdf" ".png" ".svg"))
-(setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
+#+begin_src emacs-lisp 
+(after! projectile
+   :config
+   (setq custom-suffixes '(".pdf" ".png" ".svg"))
+   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
 #+end_src
 
 ** counsel/ivy
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 (after! counsel
   (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
 #+end_src
 * Org settings
 org ref is excellent.
 
-#+BEGIN_SRC elisp :tangle yes
+#+BEGIN_SRC elisp 
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
@@ -203,7 +204,7 @@ org ref is excellent.
 #+END_SRC
 
 I would like company do to things in org-mode yes please thankyou
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! org
   :config
   (setq org-startup-with-latex-preview t)
@@ -223,7 +224,7 @@ functional. TODO not sure why borked
  # )
 
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! org-fragtog
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode)
@@ -234,7 +235,7 @@ whenever you're over a latex fragment, it will compile. Also, get the resolution
 ** Org-anizing my life
 Current references for putting this together are [[http://doc.norang.ca/org-mode.html][norang]] and [[http://www.cachestocaches.com/2016/9/my-workflow-org-agenda/][Caches to Caches]].
 Enable my todos from these files to be collected by the agenda
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq org-agenda-files (quote ("~/orgNotes"
                                )))
 (setq +org-capture-projects-file "~/orgNotes/projects.org")
@@ -255,12 +256,12 @@ Also, the current location [[~/org]] isn't a good place for that, because it's a
 
 
 The list of keywords could use more processing; timestamp's in wait would be useful, though this doesn't seem to be working. should check back after restarting.
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 #+end_src
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq org-agenda-todo-ignore-deadlines 'near)
 (setq org-agenda-todo-ignore-scheduled 'future)
 #+end_src
@@ -284,7 +285,7 @@ A review agenda mode
 | n | Agenda and all TODOs | ((agenda ) (alltodo )) |   |                                                                                                                                                                                                             |
 
 org priorities
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! org
   :config
   (setq org-priority-highest 1)
@@ -292,7 +293,7 @@ org priorities
   (setq org-priority-default 32))
 #+end_src
 
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! org
   :config
   (setq org-agenda-sorting-strategy
@@ -304,7 +305,7 @@ org priorities
 #+end_src
 * Julia Settings
 First, let's define the current version of Julia
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! julia-repl
   (setq juliaVersion "1.6.3"))
 #+END_SRC
@@ -324,7 +325,7 @@ create_sysimage(:LanguageServer,
 #+END_SRC
 
 and now the actual code to be tangled into ~init.el~.
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! lsp-julia
   :after julia-repl eshell
   :config
@@ -351,7 +352,7 @@ and now the actual code to be tangled into ~init.el~.
 #+END_SRC
 
 It appears that julia-repl also has some settings to adjust
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! julia-repl
   (setq julia-repl-executable-records
         `((default ,(concat "/home/dsweber/julia-" juliaVersion
@@ -365,7 +366,7 @@ It appears that julia-repl also has some settings to adjust
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
   (define-key evil-normal-state-map "L" 'evil-scroll-line-to-bottom)
@@ -382,7 +383,7 @@ because I have some odd preferences about how top middle bottom should work
 #+END_SRC
 
 quickscope highlights what letters are unique for the purpose of jumping.
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! evil-quickscope
   :config
   (global-evil-quickscope-mode 1)
@@ -392,7 +393,7 @@ quickscope highlights what letters are unique for the purpose of jumping.
 #+end_src
 
 fringe marks are more legible
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! evil-fringe-mark
   :config
   (global-evil-fringe-mark-mode))
@@ -400,7 +401,7 @@ fringe marks are more legible
 
 evil numbers increments and decrements numbers. useful for adding numbers
 (repeat the command e.g. 45 times)
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! evil-numbers
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
@@ -409,13 +410,13 @@ evil numbers increments and decrements numbers. useful for adding numbers
 * Elfeed settings
 
 The actual feed list and general settings are over at elfeedSources
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 #+end_src
 
 The elfeed goodies collection. See customize for more values
 Elfeed Goodies Wide Threshold
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! elfeed-goodies
   :after elfeed-score
   :config
@@ -425,14 +426,14 @@ Elfeed Goodies Wide Threshold
   )
 #+end_src
 Display the date
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (after! elfeed
   (defun elfeed-search-format-date (date)
     (format-time-string "%Y-%m-%d %H:%M" (seconds-to-time date))))
 #+end_src
 
 ** Elscore settings
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (use-package! elfeed-score
   :config
   (setq elfeed-score/score-file (concat own-doom-home "elfeed.score"))
@@ -483,7 +484,7 @@ Display the date
 #+end_src
 ** +Teeny Tiny Rss+ Newsblur
 getting another server to handle fetching data from other servers and phone access.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 (setq elfeed-log-level 'debug)
 (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
@@ -515,7 +516,7 @@ getting another server to handle fetching data from other servers and phone acce
   (bookmark-jump "elfeed-unread"))
 
 function to toggle warning level
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
 (defun elfeed-score/toggle-debug-warn-level ()
   (if (eq elfeed-score-log-level 'debug)
       (setq elfeed-score-log-level 'warn)
@@ -523,7 +524,7 @@ function to toggle warning level
 #+end_src
 
 general keybindings
-#+begin_src elisp :tangle yes
+#+begin_src elisp 
   (map! :leader
         (:prefix ("e" . "elfeed")
          :desc "elfeed-score-map" "m" #'elfeed-score-map

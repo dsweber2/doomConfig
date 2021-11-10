@@ -15,6 +15,9 @@
 
 (setq electric-pair-mode t)
 
+(after! +word-wrap
+  (setq +gobal-word-wrap-mode +1))
+
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
@@ -63,13 +66,6 @@
   (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
-
-:config
-(setq custom-suffixes '(".pdf" ".png" ".svg"))
-(setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
-
-(after! counsel
-  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
 
 (use-package! org-ref
   :config
@@ -258,6 +254,39 @@
 (setq a-date 3425)
 (setq b-date 3295)
 
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+
+(map! :leader
+      (:prefix ("e" . "elfeed")
+       :desc "elfeed-score-map" "m" #'elfeed-score-map
+       :desc "open feed"        "f" #'elfeed
+       :desc "update elfeed"    "u" #'elfeed-update
+       :desc "score entries"    "s" #'elfeed-score/score
+       :desc "add score rules"  "r" #'elfeed-score-load-score-file
+       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+       )
+      )
+
+(after! persp-mode
+  (persp-def-buffer-save/load
+   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+   :save-vars '(default-directory)
+   :load-function #'(lambda (savelist &rest _)
+                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
+                        (let ((buf-dir (alist-get 'default-directory vars-list)))
+                          (magit-status buf-dir))))))
+
+(after! projectile
+   :config
+   (setq custom-suffixes '(".pdf" ".png" ".svg"))
+   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+
+(after! counsel
+  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
+
 (setq elfeed-log-level 'debug)
 (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
@@ -277,19 +306,3 @@
                               :autotags elfeed-protocol-tags))))
   (elfeed-protocol-enable)
   )
-
-(defun elfeed-score/toggle-debug-warn-level ()
-  (if (eq elfeed-score-log-level 'debug)
-      (setq elfeed-score-log-level 'warn)
-    (setq elfeed-score-log-level 'debug)))
-
-  (map! :leader
-        (:prefix ("e" . "elfeed")
-         :desc "elfeed-score-map" "m" #'elfeed-score-map
-         :desc "open feed"        "f" #'elfeed
-         :desc "update elfeed"    "u" #'elfeed-update
-         :desc "score entries"    "s" #'elfeed-score/score
-         :desc "add score rules"  "r" #'elfeed-score-load-score-file
-         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-         )
-        )
