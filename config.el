@@ -107,6 +107,9 @@
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 
+(setq org-todo-keywords-for-agenda (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
+                                (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
+
 (setq org-agenda-todo-ignore-deadlines 'near)
 (setq org-agenda-todo-ignore-scheduled 'future)
 

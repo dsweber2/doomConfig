@@ -259,6 +259,9 @@ The list of keywords could use more processing; timestamp's in wait would be use
 #+begin_src elisp 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
+
+(setq org-todo-keywords-for-agenda (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
+                                (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 #+end_src
 
 #+begin_src elisp 
