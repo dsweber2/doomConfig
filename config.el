@@ -67,6 +67,9 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
+(use-package! rainbow-mode
+  :ensure t)
+
 (use-package! org-ref
   :config
   (setq orgRefDir "~/allHail/LaTeX/")
@@ -95,14 +98,38 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   )
 
-(setq org-agenda-files (quote ("~/orgNotes"
-                               )))
-(setq +org-capture-projects-file "~/orgNotes/projects.org")
-(setq org-capture-todo-file "~/orgNotes/todo.org")
-(setq +org-capture-todo-file "~/orgNotes/todo.org")
-(setq org-priority-faces '((33 :foreground "green")
-                           (34 . warning)
-                           (35 . success)))
+(after! org
+    (setq org-agenda-files (quote ("~/orgNotes")))
+    (setq +org-capture-projects-file "~/orgNotes/projects.org")
+    (setq org-capture-todo-file "~/orgNotes/todo.org")
+    (setq +org-capture-todo-file "~/orgNotes/todo.org")
+    (setq org-priority-faces  '((?A :foreground "#FF6C6B")
+                            (?B :foreground "#F97066")
+                            (?C :foreground "#F37460")
+                            (?D :foreground "#ED785A")
+                            (?E :foreground "#E77D54")
+                            (?F :foreground "#E1804F")
+                            (?G :foreground "#DB8449")
+                            (?H :foreground "#D8835B")
+                            (?I :foreground "#D48172")
+                            (?J :foreground "#D17F8A")
+                            (?K :foreground "#CE7DA2")
+                            (?L :foreground "#CA7BBA")
+                            (?M :foreground "#C779D2")
+                            (?N :foreground "#C47BDE")
+                            (?O :foreground "#BF82DE")
+                            (?P :foreground "#BB88DE")
+                            (?Q :foreground "#B68FDF")
+                            (?R :foreground "#B196DF")
+                            (?S :foreground "#AD9CE1")
+                            (?T :foreground "#A69EDD")
+                            (?U :foreground "#9A94C9")
+                            (?V :foreground "#8D8BB6")
+                            (?W :foreground "#8181A3")
+                            (?X :foreground "#74768F")
+                            (?Y :foreground "#676C7B")
+                            (?Z :foreground "#5B6268")))
+    )
 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
@@ -115,17 +142,17 @@
 
 (after! org
   :config
-  (setq org-priority-highest 1)
-  (setq org-priority-lowest 64)
-  (setq org-priority-default 32))
+  (setq org-priority-highest ?A)
+  (setq org-priority-lowest ?Z)
+  (setq org-priority-default ?M))
 
 (after! org
   :config
   (setq org-agenda-sorting-strategy
-        '('(agenda habit-up time-up scheduled-down deadline-down category-keep)
-          '(todo category-keep priority-down)
-          '(tags priority-down category-keep)
-          '(search category-keep)))
+        '((agenda habit-up priority-down time-up deadline-down scheduled-down)
+          (todo category-keep priority-down)
+          (tags priority-down category-keep)
+          (search category-keep)))
   )
 
 (after! julia-repl
