@@ -327,6 +327,10 @@
   (setq elfeed-protocol-newsblur-maxpages 20)
   (setq elfeed-curl-extra-arguments '("--cookie-jar" "/home/dsweber/tmp/newsblur-cookie"
                                       "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
+  (setq elfeed-protocol-tags elfeed-feeds)
+  (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
+                              :password-file "~/.newsblur"
+                              :autotags elfeed-protocol-tags)))
   (defadvice elfeed (after configure-elfeed-feeds activate)
     "Make elfeed-org autotags rules works with elfeed-protocol."
     (setq elfeed-protocol-tags elfeed-feeds)
