@@ -149,7 +149,7 @@
 (after! org
   :config
   (setq org-agenda-sorting-strategy
-        '((agenda habit-up priority-down time-up deadline-down scheduled-down)
+        '((agenda habit-up deadline-up priority-down time-up scheduled-down)
           (todo category-keep priority-down)
           (tags priority-down category-keep)
           (search category-keep)))
