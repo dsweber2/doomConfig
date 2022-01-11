@@ -78,11 +78,11 @@
         org-ref-bibliography-notes (concat orgRefDir "oneBibToRuleThemAll.org")
         bibtex-completion-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
         bibtex-completion-library-path "~/allHail/zoteroFiles"
-        bibtex-completion-notes-path (concat orgRefDir "hem-bibtex-notes"))
+        bibtex-completion-notes-path (concat orgRefDir "oneBibToRuleThemAll.org"))
   )
 (map! :leader
       :desc "insert a helm reference"
-      "i c" 'org-ref-helm-insert-cite-link)
+      "i c" 'org-ref-insert-link)
 
 (after! org
   :config

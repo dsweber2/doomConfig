@@ -1,4 +1,4 @@
-personal_ws-1.1 en 235
+personal_ws-1.1 en 236
 AUCs
 Amari
 AppendixFits
@@ -175,6 +175,7 @@ oneDelta
 oneDeltaNormalized
 oneDeltaUnnorm
 outputPool
+parameterizing
 plotOfLogCentralFrequencies
 png
 pointwise
