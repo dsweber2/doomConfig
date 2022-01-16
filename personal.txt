@@ -1,4 +1,4 @@
-personal_ws-1.1 en 236
+personal_ws-1.1 en 237
 AUCs
 Amari
 AppendixFits
@@ -205,6 +205,7 @@ sfAlone
 sharkfin
 shearlet
 sigmoidal
+significantly
 singleCoordinate
 singleFits
 sinusoid's

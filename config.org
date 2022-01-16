@@ -319,6 +319,17 @@ org priorities
           (search category-keep)))
   )
 #+end_src
+
+The keybindings for the agenda changed. some have added an annoying amount of friction.
+#+begin_src elisp
+  (after! org
+    (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
+    (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
+    (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
+    (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
+    (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
+    )
+#+end_src
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp 

@@ -155,6 +155,14 @@
           (search category-keep)))
   )
 
+(after! org
+  (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
+  (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
+  (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
+  (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
+  (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
+  )
+
 (after! julia-repl
   (setq juliaVersion "1.6.3"))
 
