@@ -7,6 +7,15 @@
 
 (setq own-doom-home "/home/dsweber/.doom.d/")
 
+(after! persp-mode
+  (persp-def-buffer-save/load
+   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+   :save-vars '(default-directory)
+   :load-function #'(lambda (savelist &rest _)
+                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
+                        (let ((buf-dir (alist-get 'default-directory vars-list)))
+                          (magit-status buf-dir))))))
+
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (setq default-input-method "TeX")
@@ -67,11 +76,19 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
+(after! projectile
+   :config
+   (setq custom-suffixes '(".pdf" ".png" ".svg"))
+   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+
+(after! counsel
+  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
+
 (use-package! rainbow-mode
   :ensure t)
 
-(after! indent
-        (setq standard-indent 4))
+  (after! indent
+          (setq standard-indent 4))
 
 (use-package! org-ref
   :config
@@ -101,84 +118,36 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   )
 
-(after! org
-    (setq org-agenda-files (quote ("~/orgNotes")))
-    (setq +org-capture-projects-file "~/orgNotes/projects.org")
-    (setq org-capture-todo-file "~/orgNotes/todo.org")
-    (setq +org-capture-todo-file "~/orgNotes/todo.org")
-    (setq org-priority-faces  '((?A :foreground "#FF6C6B")
-                            (?B :foreground "#F97066")
-                            (?C :foreground "#F37460")
-                            (?D :foreground "#ED785A")
-                            (?E :foreground "#E77D54")
-                            (?F :foreground "#E1804F")
-                            (?G :foreground "#DB8449")
-                            (?H :foreground "#D8835B")
-                            (?I :foreground "#D48172")
-                            (?J :foreground "#D17F8A")
-                            (?K :foreground "#CE7DA2")
-                            (?L :foreground "#CA7BBA")
-                            (?M :foreground "#C779D2")
-                            (?N :foreground "#C47BDE")
-                            (?O :foreground "#BF82DE")
-                            (?P :foreground "#BB88DE")
-                            (?Q :foreground "#B68FDF")
-                            (?R :foreground "#B196DF")
-                            (?S :foreground "#AD9CE1")
-                            (?T :foreground "#A69EDD")
-                            (?U :foreground "#9A94C9")
-                            (?V :foreground "#8D8BB6")
-                            (?W :foreground "#8181A3")
-                            (?X :foreground "#74768F")
-                            (?Y :foreground "#676C7B")
-                            (?Z :foreground "#5B6268")))
-    (setq org-capture-templates
-      '(("t" "Personal todo" entry
-         (file+headline +org-capture-todo-file "Inbox")
-         "* [ ] %?\n%i\n%a" :prepend t)
-        ("n" "Personal notes" entry
-         (file+headline +org-capture-notes-file "Inbox")
-         "* %u %?\n%i\n%a" :prepend t)
-        ("j" "Journal" entry
-         (file+olp+datetree +org-capture-journal-file)
-         "* %U %?\n%i\n%a" :prepend t)
-
-        ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
-        ;; {todo,notes,changelog}.org file is found in a parent directory.
-        ;; Uses the basename from `+org-capture-todo-file',
-        ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
-        ("p" "Templates for projects")
-        ("pt" "Project-local todo" entry  ; {project-root}/todo.org
-         (file+headline +org-capture-project-todo-file "Inbox")
-         "* TODO %?\n%i\n%a" :prepend t)
-        ("pn" "Project-local notes" entry  ; {project-root}/notes.org
-         (file+headline +org-capture-project-notes-file "Inbox")
-         "* %U %?\n%i\n%a" :prepend t)
-        ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
-         (file+headline +org-capture-project-changelog-file "Unreleased")
-         "* %U %?\n%i\n%a" :prepend t)
-
-        ;; Will use {org-directory}/{+org-capture-projects-file} and store
-        ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
-        ;; support `:parents' to specify what headings to put them under, e.g.
-        ;; :parents ("Projects")
-        ("o" "Centralized templates for projects")
-        ("ot" "Project todo" entry
-         (function +org-capture-central-project-todo-file)
-         "* TODO %?\n %i\n %a"
-         :heading "Tasks"
-         :prepend nil)
-        ("on" "Project notes" entry
-         (function +org-capture-central-project-notes-file)
-         "* %U %?\n %i\n %a"
-         :heading "Notes"
-         :prepend t)
-        ("oc" "Project changelog" entry
-         (function +org-capture-central-project-changelog-file)
-         "* %U %?\n %i\n %a"
-         :heading "Changelog"
-         :prepend t)))
-    )
+  (after! org
+      (setq org-agenda-files (quote ("~/orgNotes")))
+      (setq org-directory "~/orgNotes")
+      (setq org-priority-faces  '((?A :foreground "#FF6C6B")
+                              (?B :foreground "#F97066")
+                              (?C :foreground "#F37460")
+                              (?D :foreground "#ED785A")
+                              (?E :foreground "#E77D54")
+                              (?F :foreground "#E1804F")
+                              (?G :foreground "#DB8449")
+                              (?H :foreground "#D8835B")
+                              (?I :foreground "#D48172")
+                              (?J :foreground "#D17F8A")
+                              (?K :foreground "#CE7DA2")
+                              (?L :foreground "#CA7BBA")
+                              (?M :foreground "#C779D2")
+                              (?N :foreground "#C47BDE")
+                              (?O :foreground "#BF82DE")
+                              (?P :foreground "#BB88DE")
+                              (?Q :foreground "#B68FDF")
+                              (?R :foreground "#B196DF")
+                              (?S :foreground "#AD9CE1")
+                              (?T :foreground "#A69EDD")
+                              (?U :foreground "#9A94C9")
+                              (?V :foreground "#8D8BB6")
+                              (?W :foreground "#8181A3")
+                              (?X :foreground "#74768F")
+                              (?Y :foreground "#676C7B")
+                              (?Z :foreground "#5B6268")))
+      )
 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
@@ -204,40 +173,77 @@
           (search category-keep)))
   )
 
-(after! org
-  (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
-  (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
-  (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
-  (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
-  (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
-  )
+  (after! org
+    (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
+    (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
+    (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
+    (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
+    (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
+    )
 
 (after! julia-repl
   (setq juliaVersion "1.6.3"))
 
-(use-package! lsp-julia
-  :after julia-repl eshell
-  :config
-  (setenv "PATH"
-          (concat
-           "/home/dsweber/julia-" juliaVersion "/bin" ":"
-           (getenv "PATH")))
-  (add-hook 'julia-mode-hook 'lsp)
-  (add-hook 'ess-julia-mode-hook #'lsp)
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
-  (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
-  (setq lsp-julia-command (concat
-           "/home/dsweber/julia-" juliaVersion "/bin/julia"
-           ))
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-timeout 12000)
-  (setq lsp-enable-folding t)
-  (setq julia-indent-offset 1)
+  (use-package! lsp-julia
+    :after julia-repl eshell lsp
+    :config
+    (setenv "PATH"
+            (concat
+             "/home/dsweber/julia-" juliaVersion "/bin" ":"
+             (getenv "PATH")))
+    (add-hook 'julia-mode-hook 'lsp)
+    (add-hook 'ess-julia-mode-hook #'lsp)
+    (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+    (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
+    (setq lsp-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             ))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-timeout 12000)
+    (setq lsp-enable-folding t)
+    (setq julia-indent-offset 4)
 
-  (setq lsp-julia-format-indents nil)
-  (setq lsp-enable-indentation nil)
-  )
-(setq julia-indent-offset 4)
+    (setq lsp-julia-format-indents true)
+    (setq lsp-enable-indentation true)
+    (setq julia-indent-mapping '((julia-mode . julia-indent-offset)))
+    (setq lsp--formatting-indent-alist '((c-mode                     . c-basic-offset)                   ; C
+    (c++-mode                   . c-basic-offset)                   ; C++
+    (csharp-mode                . c-basic-offset)                   ; C#
+    (csharp-tree-sitter-mode    . csharp-tree-sitter-indent-offset) ; C#
+    (d-mode                     . c-basic-offset)                   ; D
+    (java-mode                  . c-basic-offset)                   ; Java
+    (jde-mode                   . c-basic-offset)                   ; Java (JDE)
+    (js-mode                    . js-indent-level)                  ; JavaScript
+    (js2-mode                   . js2-basic-offset)                 ; JavaScript-IDE
+    (js3-mode                   . js3-indent-level)                 ; JavaScript-IDE
+    (json-mode                  . js-indent-level)                  ; JSON
+    (lua-mode                   . lua-indent-level)                 ; Lua
+    (objc-mode                  . c-basic-offset)                   ; Objective C
+    (php-mode                   . c-basic-offset)                   ; PHP
+    (perl-mode                  . perl-indent-level)                ; Perl
+    (cperl-mode                 . cperl-indent-level)               ; Perl
+    (raku-mode                  . raku-indent-offset)               ; Perl6/Raku
+    (erlang-mode                . erlang-indent-level)              ; Erlang
+    (ada-mode                   . ada-indent)                       ; Ada
+    (sgml-mode                  . sgml-basic-offset)                ; SGML
+    (nxml-mode                  . nxml-child-indent)                ; XML
+    (pascal-mode                . pascal-indent-level)              ; Pascal
+    (typescript-mode            . typescript-indent-level)          ; Typescript
+    (sh-mode                    . sh-basic-offset)                  ; Shell Script
+    (ruby-mode                  . ruby-indent-level)                ; Ruby
+    (enh-ruby-mode              . enh-ruby-indent-level)            ; Ruby
+    (crystal-mode               . crystal-indent-level)             ; Crystal (Ruby)
+    (css-mode                   . css-indent-offset)                ; CSS
+    (rust-mode                  . rust-indent-offset)               ; Rust
+    (rustic-mode                . rustic-indent-offset)             ; Rust
+    (scala-mode                 . scala-indent:step)                ; Scala
+    (powershell-mode            . powershell-indent)                ; PowerShell
+    (ess-mode                   . ess-indent-offset)                ; ESS (R)
+    (yaml-mode                  . yaml-indent-offset)               ; YAML
+    (hack-mode                  . hack-indent-offset)               ; Hack
+    (julia-mode                 . julia-indent-offset)
+    (default                    . standard-indent)))
+    )
 
 (after! julia-repl
   (setq julia-repl-executable-records
@@ -341,39 +347,6 @@
 (setq a-date 3425)
 (setq b-date 3295)
 
-(defun elfeed-score/toggle-debug-warn-level ()
-  (if (eq elfeed-score-log-level 'debug)
-      (setq elfeed-score-log-level 'warn)
-    (setq elfeed-score-log-level 'debug)))
-
-(map! :leader
-      (:prefix ("e" . "elfeed")
-       :desc "elfeed-score-map" "m" #'elfeed-score-map
-       :desc "open feed"        "f" #'elfeed
-       :desc "update elfeed"    "u" #'elfeed-update
-       :desc "score entries"    "s" #'elfeed-score/score
-       :desc "add score rules"  "r" #'elfeed-score-load-score-file
-       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-       )
-      )
-
-(after! persp-mode
-  (persp-def-buffer-save/load
-   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
-   :save-vars '(default-directory)
-   :load-function #'(lambda (savelist &rest _)
-                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
-                        (let ((buf-dir (alist-get 'default-directory vars-list)))
-                          (magit-status buf-dir))))))
-
-(after! projectile
-   :config
-   (setq custom-suffixes '(".pdf" ".png" ".svg"))
-   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
-
-(after! counsel
-  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
-
 (setq elfeed-log-level 'debug)
 (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
@@ -397,3 +370,19 @@
                               :autotags elfeed-protocol-tags))))
   (elfeed-protocol-enable)
   )
+
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+
+  (map! :leader
+        (:prefix ("e" . "elfeed")
+         :desc "elfeed-score-map" "m" #'elfeed-score-map
+         :desc "open feed"        "f" #'elfeed
+         :desc "update elfeed"    "u" #'elfeed-update
+         :desc "score entries"    "s" #'elfeed-score/score
+         :desc "add score rules"  "r" #'elfeed-score-load-score-file
+         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+         )
+        )
