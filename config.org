@@ -341,7 +341,8 @@ The keybindings for the agenda changed. some have added an annoying amount of fr
 First, let's define the current version of Julia
 #+begin_src elisp 
 (after! julia-repl
-  (setq juliaVersion "1.6.3"))
+  (setq juliaVersion "1.7.1")
+  (setq juliaPkgVersion "1.7"))
 #+END_SRC
 
 
@@ -350,7 +351,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.6.3"
+juliaVersion = "1.7.1"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -369,12 +370,14 @@ and now the actual code to be tangled into ~init.el~.
              (getenv "PATH")))
     (add-hook 'julia-mode-hook 'lsp)
     (add-hook 'ess-julia-mode-hook #'lsp)
-    (setq lsp-julia-default-environment "~/.julia/environments/v1.6")
-    (setq lsp-julia-package-dir "~/.julia/environments/v1.6")
+    (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
+    (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command (concat
              "/home/dsweber/julia-" juliaVersion "/bin/julia"
              ))
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.6" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"))
     (setq lsp-julia-timeout 12000)
     (setq lsp-enable-folding t)
     (setq julia-indent-offset 4)
@@ -421,6 +424,17 @@ and now the actual code to be tangled into ~init.el~.
     (default                    . standard-indent)))
     )
 #+END_SRC
+#+begin_src elisp
+(after! lsp-julia
+    (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
+    (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
+    (setq lsp-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             ))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia")))
+#+end_src
 
 It appears that julia-repl also has some settings to adjust
 #+begin_src elisp 
