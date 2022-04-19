@@ -1,4 +1,4 @@
-personal_ws-1.1 en 240
+personal_ws-1.1 en 245
 AUCs
 Amari
 AppendixFits
@@ -20,6 +20,7 @@ Daubechies's
 DeltaInputGradient
 Donoho
 Dosovitskiy
+Dwosner
 EffQual
 FahionMNIST
 FashionMNIST
@@ -31,6 +32,7 @@ HeavisineST
 JuliaDSP
 Kingsbury
 Kingsbury's
+Kirill
 Kittipoom
 Klauder
 Kutyniok
@@ -57,6 +59,7 @@ ROCshape
 ROCshapeDS
 ReLU
 Riesz
+Rudin
 Saito
 Sammis
 Sandworm
@@ -153,6 +156,7 @@ htb
 https
 inputGradientSecond
 inputSignal
+interpretability
 invertibility
 jl
 kymat
@@ -228,6 +232,7 @@ unpenalized
 unrotated
 upsampling
 variousBcfResults
+ve
 vers
 vn
 wavefield

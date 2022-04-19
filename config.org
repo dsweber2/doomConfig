@@ -212,6 +212,16 @@ org ref is excellent.
         bibtex-completion-bibliography (concat orgRefDir "oneBibToRuleThemAll.bib")
         bibtex-completion-library-path "~/allHail/zoteroFiles"
         bibtex-completion-notes-path (concat orgRefDir "oneBibToRuleThemAll.org"))
+  (with-eval-after-load 'ox
+    (defun my/org-ref-process-buffer--html (backend)
+      "Preprocess `org-ref' citations to HTML format.
+
+Do this only if the export backend is `html' or a derivative of
+that."
+      ;; `ox-hugo' is derived indirectly from `ox-html'.
+      (when (org-export-derived-backend-p backend 'html)
+        (org-ref-process-buffer 'html)))
+    (add-to-list 'org-export-before-parsing-hook #'my/org-ref-process-buffer--html))
   )
 (map! :leader
       :desc "insert a helm reference"
@@ -313,7 +323,7 @@ org priorities
   :config
   (setq org-priority-highest ?A)
   (setq org-priority-lowest ?Z)
-  (setq org-priority-default ?M))
+  (setq org-priority-default ?Z))
 #+end_src
 
 #+begin_src elisp 
@@ -321,7 +331,7 @@ org priorities
   :config
   (setq org-agenda-sorting-strategy
         '((agenda habit-up deadline-up priority-down time-up scheduled-down)
-          (todo category-keep priority-down)
+          (todo priority-down)
           (tags priority-down category-keep)
           (search category-keep)))
   )
@@ -337,6 +347,13 @@ The keybindings for the agenda changed. some have added an annoying amount of fr
     (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
     )
 #+end_src
+* LSP stuff
+#+begin_src R :tangle no
+install.packages("styler")
+#+end_src
+
+#+RESULTS:
+
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp 
