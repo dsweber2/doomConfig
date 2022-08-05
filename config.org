@@ -361,8 +361,9 @@ install.packages("styler")
 First, let's define the current version of Julia
 #+begin_src elisp
 (after! julia-repl
-  (setq juliaVersion "1.7.1")
-  (setq juliaPkgVersion "1.7"))
+  (setq juliaVersion "1.7.3")
+  (setq juliaPkgVersion "1.7")
+  (setenv "JULIA_NUM_THREADS" "5"))
 #+END_SRC
 
 
@@ -371,7 +372,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.7.1"
+juliaVersion = "1.7.3"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -384,6 +385,8 @@ and now the actual code to be tangled into ~init.el~.
   (use-package! lsp-julia
     :after julia-repl eshell lsp
     :config
+    (setq juliaVersion "1.7.3")
+    (setq juliaPkgVersion "1.7")
     (setenv "PATH"
             (concat
              "/home/dsweber/julia-" juliaVersion "/bin" ":"
@@ -444,8 +447,11 @@ and now the actual code to be tangled into ~init.el~.
     (default                    . standard-indent)))
     )
 #+END_SRC
+fixing some stuff for lsp
 #+begin_src elisp
 (after! lsp-julia
+    (setq juliaPkgVersion "1.7")
+    (setq juliaVersion "1.7.3")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command (concat

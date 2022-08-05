@@ -7,15 +7,6 @@
 
 (setq own-doom-home "/home/dsweber/.doom.d/")
 
-(after! persp-mode
-  (persp-def-buffer-save/load
-   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
-   :save-vars '(default-directory)
-   :load-function #'(lambda (savelist &rest _)
-                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
-                        (let ((buf-dir (alist-get 'default-directory vars-list)))
-                          (magit-status buf-dir))))))
-
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (setq default-input-method "TeX")
@@ -76,19 +67,11 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
-(after! projectile
-   :config
-   (setq custom-suffixes '(".pdf" ".png" ".svg"))
-   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
-
-(after! counsel
-  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
-
 (use-package! rainbow-mode
   :ensure t)
 
-  (after! indent
-          (setq standard-indent 4))
+(after! indent
+        (setq standard-indent 4))
 
 (use-package! org-ref
   :config
@@ -109,11 +92,14 @@ that."
       (when (org-export-derived-backend-p backend 'html)
         (org-ref-process-buffer 'html)))
     (add-to-list 'org-export-before-parsing-hook #'my/org-ref-process-buffer--html))
+    (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
   )
 (map! :leader
       :desc "insert a helm reference"
       "i c" 'org-ref-insert-link)
 
+(setq max-lisp-eval-depth 10000)
+(setq org-extend-today-until 2)
 (after! org
   :config
   (setq org-startup-with-latex-preview t)
@@ -128,36 +114,36 @@ that."
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   )
 
-  (after! org
-      (setq org-agenda-files (quote ("~/orgNotes")))
-      (setq org-directory "~/orgNotes")
-      (setq org-priority-faces  '((?A :foreground "#FF6C6B")
-                              (?B :foreground "#F97066")
-                              (?C :foreground "#F37460")
-                              (?D :foreground "#ED785A")
-                              (?E :foreground "#E77D54")
-                              (?F :foreground "#E1804F")
-                              (?G :foreground "#DB8449")
-                              (?H :foreground "#D8835B")
-                              (?I :foreground "#D48172")
-                              (?J :foreground "#D17F8A")
-                              (?K :foreground "#CE7DA2")
-                              (?L :foreground "#CA7BBA")
-                              (?M :foreground "#C779D2")
-                              (?N :foreground "#C47BDE")
-                              (?O :foreground "#BF82DE")
-                              (?P :foreground "#BB88DE")
-                              (?Q :foreground "#B68FDF")
-                              (?R :foreground "#B196DF")
-                              (?S :foreground "#AD9CE1")
-                              (?T :foreground "#A69EDD")
-                              (?U :foreground "#9A94C9")
-                              (?V :foreground "#8D8BB6")
-                              (?W :foreground "#8181A3")
-                              (?X :foreground "#74768F")
-                              (?Y :foreground "#676C7B")
-                              (?Z :foreground "#5B6268")))
-      )
+(after! org
+    (setq org-agenda-files (quote ("~/orgNotes")))
+    (setq org-directory "~/orgNotes")
+    (setq org-priority-faces  '((?A :foreground "#FF6C6B")
+                            (?B :foreground "#F97066")
+                            (?C :foreground "#F37460")
+                            (?D :foreground "#ED785A")
+                            (?E :foreground "#E77D54")
+                            (?F :foreground "#E1804F")
+                            (?G :foreground "#DB8449")
+                            (?H :foreground "#D8835B")
+                            (?I :foreground "#D48172")
+                            (?J :foreground "#D17F8A")
+                            (?K :foreground "#CE7DA2")
+                            (?L :foreground "#CA7BBA")
+                            (?M :foreground "#C779D2")
+                            (?N :foreground "#C47BDE")
+                            (?O :foreground "#BF82DE")
+                            (?P :foreground "#BB88DE")
+                            (?Q :foreground "#B68FDF")
+                            (?R :foreground "#B196DF")
+                            (?S :foreground "#AD9CE1")
+                            (?T :foreground "#A69EDD")
+                            (?U :foreground "#9A94C9")
+                            (?V :foreground "#8D8BB6")
+                            (?W :foreground "#8181A3")
+                            (?X :foreground "#74768F")
+                            (?Y :foreground "#676C7B")
+                            (?Z :foreground "#5B6268")))
+    )
 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
@@ -183,82 +169,87 @@ that."
           (search category-keep)))
   )
 
-  (after! org
-    (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
-    (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
-    (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
-    (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
-    (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
-    )
+(after! org
+  (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
+  (org-defkey org-agenda-mode-map "k" #'org-agenda-previous-line)
+  (org-defkey org-agenda-mode-map "J" #'org-agenda-priority-up)
+  (org-defkey org-agenda-mode-map "K" #'org-agenda-priority-down)
+  (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
+  )
 
 (after! julia-repl
-  (setq juliaVersion "1.7.1")
-  (setq juliaPkgVersion "1.7"))
+  (setq juliaVersion "1.7.3")
+  (setq juliaPkgVersion "1.7")
+  (setenv "JULIA_NUM_THREADS" "5"))
 
-  (use-package! lsp-julia
-    :after julia-repl eshell lsp
-    :config
-    (setenv "PATH"
-            (concat
-             "/home/dsweber/julia-" juliaVersion "/bin" ":"
-             (getenv "PATH")))
-    (add-hook 'julia-mode-hook 'lsp)
-    (add-hook 'ess-julia-mode-hook #'lsp)
-    (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-command (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia"
-             ))
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia"))
-    (setq lsp-julia-timeout 12000)
-    (setq lsp-enable-folding t)
-    (setq julia-indent-offset 4)
+(use-package! lsp-julia
+  :after julia-repl eshell lsp
+  :config
+  (setq juliaVersion "1.7.3")
+  (setq juliaPkgVersion "1.7")
+  (setenv "PATH"
+          (concat
+           "/home/dsweber/julia-" juliaVersion "/bin" ":"
+           (getenv "PATH")))
+  (add-hook 'julia-mode-hook 'lsp)
+  (add-hook 'ess-julia-mode-hook #'lsp)
+  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-command (concat
+           "/home/dsweber/julia-" juliaVersion "/bin/julia"
+           ))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command (concat
+           "/home/dsweber/julia-" juliaVersion "/bin/julia"))
+  (setq lsp-julia-timeout 12000)
+  (setq lsp-enable-folding t)
+  (setq julia-indent-offset 4)
 
-    (setq lsp-julia-format-indents true)
-    (setq lsp-enable-indentation true)
-    (setq julia-indent-mapping '((julia-mode . julia-indent-offset)))
-    (setq lsp--formatting-indent-alist '((c-mode                     . c-basic-offset)                   ; C
-    (c++-mode                   . c-basic-offset)                   ; C++
-    (csharp-mode                . c-basic-offset)                   ; C#
-    (csharp-tree-sitter-mode    . csharp-tree-sitter-indent-offset) ; C#
-    (d-mode                     . c-basic-offset)                   ; D
-    (java-mode                  . c-basic-offset)                   ; Java
-    (jde-mode                   . c-basic-offset)                   ; Java (JDE)
-    (js-mode                    . js-indent-level)                  ; JavaScript
-    (js2-mode                   . js2-basic-offset)                 ; JavaScript-IDE
-    (js3-mode                   . js3-indent-level)                 ; JavaScript-IDE
-    (json-mode                  . js-indent-level)                  ; JSON
-    (lua-mode                   . lua-indent-level)                 ; Lua
-    (objc-mode                  . c-basic-offset)                   ; Objective C
-    (php-mode                   . c-basic-offset)                   ; PHP
-    (perl-mode                  . perl-indent-level)                ; Perl
-    (cperl-mode                 . cperl-indent-level)               ; Perl
-    (raku-mode                  . raku-indent-offset)               ; Perl6/Raku
-    (erlang-mode                . erlang-indent-level)              ; Erlang
-    (ada-mode                   . ada-indent)                       ; Ada
-    (sgml-mode                  . sgml-basic-offset)                ; SGML
-    (nxml-mode                  . nxml-child-indent)                ; XML
-    (pascal-mode                . pascal-indent-level)              ; Pascal
-    (typescript-mode            . typescript-indent-level)          ; Typescript
-    (sh-mode                    . sh-basic-offset)                  ; Shell Script
-    (ruby-mode                  . ruby-indent-level)                ; Ruby
-    (enh-ruby-mode              . enh-ruby-indent-level)            ; Ruby
-    (crystal-mode               . crystal-indent-level)             ; Crystal (Ruby)
-    (css-mode                   . css-indent-offset)                ; CSS
-    (rust-mode                  . rust-indent-offset)               ; Rust
-    (rustic-mode                . rustic-indent-offset)             ; Rust
-    (scala-mode                 . scala-indent:step)                ; Scala
-    (powershell-mode            . powershell-indent)                ; PowerShell
-    (ess-mode                   . ess-indent-offset)                ; ESS (R)
-    (yaml-mode                  . yaml-indent-offset)               ; YAML
-    (hack-mode                  . hack-indent-offset)               ; Hack
-    (julia-mode                 . julia-indent-offset)
-    (default                    . standard-indent)))
-    )
+  (setq lsp-julia-format-indents true)
+  (setq lsp-enable-indentation true)
+  (setq julia-indent-mapping '((julia-mode . julia-indent-offset)))
+  (setq lsp--formatting-indent-alist '((c-mode                     . c-basic-offset)                   ; C
+  (c++-mode                   . c-basic-offset)                   ; C++
+  (csharp-mode                . c-basic-offset)                   ; C#
+  (csharp-tree-sitter-mode    . csharp-tree-sitter-indent-offset) ; C#
+  (d-mode                     . c-basic-offset)                   ; D
+  (java-mode                  . c-basic-offset)                   ; Java
+  (jde-mode                   . c-basic-offset)                   ; Java (JDE)
+  (js-mode                    . js-indent-level)                  ; JavaScript
+  (js2-mode                   . js2-basic-offset)                 ; JavaScript-IDE
+  (js3-mode                   . js3-indent-level)                 ; JavaScript-IDE
+  (json-mode                  . js-indent-level)                  ; JSON
+  (lua-mode                   . lua-indent-level)                 ; Lua
+  (objc-mode                  . c-basic-offset)                   ; Objective C
+  (php-mode                   . c-basic-offset)                   ; PHP
+  (perl-mode                  . perl-indent-level)                ; Perl
+  (cperl-mode                 . cperl-indent-level)               ; Perl
+  (raku-mode                  . raku-indent-offset)               ; Perl6/Raku
+  (erlang-mode                . erlang-indent-level)              ; Erlang
+  (ada-mode                   . ada-indent)                       ; Ada
+  (sgml-mode                  . sgml-basic-offset)                ; SGML
+  (nxml-mode                  . nxml-child-indent)                ; XML
+  (pascal-mode                . pascal-indent-level)              ; Pascal
+  (typescript-mode            . typescript-indent-level)          ; Typescript
+  (sh-mode                    . sh-basic-offset)                  ; Shell Script
+  (ruby-mode                  . ruby-indent-level)                ; Ruby
+  (enh-ruby-mode              . enh-ruby-indent-level)            ; Ruby
+  (crystal-mode               . crystal-indent-level)             ; Crystal (Ruby)
+  (css-mode                   . css-indent-offset)                ; CSS
+  (rust-mode                  . rust-indent-offset)               ; Rust
+  (rustic-mode                . rustic-indent-offset)             ; Rust
+  (scala-mode                 . scala-indent:step)                ; Scala
+  (powershell-mode            . powershell-indent)                ; PowerShell
+  (ess-mode                   . ess-indent-offset)                ; ESS (R)
+  (yaml-mode                  . yaml-indent-offset)               ; YAML
+  (hack-mode                  . hack-indent-offset)               ; Hack
+  (julia-mode                 . julia-indent-offset)
+  (default                    . standard-indent)))
+  )
 
 (after! lsp-julia
+    (setq juliaPkgVersion "1.7")
+    (setq juliaVersion "1.7.3")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command (concat
@@ -277,6 +268,23 @@ that."
         )
   :hook '(julia-repl-mode-hook +word-wrap-mode)
   )
+
+(after! ob-julia
+  (setq org-babel-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             ))
+  (setq inferior-julia-program-name (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             )))
+
+(after! ob-ess-julia
+  (org-babel-do-load-languages 'org-babel-load-languages (append org-babel-load-languages '((ess-julia . t))))
+  (setq org-src-lang-modes (append org-src-lang-modes '(("ess-julia" . ess-julia))))
+  )
+
+(after! ein
+  (setq org-babel-header-args '((:kernel . "julia-1.7") (:async . yes)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.7") (:async . yes))))
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
@@ -370,6 +378,39 @@ that."
 (setq a-date 3425)
 (setq b-date 3295)
 
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+
+(map! :leader
+      (:prefix ("e" . "elfeed")
+       :desc "elfeed-score-map" "m" #'elfeed-score-map
+       :desc "open feed"        "f" #'elfeed
+       :desc "update elfeed"    "u" #'elfeed-update
+       :desc "score entries"    "s" #'elfeed-score/score
+       :desc "add score rules"  "r" #'elfeed-score-load-score-file
+       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+       )
+      )
+
+(after! persp-mode
+  (persp-def-buffer-save/load
+   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+   :save-vars '(default-directory)
+   :load-function #'(lambda (savelist &rest _)
+                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
+                        (let ((buf-dir (alist-get 'default-directory vars-list)))
+                          (magit-status buf-dir))))))
+
+(after! projectile
+   :config
+   (setq custom-suffixes '(".pdf" ".png" ".svg"))
+   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+
+(after! counsel
+  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
+
 (setq elfeed-log-level 'debug)
 (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
@@ -393,19 +434,3 @@ that."
                               :autotags elfeed-protocol-tags))))
   (elfeed-protocol-enable)
   )
-
-(defun elfeed-score/toggle-debug-warn-level ()
-  (if (eq elfeed-score-log-level 'debug)
-      (setq elfeed-score-log-level 'warn)
-    (setq elfeed-score-log-level 'debug)))
-
-  (map! :leader
-        (:prefix ("e" . "elfeed")
-         :desc "elfeed-score-map" "m" #'elfeed-score-map
-         :desc "open feed"        "f" #'elfeed
-         :desc "update elfeed"    "u" #'elfeed-update
-         :desc "score entries"    "s" #'elfeed-score/score
-         :desc "add score rules"  "r" #'elfeed-score-load-score-file
-         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-         )
-        )
