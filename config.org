@@ -468,10 +468,34 @@ It appears that julia-repl also has some settings to adjust
   :hook '(julia-repl-mode-hook +word-wrap-mode)
   )
 #+end_src
+you know what else would be nice? org-babel
+#+begin_src elisp
+(after! ob-julia
+  (setq org-babel-julia-command (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             ))
+  (setq inferior-julia-program-name (concat
+             "/home/dsweber/julia-" juliaVersion "/bin/julia"
+             )))
+#+end_src
+and trying ess julia instead
+#+begin_src elisp
+(after! ob-ess-julia
+  (org-babel-do-load-languages 'org-babel-load-languages (append org-babel-load-languages '((ess-julia . t))))
+  (setq org-src-lang-modes (append org-src-lang-modes '(("ess-julia" . ess-julia))))
+  )
+#+end_src
+actually jupyter is the most reasonable
+#+begin_src elisp
+(after! ein
+  (setq org-babel-header-args '((:kernel . "julia-1.7") (:async . yes)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.7") (:async . yes))))
+#+end_src
+
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work
-#+begin_src elisp 
+#+begin_src elisp
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
   (define-key evil-normal-state-map "L" 'evil-scroll-line-to-bottom)

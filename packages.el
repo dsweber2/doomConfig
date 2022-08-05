@@ -61,6 +61,7 @@
 (package! citeproc)
 (package! company-bibtex)
 (package! org-fragtog)
+(package! ob-ess-julia)
 ;; editor packages
 (package! ace-jump-buffer)
 ;;(package! ace-jump)
