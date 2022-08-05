@@ -1,4 +1,4 @@
-personal_ws-1.1 en 245
+personal_ws-1.1 en 260
 AUCs
 Amari
 AppendixFits
@@ -89,12 +89,15 @@ Wiatowski's
 allScalograms
 analyticInversion
 angleCoverage
+automata
 aveDec
 aveLen
 averagingLength
+bato
 bcf
 beamformed
 beamforming
+bemidji
 bumpsFunction
 bumpsGradients
 bumpsMorl
@@ -113,7 +116,9 @@ convBoundary
 convolutional
 coord
 coordinateFit
+cpus
 cwtExs
+dapro
 decayRates
 dev
 discretize
@@ -122,6 +127,7 @@ discretizing
 ector
 ephane
 estim
+explainability
 extraOctaves
 fatherWav
 fft
@@ -143,6 +149,7 @@ fitSignalsSecondLayer
 freqStd
 funct
 geometryBaseRect
+gifs
 gitlab
 gradientAlone
 gradientInputs
@@ -158,11 +165,14 @@ inputGradientSecond
 inputSignal
 interpretability
 invertibility
+jemisin
 jl
+kusanagi
 kymat
 linearFashionMNIST
 linearMNIST
 locat
+mahoney's
 maximizers
 morl
 motherDef
@@ -186,6 +196,7 @@ plotOfLogCentralFrequencies
 png
 pointwise
 preprocessing
+prestructured
 proto
 pseudoinverse
 pseudoinversion
@@ -201,6 +212,7 @@ robertfeldt
 rotRad
 scalograms
 scatSparse
+schmidhuber
 secondOutput
 secondOutputBumps
 secondOutputCylinder
@@ -218,6 +230,7 @@ singleFits
 sinusoid's
 sinusoidFirst
 sketchWaves
+skipgram
 sparseTree
 speedDrawring
 subsampled
@@ -226,6 +239,7 @@ theo
 theor
 thm
 timeseriesclassification
+tokenization
 tranInv
 triAlone
 unpenalized
@@ -242,5 +256,6 @@ waveletTransforms
 waveletWaveletTransform
 wrappedbcf
 wrappedbcfRot
+yu
 zeroDelta
 zeroDeltaNormalized
