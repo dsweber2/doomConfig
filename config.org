@@ -222,6 +222,7 @@ that."
       (when (org-export-derived-backend-p backend 'html)
         (org-ref-process-buffer 'html)))
     (add-to-list 'org-export-before-parsing-hook #'my/org-ref-process-buffer--html))
+    (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
   )
 (map! :leader
       :desc "insert a helm reference"
@@ -230,6 +231,8 @@ that."
 
 I would like company do to things in org-mode yes please thankyou
 #+begin_src elisp
+(setq max-lisp-eval-depth 10000)
+(setq org-extend-today-until 2)
 (after! org
   :config
   (setq org-startup-with-latex-preview t)
