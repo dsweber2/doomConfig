@@ -1,4 +1,4 @@
-personal_ws-1.1 en 260
+personal_ws-1.1 en 262
 AUCs
 Amari
 AppendixFits
@@ -147,6 +147,7 @@ fitSignals
 fitSignalsScalograms
 fitSignalsSecondLayer
 freqStd
+frobenius
 funct
 geometryBaseRect
 gifs
@@ -171,6 +172,7 @@ kusanagi
 kymat
 linearFashionMNIST
 linearMNIST
+linearization
 locat
 mahoney's
 maximizers
