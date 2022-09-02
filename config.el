@@ -177,30 +177,31 @@ that."
   (org-defkey org-agenda-mode-map (kbd "SPC") 'nil)
   )
 
+(after! org
+  (setq org-log-into-drawer t)
+  (setq org-log-state-notes-into-drawer t))
+
 (after! julia-repl
-  (setq juliaVersion "1.7.3")
-  (setq juliaPkgVersion "1.7")
+  (setq juliaVersion "1.8.0")
+  (setq juliaPkgVersion "1.8")
   (setenv "JULIA_NUM_THREADS" "5"))
 
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.7.3")
-  (setq juliaPkgVersion "1.7")
+  (setq juliaVersion "1.8.0")
+  (setq juliaPkgVersion "1.8")
   (setenv "PATH"
           (concat
-           "/home/dsweber/julia-" juliaVersion "/bin" ":"
+           "/home/dsweber/.julia/juliaup/bin" ":"
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp)
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command (concat
-           "/home/dsweber/julia-" juliaVersion "/bin/julia"
-           ))
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command (concat
-           "/home/dsweber/julia-" juliaVersion "/bin/julia"))
+  (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
@@ -248,21 +249,17 @@ that."
   )
 
 (after! lsp-julia
-    (setq juliaPkgVersion "1.7")
-    (setq juliaVersion "1.7.3")
+    (setq juliaPkgVersion "1.8")
+    (setq juliaVersion "1.8.0")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-command (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia"
-             ))
+    (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
     (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia")))
+    (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia"))
 
 (after! julia-repl
   (setq julia-repl-executable-records
-        `((default ,(concat "/home/dsweber/julia-" juliaVersion
-                            "/bin/julia") :basedir
+        `((default ,"home/dsweber/.julia/juliaup/bin/julia" :basedir
                             nil)
           )
         )
@@ -270,12 +267,8 @@ that."
   )
 
 (after! ob-julia
-  (setq org-babel-julia-command (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia"
-             ))
-  (setq inferior-julia-program-name (concat
-             "/home/dsweber/julia-" juliaVersion "/bin/julia"
-             )))
+  (setq org-babel-julia-command "home/dsweber/.julia/juliaup/bin/julia")
+  (setq inferior-julia-program-name "home/dsweber/.julia/juliaup/bin/julia"))
 
 (after! ob-ess-julia
   (org-babel-do-load-languages 'org-babel-load-languages (append org-babel-load-languages '((ess-julia . t))))
