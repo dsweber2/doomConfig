@@ -199,9 +199,9 @@ that."
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
@@ -253,13 +253,13 @@ that."
     (setq juliaVersion "1.8.0")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia")
+    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
     (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command "home/dsweber/.julia/juliaup/bin/julia"))
+    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia"))
 
 (after! julia-repl
   (setq julia-repl-executable-records
-        `((default ,"home/dsweber/.julia/juliaup/bin/julia" :basedir
+        `((default ,"/home/dsweber/.julia/juliaup/bin/julia" :basedir
                             nil)
           )
         )
@@ -267,8 +267,8 @@ that."
   )
 
 (after! ob-julia
-  (setq org-babel-julia-command "home/dsweber/.julia/juliaup/bin/julia")
-  (setq inferior-julia-program-name "home/dsweber/.julia/juliaup/bin/julia"))
+  (setq org-babel-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq inferior-julia-program-name "/home/dsweber/.julia/juliaup/bin/julia"))
 
 (after! ob-ess-julia
   (org-babel-do-load-languages 'org-babel-load-languages (append org-babel-load-languages '((ess-julia . t))))
