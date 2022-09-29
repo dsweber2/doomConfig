@@ -124,6 +124,7 @@ So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
 #+begin_src elisp
 (after! ace-window
+  (global-unset-key (kbd "M-o"))
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
@@ -252,6 +253,9 @@ whenever you're over a latex fragment, it will compile. Also, get the resolution
 #+end_src
 
 ** Org-anizing my life
+:PROPERTIES:
+:ID:       9a235fa1-8b85-440f-b6c5-e999efccabd5
+:END:
 Current references for putting this together are [[http://doc.norang.ca/org-mode.html][norang]] and [[http://www.cachestocaches.com/2016/9/my-workflow-org-agenda/][Caches to Caches]].
 Enable my todos from these files to be collected by the agenda
 #+begin_src elisp
@@ -329,6 +333,7 @@ org priorities
   (setq org-priority-default ?Z))
 #+end_src
 
+how to sort the agenda and the daily todo. the priority is the most important sorting
 #+begin_src elisp
 (after! org
   :config
@@ -379,7 +384,7 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.7.3"
+juliaVersion = "1.8.1"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -459,7 +464,7 @@ fixing some stuff for lsp
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.7" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia"))
 #+end_src
 
@@ -490,8 +495,8 @@ and trying ess julia instead
 actually jupyter is the most reasonable
 #+begin_src elisp
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.7") (:async . yes)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.7") (:async . yes))))
+  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . yes)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . yes))))
 #+end_src
 
 * Evil Settings
@@ -533,9 +538,10 @@ fringe marks are more legible
 evil numbers increments and decrements numbers. useful for adding numbers
 (repeat the command e.g. 45 times)
 #+begin_src elisp
-(after! evil-numbers
-  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+(use-package! evil-numbers
+  :config
+  (define-key evil-normal-state-map (kbd "zQ") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/dec-at-pt)
   )
 #+end_src
 * Elfeed settings

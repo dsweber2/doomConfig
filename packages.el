@@ -58,13 +58,17 @@
 
 ;; org packages
 (package! org-ref)
+;; (package! org-sync)
 (package! citeproc)
 (package! company-bibtex)
 (package! org-fragtog)
 (package! ob-ess-julia)
+(package! orgit)
+
 ;; editor packages
 (package! ace-jump-buffer)
 ;;(package! ace-jump)
+
 ;; random stuff
 ;;(package! activity-watch-mode)
 
