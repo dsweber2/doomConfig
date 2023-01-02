@@ -262,6 +262,7 @@ Enable my todos from these files to be collected by the agenda
   (after! org
       (setq org-agenda-files (quote ("~/orgNotes")))
       (setq org-directory "~/orgNotes")
+      (setq +org-capture-journal-file "~/orgNotes/journal.org")
       (setq org-priority-faces  '((?A :foreground "#FF6C6B")
                               (?B :foreground "#F97066")
                               (?C :foreground "#F37460")
@@ -343,6 +344,13 @@ how to sort the agenda and the daily todo. the priority is the most important so
           (tags priority-down category-keep)
           (search category-keep)))
   )
+#+end_src
+
+I don't want future iterations of repeating events to show up. That's just clutter
+#+begin_src elisp
+(after! org
+  :config
+  (setq org-agenda-show-future-repeats 'next))
 #+end_src
 
 The keybindings for the agenda changed. some have added an annoying amount of friction.

@@ -7,6 +7,15 @@
 
 (setq own-doom-home "/home/dsweber/.doom.d/")
 
+(after! persp-mode
+  (persp-def-buffer-save/load
+   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
+   :save-vars '(default-directory)
+   :load-function #'(lambda (savelist &rest _)
+                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
+                        (let ((buf-dir (alist-get 'default-directory vars-list)))
+                          (magit-status buf-dir))))))
+
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (setq default-input-method "TeX")
@@ -68,6 +77,14 @@
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
+(after! projectile
+   :config
+   (setq custom-suffixes '(".pdf" ".png" ".svg"))
+   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+
+(after! counsel
+  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
+
 (use-package! rainbow-mode
   :ensure t)
 
@@ -118,6 +135,7 @@ that."
 (after! org
     (setq org-agenda-files (quote ("~/orgNotes")))
     (setq org-directory "~/orgNotes")
+    (setq +org-capture-journal-file "~/orgNotes/journal.org")
     (setq org-priority-faces  '((?A :foreground "#FF6C6B")
                             (?B :foreground "#F97066")
                             (?C :foreground "#F37460")
@@ -169,6 +187,10 @@ that."
           (tags priority-down category-keep)
           (search category-keep)))
   )
+
+(after! org
+  :config
+  (setq org-agenda-show-future-repeats 'next))
 
 (after! org
   (org-defkey org-agenda-mode-map "j" #'org-agenda-next-line)
@@ -446,39 +468,6 @@ that."
 (setq a-date 3425)
 (setq b-date 3295)
 
-(defun elfeed-score/toggle-debug-warn-level ()
-  (if (eq elfeed-score-log-level 'debug)
-      (setq elfeed-score-log-level 'warn)
-    (setq elfeed-score-log-level 'debug)))
-
-(map! :leader
-      (:prefix ("e" . "elfeed")
-       :desc "elfeed-score-map" "m" #'elfeed-score-map
-       :desc "open feed"        "f" #'elfeed
-       :desc "update elfeed"    "u" #'elfeed-update
-       :desc "score entries"    "s" #'elfeed-score/score
-       :desc "add score rules"  "r" #'elfeed-score-load-score-file
-       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-       )
-      )
-
-(after! persp-mode
-  (persp-def-buffer-save/load
-   :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
-   :save-vars '(default-directory)
-   :load-function #'(lambda (savelist &rest _)
-                      (cl-destructuring-bind (buffer-name vars-list &rest _rest) (cdr savelist)
-                        (let ((buf-dir (alist-get 'default-directory vars-list)))
-                          (magit-status buf-dir))))))
-
-(after! projectile
-   :config
-   (setq custom-suffixes '(".pdf" ".png" ".svg"))
-   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
-
-(after! counsel
-  (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
-
 (setq elfeed-log-level 'debug)
 (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
@@ -502,3 +491,19 @@ that."
                               :autotags elfeed-protocol-tags))))
   (elfeed-protocol-enable)
   )
+
+(defun elfeed-score/toggle-debug-warn-level ()
+  (if (eq elfeed-score-log-level 'debug)
+      (setq elfeed-score-log-level 'warn)
+    (setq elfeed-score-log-level 'debug)))
+
+(map! :leader
+      (:prefix ("e" . "elfeed")
+       :desc "elfeed-score-map" "m" #'elfeed-score-map
+       :desc "open feed"        "f" #'elfeed
+       :desc "update elfeed"    "u" #'elfeed-update
+       :desc "score entries"    "s" #'elfeed-score/score
+       :desc "add score rules"  "r" #'elfeed-score-load-score-file
+       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+       )
+      )
