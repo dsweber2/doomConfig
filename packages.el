@@ -64,6 +64,10 @@
 (package! org-fragtog)
 (package! ob-ess-julia)
 (package! orgit)
+;; org -> python notebook converter
+(package! ox-ipynb :recipe
+  (:host github
+   :repo "jkitchin/ox-ipynb"))
 
 ;; editor packages
 (package! ace-jump-buffer)

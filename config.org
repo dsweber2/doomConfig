@@ -98,11 +98,16 @@ auto-fill mode (hard wrapping is +nice+ not nice methinks)
 #+begin_src elisp :tangle no
 (setq-default auto-fill-function nil)
 #+end_src
+strangely enough, the fill value is still used by jupyter, so seting it to ~264, based on my current screen
+#+begin_src elisp
+(after! emacs
+  (setq fill-column 264))
+#+end_src
 
 word wrap should be on everywhere
 #+begin_src elisp
 (after! +word-wrap
-  (setq +gobal-word-wrap-mode +1))
+  (setq +gobal-word-wrap-mode 't))
 #+end_src
 ** New functions
 #+begin_src elisp
@@ -542,6 +547,17 @@ install.packages("styler")
 #+end_src
 
 #+RESULTS:
+* Ein settings
+general ein settings
+#+begin_src elisp
+(after! ein
+  (setq ein:output-area-inlined-images t))
+#+end_src
+
+exporting org to ipython notebooks
+#+begin_src elisp
+(use-package! ox-ipynb)
+#+end_src
 
 * Julia Settings
 First, let's define the current version of Julia
@@ -669,8 +685,15 @@ and trying ess julia instead
 actually jupyter is the most reasonable
 #+begin_src elisp
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . yes)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . yes))))
+  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . no))))
+#+end_src
+
+customizing the ob-ein languages
+#+begin_src elisp :tangle no
+(after! ein
+  (setq ob-ein-languages '(("ein" . python)))
+)
 #+end_src
 
 * Evil Settings

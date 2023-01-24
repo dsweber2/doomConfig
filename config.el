@@ -24,8 +24,11 @@
 
 (setq electric-pair-mode t)
 
+(after! emacs
+  (setq fill-column 264))
+
 (after! +word-wrap
-  (setq +gobal-word-wrap-mode +1))
+  (setq +gobal-word-wrap-mode 't))
 
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
@@ -277,6 +280,11 @@ that."
   (update-forge-org-timer "1 hour")
   )
 
+(after! ein
+  (setq ein:output-area-inlined-images t))
+
+(use-package! ox-ipynb)
+
 (after! julia-repl
   (setq juliaVersion "1.8.0")
   (setq juliaPkgVersion "1.8")
@@ -372,8 +380,8 @@ that."
   )
 
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . yes)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . yes))))
+  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . no))))
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
