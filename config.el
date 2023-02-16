@@ -27,6 +27,20 @@
 (after! emacs
   (setq fill-column 264))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(()(python . t)
+   (js . t)
+   (ruby . t)
+   (C .t)
+   (shell .t)
+   (mathematica .t)
+   (clojure .t)
+   (R .t)
+   (jupyter . t)
+   ;; other languages..
+   ))
+
 (after! +word-wrap
   (setq +gobal-word-wrap-mode 't))
 
@@ -278,6 +292,11 @@ that."
           (void-variable "void variable"))
     (setq forge-org-timer (run-at-time interval nil #'org-forge-update-repos))))
   (update-forge-org-timer "1 hour")
+
+   (after! (:and ob-async org-src)
+    (dolist (lang '(python r julia)) ;; FIXME: Replace your prefer language for jupyter.
+      (cl-pushnew (cons (format "jupyter-%s" lang) lang)
+                  org-src-lang-modes :key #'car)))
   )
 
 (after! ein

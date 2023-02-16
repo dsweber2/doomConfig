@@ -68,7 +68,8 @@
 (package! ox-ipynb :recipe
   (:host github
    :repo "jkitchin/ox-ipynb"))
-
+;; emacs-jupyter for org mode needs a version switch
+(unpin! jupyter)
 ;; editor packages
 (package! ace-jump-buffer)
 ;;(package! ace-jump)

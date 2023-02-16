@@ -104,6 +104,22 @@ strangely enough, the fill value is still used by jupyter, so seting it to ~264,
   (setq fill-column 264))
 #+end_src
 
+#+begin_src elisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(()(python . t)
+   (js . t)
+   (ruby . t)
+   (C .t)
+   (shell .t)
+   (mathematica .t)
+   (clojure .t)
+   (R .t)
+   (jupyter . t)
+   ;; other languages..
+   ))
+#+end_src
+
 word wrap should be on everywhere
 #+begin_src elisp
 (after! +word-wrap
@@ -458,6 +474,11 @@ The pull requests don't get a link ([[https://github.com/magit/orgit-forge][see 
           (void-variable "void variable"))
     (setq forge-org-timer (run-at-time interval nil #'org-forge-update-repos))))
   (update-forge-org-timer "1 hour")
+
+   (after! (:and ob-async org-src)
+    (dolist (lang '(python r julia)) ;; FIXME: Replace your prefer language for jupyter.
+      (cl-pushnew (cons (format "jupyter-%s" lang) lang)
+                  org-src-lang-modes :key #'car)))
   )
 #+end_src
 
@@ -547,7 +568,8 @@ install.packages("styler")
 #+end_src
 
 #+RESULTS:
-* Ein settings
+* Ein/emacs-jupyter settings
+Note these are two different packages, ein is [[https://github.com/millejoh/emacs-ipython-notebook][here]], while [[https://github.com/nnicandro/emacs-jupyter][this is emacs-jupyter]]. Ein has a nicer 1-1 for notebooks, but emacs-jupyter has better auto-complete options.
 general ein settings
 #+begin_src elisp
 (after! ein

@@ -1,4 +1,4 @@
-personal_ws-1.1 en 274
+personal_ws-1.1 en 282
 AUCs
 Amari
 AppendixFits
@@ -126,7 +126,10 @@ dev
 discretize
 discretized
 discretizing
+dragonborn
+dudebro
 ector
+elementals
 ephane
 estim
 explainability
@@ -173,6 +176,7 @@ invertibility
 jemisin
 jl
 kintsugi
+kobolds
 kusanagi
 kymat
 linearFashionMNIST
@@ -234,6 +238,7 @@ sfAlone
 shapeshifters
 sharkfin
 shearlet
+sigils
 sigmoidal
 significantly
 singleCoordinate
@@ -251,11 +256,14 @@ teleported
 theo
 theor
 thm
+tieflings
 timeseriesclassification
 tokenization
 tranInv
 trefethen
 triAlone
+unglamored
+unionista
 unpenalized
 unrotated
 upsampling
