@@ -1,4 +1,4 @@
-personal_ws-1.1 en 282
+personal_ws-1.1 en 288
 AUCs
 Amari
 AppendixFits
@@ -128,8 +128,10 @@ discretized
 discretizing
 dragonborn
 dudebro
+dwarves
 ector
 elementals
+elsevier
 ephane
 estim
 explainability
@@ -154,6 +156,7 @@ fitSignalsSecondLayer
 freqStd
 frobenius
 funct
+funders
 generalizability
 geometryBaseRect
 gifs
@@ -199,6 +202,7 @@ nonlinearities
 normalWaveletTransform
 olcskei
 olcskei's
+omiprazole
 oneDelta
 oneDeltaNormalized
 oneDeltaUnnorm
@@ -252,6 +256,8 @@ speedDrawring
 subsampled
 subsampling
 substitions
+tarquin
+tarquin's
 teleported
 theo
 theor

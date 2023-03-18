@@ -139,7 +139,6 @@ that."
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
-  (defun native-comp-available-p () nil)
   ;;(setq org)
   )
 

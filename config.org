@@ -259,10 +259,11 @@ I would like company do to things in org-mode yes please thankyou
   :config
   (setq org-startup-with-latex-preview t)
   (setq org-startup-with-inline-images t)
-  (defun native-comp-available-p () nil)
   ;;(setq org)
   )
 #+END_SRC
+
+  (defun native-comp-available-p () nil)
 
 whenever you're over a latex fragment, it will compile. Also, get the resolution correct
 #+begin_src elisp
@@ -391,6 +392,16 @@ For repeating events, the logs get in the way of the notes I was taking. This pu
   (setq org-log-into-drawer t)
   (setq org-log-state-notes-into-drawer t))
 #+end_src
+
+Saving whenever org-deadline or org-todo is called
+#+begin_src elisp :tangle no
+(after! org
+  (advice-add 'org-deadline :after 'org-save-all-org-buffers)
+  (advice-add 'org-todo :after 'org-save-all-org-buffers)
+  (advice-add 'org-schedule :after 'org-save-all-org-buffers)
+  (advice-add 'org-store-log-note :after 'org-save-all-org-buffers))
+#+end_src
+currently not tangled because it doesn't actually allow the date to change. And actually, having =auto-save-visited= on actually achieves the desired effect, and can be set for everything in the particular directory via a [[file:~/orgNotes/.dir-locals.el][.dir-locals.el]] file (which admittedly have a bit of a [[https://superuser.com/questions/740720/reload-minor-mode-in-dir-locals-el/794979#794979][weird syntax]]).
 ** Org-forge
 This is my adaptation of orgit/orgit-forge to get org issues into org-mode.
 The frequently called function is `org-forge-update-repos`, which periodically fetches (every hour by default) from the known repositories, and adds them to a separate org todo list (located at [[file:~/orgNotes/forge.org]]).
