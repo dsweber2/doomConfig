@@ -125,6 +125,17 @@ word wrap should be on everywhere
 (after! +word-wrap
   (setq +gobal-word-wrap-mode 't))
 #+end_src
+
+add poly markdown mode for R-markdown files
+#+begin_src elisp
+(after! poly-markdown
+  (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
+#+end_src
+
+Safe variables
+#+begin_src elisp
+(add-to-list 'safe-local-variable-values '(commend-add . 0))
+#+end_src
 ** New functions
 #+begin_src elisp
 (defun add-electric-pairs (new-pairs)
@@ -219,8 +230,12 @@ somehow the default indent got set to 8?
   (after! indent
           (setq standard-indent 4))
 #+end_src
-
+** flycheck
+#+begin_src elisp
+(after! flycheck
+  (setq flycheck-checker-error-threshold 'nil))
 #+end_src
+flycheck-checker-error-threshold
 * Org settings
 org ref is excellent.
 
@@ -576,9 +591,22 @@ when initially adding a repository. Doesn't seem to actually be stopping it from
 * LSP stuff
 #+begin_src R :tangle no
 install.packages("styler")
+install.packages("lintr")
+install.packages("languageserver")
 #+end_src
+https://github.com/r-lib/lintr
+also at the command line:
+#+begin_src bash :tangle no
+# On Debian, Ubuntu, etc.
+apt install --assume-yes --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base
 
-#+RESULTS:
+# On Fedora, Centos, etc.
+dnf install --assumeyes --setopt=install_weak_deps=False @development-tools libcurl-devel libxml2-devel openssl-devel R
+
+# On Alpine
+apk add --no-cache curl-dev g++ gcc libxml2-dev linux-headers make R R-dev
+#+end_src
+https://github.com/REditorSupport/languageserver
 * Ein/emacs-jupyter settings
 Note these are two different packages, ein is [[https://github.com/millejoh/emacs-ipython-notebook][here]], while [[https://github.com/nnicandro/emacs-jupyter][this is emacs-jupyter]]. Ein has a nicer 1-1 for notebooks, but emacs-jupyter has better auto-complete options.
 general ein settings
@@ -591,6 +619,12 @@ exporting org to ipython notebooks
 #+begin_src elisp
 (use-package! ox-ipynb)
 #+end_src
+* ESS stuff
+#+begin_src elisp
+(after! ess
+  (add-to-list 'safe-local-variable-values '((comment-add . 0))))
+#+end_src
+(add-to-list 'safe-local-variable-values '(comment-add . 0))
 
 * Julia Settings
 First, let's define the current version of Julia

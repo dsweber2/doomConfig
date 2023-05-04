@@ -44,6 +44,11 @@
 (after! +word-wrap
   (setq +gobal-word-wrap-mode 't))
 
+(after! poly-markdown
+  (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
+
+(add-to-list 'safe-local-variable-values '(commend-add . 0))
+
 (defun add-electric-pairs (new-pairs)
   (setq-local electric-pair-pairs (append electric-pair-pairs new-pairs)))
 
@@ -107,6 +112,9 @@
 
 (after! indent
         (setq standard-indent 4))
+
+(after! flycheck
+  (setq flycheck-checker-error-threshold 'nil))
 
 (use-package! org-ref
   :config
@@ -302,6 +310,9 @@ that."
   (setq ein:output-area-inlined-images t))
 
 (use-package! ox-ipynb)
+
+(after! ess
+  (add-to-list 'safe-local-variable-values '((comment-add . 0))))
 
 (after! julia-repl
   (setq juliaVersion "1.8.0")
