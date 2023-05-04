@@ -185,7 +185,7 @@ it with the meta key of facemenu
   (setq backends-for-everywhere '(company-bibtex company-ispell))
   (setq company-backends (append company-backends backends-for-everywhere)))
 #+END_SRC
-**  Auctex
+** Auctex
 #+begin_src elisp
 (after! tex
   (setq-default TeX-master 'dwim)

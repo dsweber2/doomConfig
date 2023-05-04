@@ -1,4 +1,4 @@
-personal_ws-1.1 en 288
+personal_ws-1.1 en 294
 AUCs
 Amari
 AppendixFits
@@ -170,6 +170,7 @@ heatmaps
 heavisineMorl
 heavisineScalogram
 heavisineScatteredMorlet
+homecare
 htb
 https
 inputGradientSecond
@@ -186,6 +187,7 @@ linearFashionMNIST
 linearMNIST
 linearization
 locat
+logeais
 mahoney's
 maximizers
 morl
@@ -214,6 +216,7 @@ png
 pointwise
 preprocessing
 prestructured
+propritary
 proto
 pseudoinverse
 pseudoinversion
@@ -256,11 +259,13 @@ speedDrawring
 subsampled
 subsampling
 substitions
+syncthing
 tarquin
 tarquin's
 teleported
 theo
 theor
+they're
 thm
 tieflings
 timeseriesclassification
@@ -284,6 +289,7 @@ waveletTransforms
 waveletWaveletTransform
 wrappedbcf
 wrappedbcfRot
+wroughten
 yu
 zeroDelta
 zeroDeltaNormalized
