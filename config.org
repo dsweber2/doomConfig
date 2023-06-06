@@ -622,10 +622,18 @@ exporting org to ipython notebooks
 * ESS stuff
 #+begin_src elisp
 (after! ess
-  (add-to-list 'safe-local-variable-values '((comment-add . 0))))
+  (add-to-list 'safe-local-variable-values '(comment-add . 0)))
 #+end_src
 (add-to-list 'safe-local-variable-values '(comment-add . 0))
 
+There are some color problems which are currently being worked on; a workaround [[https://github.com/emacs-ess/ESS/issues/1199][from the issues list]] is
+#+begin_src elisp
+(after! ess
+      (defun my-inferior-ess-init ()
+      (setq-local ansi-color-for-comint-mode 'filter)
+      (smartparens-mode 1))
+    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init))
+#+end_src
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp

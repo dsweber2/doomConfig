@@ -312,7 +312,13 @@ that."
 (use-package! ox-ipynb)
 
 (after! ess
-  (add-to-list 'safe-local-variable-values '((comment-add . 0))))
+  (add-to-list 'safe-local-variable-values '(comment-add . 0)))
+
+(after! ess
+      (defun my-inferior-ess-init ()
+      (setq-local ansi-color-for-comint-mode 'filter)
+      (smartparens-mode 1))
+    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init))
 
 (after! julia-repl
   (setq juliaVersion "1.8.0")
