@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((comment-add . 0)
+   '((+org-capture-projects-file . "~/allHail/delphi/projects.org")
+     (comment-add . 0)
      (lsp--override-calculate-lisp-indent\? . t)
      (flycheck-disabled-checkers quote
       (emacs-lisp-checkdoc))

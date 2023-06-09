@@ -132,10 +132,42 @@ add poly markdown mode for R-markdown files
   (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . poly-markdown+r-mode)))
 #+end_src
 
-Safe variables
+** Dir-locals shenanigans
+Safe variables (this is for R linting)
 #+begin_src elisp
 (add-to-list 'safe-local-variable-values '(commend-add . 0))
+(add-to-list 'safe-local-variable-values '(foob . integerp))
+(add-to-list 'safe-local-variable-values '(+org-capture-projects-file . stringp))
++org-capture-projects-file
 #+end_src
+
+
+the idea here is to reload dir-locals whenever the file changes. the first and second commands work fine, the hook is a bit shaky
+#+begin_src elisp
+(defun my-reload-dir-locals-for-current-buffer ()
+  "reload dir locals for the current buffer"
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+(defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
+  "For every buffer with the same `default-directory` as the 
+current buffer's, reload dir-locals."
+  (interactive)
+  (let ((dir default-directory))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (equal default-directory dir)
+          (my-reload-dir-locals-for-current-buffer))))))
+(add-hook 'emacs-lisp-mode-hook
+          (defun enable-autoreload-for-dir-locals ()
+            (when (and (buffer-file-name)
+                       (equal dir-locals-file
+                              (file-name-nondirectory (buffer-file-name))))
+              (add-hook 'after-save-hook
+                        'my-reload-dir-locals-for-all-buffer-in-this-directory
+                        nil t))))
+#+end_src
+
 ** New functions
 #+begin_src elisp
 (defun add-electric-pairs (new-pairs)
@@ -417,6 +449,36 @@ Saving whenever org-deadline or org-todo is called
   (advice-add 'org-store-log-note :after 'org-save-all-org-buffers))
 #+end_src
 currently not tangled because it doesn't actually allow the date to change. And actually, having =auto-save-visited= on actually achieves the desired effect, and can be set for everything in the particular directory via a [[file:~/orgNotes/.dir-locals.el][.dir-locals.el]] file (which admittedly have a bit of a [[https://superuser.com/questions/740720/reload-minor-mode-in-dir-locals-el/794979#794979][weird syntax]]).
+
+** TODO Org agenda for projectile project
+
+turns out, making an agenda specifically for the project is unnecessary, because the agenda menu already has this under ~SPC a n < n~
+#+begin_src elisp :tangle no
+(after! org
+  (defun ndkk/agenda-for-project ()
+  (interactive)
+  (let* ((project-name (projectile-project-name))
+         (project-root (projectile-project-root))
+         (org-agenda-files (list buffer-file-name))
+         (org-agenda-custom-commands `(("o" project-name tags-todo
+                                        ((agenda "")
+                                        (alltodo ""))))))
+    (org-agenda-list "o")))
+  (map! :leader
+        (:prefix ("n" . "+notes")
+         :desc "project todos" "p" #'ndk/agenda-for-project
+         )
+        ))
+#+end_src
+
+what I do need is a way to file all work things under a central project file, but with labels for each project. This involves modifying =org-capture-templates=. Unfortunately, the project todo file is
+#+begin_src elisp :tangle no
+ ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
+#+end_src
+So I'd have to redefine =+org-capture-central-project-todo-file= and =+org--capture-central-file=. Though these functions are less bad than I was thinking.
+
+Or possibly putting =+org-capture-projects-file= in a dir-locals.el. I think that's probably easier? Though it does result in any personal things that get filed while in work projects not filed under personal. Easy enough to avoid, I guess.
+
 ** Org-forge
 This is my adaptation of orgit/orgit-forge to get org issues into org-mode.
 The frequently called function is `org-forge-update-repos`, which periodically fetches (every hour by default) from the known repositories, and adds them to a separate org todo list (located at [[file:~/orgNotes/forge.org]]).

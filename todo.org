@@ -1,1 +1,4 @@
 * Inbox
+** TODO testing
+
+[[file:/home/dsweber/.doom.d/config.org::*Org agenda for projectile project][Org agenda for projectile project]]

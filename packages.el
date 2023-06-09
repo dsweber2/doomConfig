@@ -55,6 +55,9 @@
 (package! evil-quickscope)
 (package! evil-fringe-mark)
 
+(package! ess :recipe
+  (:host github
+   :repo "emacs-ess/ESS"))
 
 ;; org packages
 (package! org-ref)
