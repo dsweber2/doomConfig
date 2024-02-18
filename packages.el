@@ -67,20 +67,23 @@
 (package! org-fragtog)
 (package! ob-ess-julia)
 (package! orgit)
+
 ;; org -> python notebook converter
 (package! ox-ipynb :recipe
   (:host github
    :repo "jkitchin/ox-ipynb"))
+(package! ess-view-data)
+
 ;; emacs-jupyter for org mode needs a version switch
 (unpin! jupyter)
+
 ;; editor packages
 (package! ace-jump-buffer)
 (package! theme-changer)
-;;(package! ace-jump)
-(package! ess-view-data)
 
 ;; random stuff
 ;;(package! activity-watch-mode)
+(package! git-link)                     ; get a github/lab link to the current file
 
 ;; elfeed packages
 (package! elfeed-goodies)

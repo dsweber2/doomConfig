@@ -1123,7 +1123,8 @@ location
 (setq calendar-location-name "Sacramento, CA")
 (setq calendar-latitude 38.70)
 (setq calendar-longitude -121.59)
-(require 'theme-changer)
 (setq theme-changer-mode 'deftheme)
-(change-theme 'solarized-light 'doom-dracula)
+(after! doom-themes
+  (use-package! theme-changer)
+  (change-theme 'doom-solarized-light 'doom-dracula))
 #+end_src
