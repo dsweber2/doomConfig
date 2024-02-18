@@ -265,6 +265,14 @@ it with the meta key of facemenu
   (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
 #+end_src
 
+*** TODO hydra-ivy warning fix
+ ■  Warning (initialization): An error occurred while loading ‘/home/dsweber/.emacs.d/.local/etc/@/init.29.elc’:
+
+Error in a Doom module: /home/dsweber/.emacs.d/modules/completion/ivy/config.el, (error Eager macro-expansion failure: (void-variable hydra-ivy/params))
+
+To ensure normal operation, you should investigate and remove the
+cause of the error in your initialization file.  Start Emacs with
+the ‘--debug-init’ option to view a complete error backtrace.
 ** Rainbow Mode
 #+begin_src elisp
 (use-package! rainbow-mode
@@ -714,14 +722,78 @@ There are some color problems which are currently being worked on; a workaround 
       (defun my-inferior-ess-init ()
       (setq-local ansi-color-for-comint-mode 'filter)
       (smartparens-mode 1))
-    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init))
+    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init)
+    )
+#+end_src
+
+Wall of things that are currently in a pull request so I can't be arsed to do this correctly
+#+begin_src elisp
+(after! ess-tracebug
+  (defun ess-debug-command-finish ()
+  "Step next in debug mode.
+Equivalent to `f' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "f"))
+    (ess-send-string (ess-get-process) "f")))
+(defun ess-debug-command-step ()
+  "Step next in debug mode.
+Equivalent to `s' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "s"))
+    (ess-send-string (ess-get-process) "s")))
+
+(defun ess-debug-command-resume ()
+  "Step next in debug mode.
+Equivalent to `r' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "r"))
+    (ess-send-string (ess-get-process) "r")))
+
+(defun ess-debug-command-where ()
+  "Step next in debug mode.
+Equivalent to `where' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+    (ess-send-string (ess-get-process) "where"))
+
+
+(defun ess-debug-command-help ()
+  "Step next in debug mode.
+Equivalent to `where' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+    (ess-send-string (ess-get-process) "help"))
+(define-key ess-debug-minor-mode-map (kbd "M-S") #'ess-debug-command-step)
+(define-key ess-debug-minor-mode-map (kbd "M-W") #'ess-debug-command-where)
+(define-key ess-debug-minor-mode-map (kbd "M-F") #'ess-debug-command-finish)
+(define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
+(define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 #+end_src
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp
 (after! julia-repl
-  (setq juliaVersion "1.8.0")
-  (setq juliaPkgVersion "1.8")
+  (setq juliaVersion "1.9.2")
+  (setq juliaPkgVersion "1.9")
   (setenv "JULIA_NUM_THREADS" "5"))
 #+END_SRC
 

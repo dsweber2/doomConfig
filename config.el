@@ -1,7 +1,4 @@
-(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 
 (setq display-line-numbers-type `relative)
 
@@ -29,17 +26,18 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '(()(python . t)
+ '((python . t)
    (js . t)
    (ruby . t)
-   (C .t)
-   (shell .t)
-   (mathematica .t)
-   (clojure .t)
-   (R .t)
+   (C . t)
+   (shell . t)
+   (mathematica . t)
+   (clojure . t)
+   (R . t)
    (jupyter . t)
    ;; other languages..
    ))
+(setq org-babel-load-langages '())
 
 (after! +word-wrap
   (setq +gobal-word-wrap-mode 't))
@@ -84,6 +82,8 @@ current buffer's, reload dir-locals."
 (global-set-key (kbd "M-P") 'mc/unmark-previous-like-this)
 (global-set-key (kbd "C-c n") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-M-]") 'mc/mark-sgml-tag-pair)
+
+(setq emacsql-sqlite-executable "/fasterHome/anaconda3/bin/sqlite3")
 
 (after! ace-window
   (global-unset-key (kbd "M-o"))
@@ -183,6 +183,9 @@ that."
   )
 
 (after! org
+  (setq org-table-convert-region-max-lines 999))
+
+(after! org
     (setq org-agenda-files (quote ("~/orgNotes")))
     (setq org-directory "~/orgNotes")
     (setq +org-capture-journal-file "~/orgNotes/journal.org")
@@ -220,7 +223,8 @@ that."
 (setq org-todo-keywords-for-agenda (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 
-(setq org-agenda-todo-ignore-deadlines 'near)
+(setq org-agenda-todo-ignore-deadlines 'future)
+(setq org-deadline-warning-days 0)
 (setq org-agenda-todo-ignore-scheduled 'future)
 
 (after! org
@@ -344,18 +348,79 @@ that."
       (defun my-inferior-ess-init ()
       (setq-local ansi-color-for-comint-mode 'filter)
       (smartparens-mode 1))
-    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init))
+    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init)
+    )
+
+(after! ess-tracebug
+  (defun ess-debug-command-finish ()
+  "Step next in debug mode.
+Equivalent to `f' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "f"))
+    (ess-send-string (ess-get-process) "f")))
+(defun ess-debug-command-step ()
+  "Step next in debug mode.
+Equivalent to `s' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "s"))
+    (ess-send-string (ess-get-process) "s")))
+
+(defun ess-debug-command-resume ()
+  "Step next in debug mode.
+Equivalent to `r' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+  (if (ess--dbg-is-recover-p)
+      (progn (ess-send-string (ess-get-process) "0")
+       (ess-send-string (ess-get-process) "r"))
+    (ess-send-string (ess-get-process) "r")))
+
+(defun ess-debug-command-where ()
+  "Step next in debug mode.
+Equivalent to `where' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+    (ess-send-string (ess-get-process) "where"))
+
+
+(defun ess-debug-command-help ()
+  "Step next in debug mode.
+Equivalent to `where' at the R prompt."
+  (interactive)
+  (ess-force-buffer-current)
+  (unless (ess--dbg-is-active-p)
+    (error "Debugger is not active"))
+    (ess-send-string (ess-get-process) "help"))
+(define-key ess-debug-minor-mode-map (kbd "M-S") #'ess-debug-command-step)
+(define-key ess-debug-minor-mode-map (kbd "M-W") #'ess-debug-command-where)
+(define-key ess-debug-minor-mode-map (kbd "M-F") #'ess-debug-command-finish)
+(define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
+(define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 
 (after! julia-repl
-  (setq juliaVersion "1.8.0")
-  (setq juliaPkgVersion "1.8")
+  (setq juliaVersion "1.9.2")
+  (setq juliaPkgVersion "1.9")
   (setenv "JULIA_NUM_THREADS" "5"))
 
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.8.0")
-  (setq juliaPkgVersion "1.8")
+  (setq juliaVersion "1.9.2")
+  (setq juliaPkgVersion "1.9")
   (setenv "PATH"
           (concat
            "/home/dsweber/.julia/juliaup/bin" ":"
@@ -365,7 +430,7 @@ that."
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
@@ -414,13 +479,14 @@ that."
   )
 
 (after! lsp-julia
-    (setq juliaPkgVersion "1.8")
-    (setq juliaVersion "1.8.0")
+    (setq juliaPkgVersion "1.9")
+    (setq juliaVersion "1.9.2")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia"))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+    (setq lsp-julia-format-kw nil))
 
 (after! julia-repl
   (setq julia-repl-executable-records
@@ -441,8 +507,8 @@ that."
   )
 
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.9") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.9") (:async . no))))
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
@@ -471,8 +537,9 @@ that."
 
 (use-package! evil-numbers
   :config
-  (define-key evil-normal-state-map (kbd "zQ") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "zQ") 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map (kbd "zz") 'evil-numbers/dec-at-pt)
   )
 
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
@@ -576,3 +643,9 @@ that."
        :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
        )
       )
+
+(setq calendar-location-name "Los Angeles, CA")
+(setq calendar-latitude 38.70)
+(setq calendar-longitude 121.59)
+(require 'theme-changer)
+(change-theme 'doom-dracula 'solarized-light)
