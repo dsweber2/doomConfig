@@ -75,6 +75,7 @@
 (unpin! jupyter)
 ;; editor packages
 (package! ace-jump-buffer)
+(package! theme-changer)
 ;;(package! ace-jump)
 (package! ess-view-data)
 

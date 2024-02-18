@@ -1111,3 +1111,14 @@ general keybindings
 
 
 combine the elfeed-score-print-entry and elfeed-goodies
+* Sunrise/sunset color theme
+cribbed from [[https://github.com/hadronzoo/theme-changer][here]], which is intended for base emacs
+location
+#+begin_src emacs-lisp :tangle yes
+(setq calendar-location-name "Sacramento, CA")
+(setq calendar-latitude 38.70)
+(setq calendar-longitude -121.59)
+(require 'theme-changer)
+(setq theme-changer-mode 'deftheme)
+(change-theme 'solarized-light 'doom-dracula)
+#+end_src

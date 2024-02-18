@@ -118,7 +118,7 @@ current buffer's, reload dir-locals."
   (setq TeX-save-query nil)
   (setq Tex-PDF-mode t)
   (setq reftex-default-bibliography "~/allHail/LaTeX/oneBibToRuleThemAll.bib")
-)
+  )
 
 (after! spell-fu
   (setq ispell-dictionary "en-custom")
@@ -126,9 +126,9 @@ current buffer's, reload dir-locals."
   )
 
 (after! projectile
-   :config
-   (setq custom-suffixes '(".pdf" ".png" ".svg"))
-   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+  :config
+  (setq custom-suffixes '(".pdf" ".png" ".svg"))
+  (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
 
 (after! counsel
   (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
@@ -137,7 +137,7 @@ current buffer's, reload dir-locals."
   :ensure t)
 
 (after! indent
-        (setq standard-indent 4))
+  (setq standard-indent 4))
 
 (after! flycheck
   (setq flycheck-checker-error-threshold 'nil))
@@ -161,7 +161,7 @@ that."
       (when (org-export-derived-backend-p backend 'html)
         (org-ref-process-buffer 'html)))
     (add-to-list 'org-export-before-parsing-hook #'my/org-ref-process-buffer--html))
-    (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
+  (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
   )
 (map! :leader
       :desc "insert a helm reference"
@@ -186,42 +186,42 @@ that."
   (setq org-table-convert-region-max-lines 999))
 
 (after! org
-    (setq org-agenda-files (quote ("~/orgNotes")))
-    (setq org-directory "~/orgNotes")
-    (setq +org-capture-journal-file "~/orgNotes/journal.org")
-    (setq org-priority-faces  '((?A :foreground "#FF6C6B")
-                            (?B :foreground "#F97066")
-                            (?C :foreground "#F37460")
-                            (?D :foreground "#ED785A")
-                            (?E :foreground "#E77D54")
-                            (?F :foreground "#E1804F")
-                            (?G :foreground "#DB8449")
-                            (?H :foreground "#D8835B")
-                            (?I :foreground "#D48172")
-                            (?J :foreground "#D17F8A")
-                            (?K :foreground "#CE7DA2")
-                            (?L :foreground "#CA7BBA")
-                            (?M :foreground "#C779D2")
-                            (?N :foreground "#C47BDE")
-                            (?O :foreground "#BF82DE")
-                            (?P :foreground "#BB88DE")
-                            (?Q :foreground "#B68FDF")
-                            (?R :foreground "#B196DF")
-                            (?S :foreground "#AD9CE1")
-                            (?T :foreground "#A69EDD")
-                            (?U :foreground "#9A94C9")
-                            (?V :foreground "#8D8BB6")
-                            (?W :foreground "#8181A3")
-                            (?X :foreground "#74768F")
-                            (?Y :foreground "#676C7B")
-                            (?Z :foreground "#5B6268")))
-    )
+  (setq org-agenda-files (quote ("~/orgNotes")))
+  (setq org-directory "~/orgNotes")
+  (setq +org-capture-journal-file "~/orgNotes/journal.org")
+  (setq org-priority-faces  '((?A :foreground "#FF6C6B")
+                              (?B :foreground "#F97066")
+                              (?C :foreground "#F37460")
+                              (?D :foreground "#ED785A")
+                              (?E :foreground "#E77D54")
+                              (?F :foreground "#E1804F")
+                              (?G :foreground "#DB8449")
+                              (?H :foreground "#D8835B")
+                              (?I :foreground "#D48172")
+                              (?J :foreground "#D17F8A")
+                              (?K :foreground "#CE7DA2")
+                              (?L :foreground "#CA7BBA")
+                              (?M :foreground "#C779D2")
+                              (?N :foreground "#C47BDE")
+                              (?O :foreground "#BF82DE")
+                              (?P :foreground "#BB88DE")
+                              (?Q :foreground "#B68FDF")
+                              (?R :foreground "#B196DF")
+                              (?S :foreground "#AD9CE1")
+                              (?T :foreground "#A69EDD")
+                              (?U :foreground "#9A94C9")
+                              (?V :foreground "#8D8BB6")
+                              (?W :foreground "#8181A3")
+                              (?X :foreground "#74768F")
+                              (?Y :foreground "#676C7B")
+                              (?Z :foreground "#5B6268")))
+  )
 
 (setq org-todo-keywords (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
                                 (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 
 (setq org-todo-keywords-for-agenda (quote ((sequence "TODO(t@/!)" "PROJ(p)" "STRT(s!/!)" "WAIT(w@/!)" "HOLD(h)" "|" "DONE(d)" "KILL(k)")
-                                (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
+                                           (sequence "[ ](T@/!)" "[-](S)" "[?](W)" "|" "[X](D)"))))
 
 (setq org-agenda-todo-ignore-deadlines 'future)
 (setq org-deadline-warning-days 0)
@@ -264,16 +264,16 @@ that."
   (defun forge-add-column (which-table)
     "add a column indicating whether it has been added to `\\[forge-org-list]'"
     (condition-case nil
-      (forge-sql [:alter-table $s1 :add :column is-in-org] which-table)
-    (emacsql-error t)))
+        (forge-sql [:alter-table $s1 :add :column is-in-org] which-table)
+      (emacsql-error t)))
 
   (defun forge-capture-find-headline ()
     "In large part adapted from org-capture-set-target-location, which can't handle substituting a function for a string for the headline"
     (set-buffer (org-capture-target-buffer forge-org-list))
-	   ;; Org expects the target file to be in Org mode, otherwise
-	   ;; it throws an error.  However, the default notes files
-	   ;; should work out of the box.  In this case, we switch it to
-	   ;; Org mode.
+    ;; Org expects the target file to be in Org mode, otherwise
+    ;; it throws an error.  However, the default notes files
+    ;; should work out of the box.  In this case, we switch it to
+    ;; Org mode.
     (unless (derived-mode-p 'org-mode)
       (org-display-warning
        (format "Capture requirement: switching buffer %S to Org mode"
@@ -324,13 +324,13 @@ that."
     )
   (defun update-forge-org-timer (&optional interval)
     (let ((interval (or interval "1 hour")))
-        (condition-case nil
-            (cancel-timer forge-org-timer)
-          (void-variable "void variable"))
-    (setq forge-org-timer (run-at-time interval nil #'org-forge-update-repos))))
+      (condition-case nil
+          (cancel-timer forge-org-timer)
+        (void-variable "void variable"))
+      (setq forge-org-timer (run-at-time interval nil #'org-forge-update-repos))))
   (update-forge-org-timer "1 hour")
 
-   (after! (:and ob-async org-src)
+  (after! (:and ob-async org-src)
     (dolist (lang '(python r julia)) ;; FIXME: Replace your prefer language for jupyter.
       (cl-pushnew (cons (format "jupyter-%s" lang) lang)
                   org-src-lang-modes :key #'car)))
@@ -345,71 +345,71 @@ that."
   (add-to-list 'safe-local-variable-values '(comment-add . 0)))
 
 (after! ess
-      (defun my-inferior-ess-init ()
-      (setq-local ansi-color-for-comint-mode 'filter)
-      (smartparens-mode 1))
-    (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init)
-    )
+  (defun my-inferior-ess-init ()
+    (setq-local ansi-color-for-comint-mode 'filter)
+    (smartparens-mode 1))
+  (add-hook 'inferior-ess-mode-hook 'my-inferior-ess-init)
+  )
 
 (after! ess-tracebug
   (defun ess-debug-command-finish ()
-  "Step next in debug mode.
+    "Step next in debug mode.
 Equivalent to `f' at the R prompt."
-  (interactive)
-  (ess-force-buffer-current)
-  (unless (ess--dbg-is-active-p)
-    (error "Debugger is not active"))
-  (if (ess--dbg-is-recover-p)
-      (progn (ess-send-string (ess-get-process) "0")
-       (ess-send-string (ess-get-process) "f"))
-    (ess-send-string (ess-get-process) "f")))
-(defun ess-debug-command-step ()
-  "Step next in debug mode.
+    (interactive)
+    (ess-force-buffer-current)
+    (unless (ess--dbg-is-active-p)
+      (error "Debugger is not active"))
+    (if (ess--dbg-is-recover-p)
+        (progn (ess-send-string (ess-get-process) "0")
+               (ess-send-string (ess-get-process) "f"))
+      (ess-send-string (ess-get-process) "f")))
+  (defun ess-debug-command-step ()
+    "Step next in debug mode.
 Equivalent to `s' at the R prompt."
-  (interactive)
-  (ess-force-buffer-current)
-  (unless (ess--dbg-is-active-p)
-    (error "Debugger is not active"))
-  (if (ess--dbg-is-recover-p)
-      (progn (ess-send-string (ess-get-process) "0")
-       (ess-send-string (ess-get-process) "s"))
-    (ess-send-string (ess-get-process) "s")))
+    (interactive)
+    (ess-force-buffer-current)
+    (unless (ess--dbg-is-active-p)
+      (error "Debugger is not active"))
+    (if (ess--dbg-is-recover-p)
+        (progn (ess-send-string (ess-get-process) "0")
+               (ess-send-string (ess-get-process) "s"))
+      (ess-send-string (ess-get-process) "s")))
 
-(defun ess-debug-command-resume ()
-  "Step next in debug mode.
+  (defun ess-debug-command-resume ()
+    "Step next in debug mode.
 Equivalent to `r' at the R prompt."
-  (interactive)
-  (ess-force-buffer-current)
-  (unless (ess--dbg-is-active-p)
-    (error "Debugger is not active"))
-  (if (ess--dbg-is-recover-p)
-      (progn (ess-send-string (ess-get-process) "0")
-       (ess-send-string (ess-get-process) "r"))
-    (ess-send-string (ess-get-process) "r")))
+    (interactive)
+    (ess-force-buffer-current)
+    (unless (ess--dbg-is-active-p)
+      (error "Debugger is not active"))
+    (if (ess--dbg-is-recover-p)
+        (progn (ess-send-string (ess-get-process) "0")
+               (ess-send-string (ess-get-process) "r"))
+      (ess-send-string (ess-get-process) "r")))
 
-(defun ess-debug-command-where ()
-  "Step next in debug mode.
+  (defun ess-debug-command-where ()
+    "Step next in debug mode.
 Equivalent to `where' at the R prompt."
-  (interactive)
-  (ess-force-buffer-current)
-  (unless (ess--dbg-is-active-p)
-    (error "Debugger is not active"))
+    (interactive)
+    (ess-force-buffer-current)
+    (unless (ess--dbg-is-active-p)
+      (error "Debugger is not active"))
     (ess-send-string (ess-get-process) "where"))
 
 
-(defun ess-debug-command-help ()
-  "Step next in debug mode.
+  (defun ess-debug-command-help ()
+    "Step next in debug mode.
 Equivalent to `where' at the R prompt."
-  (interactive)
-  (ess-force-buffer-current)
-  (unless (ess--dbg-is-active-p)
-    (error "Debugger is not active"))
+    (interactive)
+    (ess-force-buffer-current)
+    (unless (ess--dbg-is-active-p)
+      (error "Debugger is not active"))
     (ess-send-string (ess-get-process) "help"))
-(define-key ess-debug-minor-mode-map (kbd "M-S") #'ess-debug-command-step)
-(define-key ess-debug-minor-mode-map (kbd "M-W") #'ess-debug-command-where)
-(define-key ess-debug-minor-mode-map (kbd "M-F") #'ess-debug-command-finish)
-(define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
-(define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
+  (define-key ess-debug-minor-mode-map (kbd "M-S") #'ess-debug-command-step)
+  (define-key ess-debug-minor-mode-map (kbd "M-W") #'ess-debug-command-where)
+  (define-key ess-debug-minor-mode-map (kbd "M-F") #'ess-debug-command-finish)
+  (define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
+  (define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 
 (after! julia-repl
   (setq juliaVersion "1.9.2")
@@ -440,58 +440,58 @@ Equivalent to `where' at the R prompt."
   (setq lsp-enable-indentation true)
   (setq julia-indent-mapping '((julia-mode . julia-indent-offset)))
   (setq lsp--formatting-indent-alist '((c-mode                     . c-basic-offset)                   ; C
-  (c++-mode                   . c-basic-offset)                   ; C++
-  (csharp-mode                . c-basic-offset)                   ; C#
-  (csharp-tree-sitter-mode    . csharp-tree-sitter-indent-offset) ; C#
-  (d-mode                     . c-basic-offset)                   ; D
-  (java-mode                  . c-basic-offset)                   ; Java
-  (jde-mode                   . c-basic-offset)                   ; Java (JDE)
-  (js-mode                    . js-indent-level)                  ; JavaScript
-  (js2-mode                   . js2-basic-offset)                 ; JavaScript-IDE
-  (js3-mode                   . js3-indent-level)                 ; JavaScript-IDE
-  (json-mode                  . js-indent-level)                  ; JSON
-  (lua-mode                   . lua-indent-level)                 ; Lua
-  (objc-mode                  . c-basic-offset)                   ; Objective C
-  (php-mode                   . c-basic-offset)                   ; PHP
-  (perl-mode                  . perl-indent-level)                ; Perl
-  (cperl-mode                 . cperl-indent-level)               ; Perl
-  (raku-mode                  . raku-indent-offset)               ; Perl6/Raku
-  (erlang-mode                . erlang-indent-level)              ; Erlang
-  (ada-mode                   . ada-indent)                       ; Ada
-  (sgml-mode                  . sgml-basic-offset)                ; SGML
-  (nxml-mode                  . nxml-child-indent)                ; XML
-  (pascal-mode                . pascal-indent-level)              ; Pascal
-  (typescript-mode            . typescript-indent-level)          ; Typescript
-  (sh-mode                    . sh-basic-offset)                  ; Shell Script
-  (ruby-mode                  . ruby-indent-level)                ; Ruby
-  (enh-ruby-mode              . enh-ruby-indent-level)            ; Ruby
-  (crystal-mode               . crystal-indent-level)             ; Crystal (Ruby)
-  (css-mode                   . css-indent-offset)                ; CSS
-  (rust-mode                  . rust-indent-offset)               ; Rust
-  (rustic-mode                . rustic-indent-offset)             ; Rust
-  (scala-mode                 . scala-indent:step)                ; Scala
-  (powershell-mode            . powershell-indent)                ; PowerShell
-  (ess-mode                   . ess-indent-offset)                ; ESS (R)
-  (yaml-mode                  . yaml-indent-offset)               ; YAML
-  (hack-mode                  . hack-indent-offset)               ; Hack
-  (julia-mode                 . julia-indent-offset)
-  (default                    . standard-indent)))
+                                       (c++-mode                   . c-basic-offset)                   ; C++
+                                       (csharp-mode                . c-basic-offset)                   ; C#
+                                       (csharp-tree-sitter-mode    . csharp-tree-sitter-indent-offset) ; C#
+                                       (d-mode                     . c-basic-offset)                   ; D
+                                       (java-mode                  . c-basic-offset)                   ; Java
+                                       (jde-mode                   . c-basic-offset)                   ; Java (JDE)
+                                       (js-mode                    . js-indent-level)                  ; JavaScript
+                                       (js2-mode                   . js2-basic-offset)                 ; JavaScript-IDE
+                                       (js3-mode                   . js3-indent-level)                 ; JavaScript-IDE
+                                       (json-mode                  . js-indent-level)                  ; JSON
+                                       (lua-mode                   . lua-indent-level)                 ; Lua
+                                       (objc-mode                  . c-basic-offset)                   ; Objective C
+                                       (php-mode                   . c-basic-offset)                   ; PHP
+                                       (perl-mode                  . perl-indent-level)                ; Perl
+                                       (cperl-mode                 . cperl-indent-level)               ; Perl
+                                       (raku-mode                  . raku-indent-offset)               ; Perl6/Raku
+                                       (erlang-mode                . erlang-indent-level)              ; Erlang
+                                       (ada-mode                   . ada-indent)                       ; Ada
+                                       (sgml-mode                  . sgml-basic-offset)                ; SGML
+                                       (nxml-mode                  . nxml-child-indent)                ; XML
+                                       (pascal-mode                . pascal-indent-level)              ; Pascal
+                                       (typescript-mode            . typescript-indent-level)          ; Typescript
+                                       (sh-mode                    . sh-basic-offset)                  ; Shell Script
+                                       (ruby-mode                  . ruby-indent-level)                ; Ruby
+                                       (enh-ruby-mode              . enh-ruby-indent-level)            ; Ruby
+                                       (crystal-mode               . crystal-indent-level)             ; Crystal (Ruby)
+                                       (css-mode                   . css-indent-offset)                ; CSS
+                                       (rust-mode                  . rust-indent-offset)               ; Rust
+                                       (rustic-mode                . rustic-indent-offset)             ; Rust
+                                       (scala-mode                 . scala-indent:step)                ; Scala
+                                       (powershell-mode            . powershell-indent)                ; PowerShell
+                                       (ess-mode                   . ess-indent-offset)                ; ESS (R)
+                                       (yaml-mode                  . yaml-indent-offset)               ; YAML
+                                       (hack-mode                  . hack-indent-offset)               ; Hack
+                                       (julia-mode                 . julia-indent-offset)
+                                       (default                    . standard-indent)))
   )
 
 (after! lsp-julia
-    (setq juliaPkgVersion "1.9")
-    (setq juliaVersion "1.9.2")
-    (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-format-kw nil))
+  (setq juliaPkgVersion "1.9")
+  (setq juliaVersion "1.9.2")
+  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-format-kw nil))
 
 (after! julia-repl
   (setq julia-repl-executable-records
         `((default ,"/home/dsweber/.julia/juliaup/bin/julia" :basedir
-                            nil)
+           nil)
           )
         )
   :hook '(julia-repl-mode-hook +word-wrap-mode)
@@ -616,8 +616,8 @@ Equivalent to `where' at the R prompt."
                                       "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
   (setq elfeed-protocol-tags elfeed-feeds)
   (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
-                              :password-file "~/.newsblur"
-                              :autotags elfeed-protocol-tags)))
+                         :password-file "~/.newsblur"
+                         :autotags elfeed-protocol-tags)))
   (defadvice elfeed (after configure-elfeed-feeds activate)
     "Make elfeed-org autotags rules works with elfeed-protocol."
     (setq elfeed-protocol-tags elfeed-feeds)
@@ -644,8 +644,9 @@ Equivalent to `where' at the R prompt."
        )
       )
 
-(setq calendar-location-name "Los Angeles, CA")
+(setq calendar-location-name "Sacramento, CA")
 (setq calendar-latitude 38.70)
-(setq calendar-longitude 121.59)
+(setq calendar-longitude -121.59)
 (require 'theme-changer)
-(change-theme 'doom-dracula 'solarized-light)
+(setq theme-changer-mode 'deftheme)
+(change-theme 'solarized-light 'doom-dracula)
