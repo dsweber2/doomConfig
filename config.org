@@ -5,6 +5,16 @@ sync` after modifying this file!
 
 Reference variables which are unique to a given computer (thus the separate file)
 #+INCLUDE: localLocations.org
+* TO be debugged
+#+begin_quote
+Warning (initialization): An error occurred while loading ‘/home/dsweber/.emacs.d/.local/etc/@/init.28.elc’:
+
+Error in a Doom module: /home/dsweber/.emacs.d/modules/term/eshell/config.el, (wrong-type-argument sequencep 771)
+
+To ensure normal operation, you should investigate and remove the
+cause of the error in your initialization file.  Start Emacs with
+the ‘--debug-init’ option to view a complete error backtrace. Disable showing Disable logging
+#+end_quote
 * Overview
 Here are some additional functions/macros that could help you configure Doom:
  - `load!' for loading external *.el files relative to this one
@@ -32,7 +42,7 @@ the three important ones:
 
 They all accept either a font-spec, font string ("Input Mono-12"), or xlfd font
 string. You generally only need these two:
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
        doom-variable-pitch-font (font-spec :family "sans" :size 13))
 #+END_SRC
@@ -40,8 +50,8 @@ string. You generally only need these two:
 There are two ways to load a theme. Both assume the theme is installed and
  available. You can either set `doom-theme' or manually load a theme with the
  `load-theme' function. This is the default:
-#+begin_src elisp
-(setq doom-theme 'doom-one)
+#+begin_src elisp :tangle yes
+(setq doom-theme 'doom-dracula)
 #+END_SRC
 
 
@@ -98,7 +108,7 @@ auto-fill mode (hard wrapping is +nice+ not nice methinks)
 #+begin_src elisp :tangle no
 (setq-default auto-fill-function nil)
 #+end_src
-strangely enough, the fill value is still used by jupyter, so seting it to ~264, based on my current screen
+strangely enough, the fill value is still used by jupyter, so setting it to ~264, based on my current screen
 #+begin_src elisp
 (after! emacs
   (setq fill-column 264))
@@ -107,17 +117,18 @@ strangely enough, the fill value is still used by jupyter, so seting it to ~264,
 #+begin_src elisp
 (org-babel-do-load-languages
  'org-babel-load-languages
- '(()(python . t)
+ '((python . t)
    (js . t)
    (ruby . t)
-   (C .t)
-   (shell .t)
-   (mathematica .t)
-   (clojure .t)
-   (R .t)
+   (C . t)
+   (shell . t)
+   (mathematica . t)
+   (clojure . t)
+   (R . t)
    (jupyter . t)
    ;; other languages..
    ))
+(setq org-babel-load-langages '())
 #+end_src
 
 word wrap should be on everywhere
@@ -182,7 +193,11 @@ current buffer's, reload dir-locals."
 (global-set-key (kbd "C-c n") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-M-]") 'mc/mark-sgml-tag-pair)
 #+END_SRC
-
+** sqlite undefined?
+[[https://emacs.stackexchange.com/questions/75541/no-emacsql-sqlite-binary-available-while-running-org-roam-on-guix][from here]]
+#+begin_src emacs-lisp :tangle yes
+(setq emacsql-sqlite-executable "/fasterHome/anaconda3/bin/sqlite3")
+#+end_src
 * Ace stuff
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
@@ -320,7 +335,11 @@ whenever you're over a latex fragment, it will compile. Also, get the resolution
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   )
 #+end_src
-
+** Org code
+#+begin_src elisp
+(after! org
+  (setq org-table-convert-region-max-lines 999))
+#+end_src
 ** Org-anizing my life
 :PROPERTIES:
 :ID:       9a235fa1-8b85-440f-b6c5-e999efccabd5
@@ -375,7 +394,8 @@ The list of keywords could use more processing; timestamp's in wait would be use
 #+end_src
 
 #+begin_src elisp
-(setq org-agenda-todo-ignore-deadlines 'near)
+(setq org-agenda-todo-ignore-deadlines 'future)
+(setq org-deadline-warning-days 0)
 (setq org-agenda-todo-ignore-scheduled 'future)
 #+end_src
 
@@ -711,7 +731,8 @@ Apparently non-Jedi has been making an emacs interface for the lsp [[https://git
 this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
-juliaVersion = "1.8.1"
+using Pkg; Pkg.add("PackageCompiler")
+juliaVersion = "1.9.2"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -719,13 +740,15 @@ create_sysimage(:LanguageServer,
                 sysimage_path = "/home/dsweber/julia-$(juliaVersion)/lib/LspSysImage.so")
 #+END_SRC
 
+#+RESULTS:
+
 and now the actual code to be tangled into ~init.el~.
 #+begin_src elisp
   (use-package! lsp-julia
     :after julia-repl eshell lsp
     :config
-    (setq juliaVersion "1.8.0")
-    (setq juliaPkgVersion "1.8")
+    (setq juliaVersion "1.9.2")
+    (setq juliaPkgVersion "1.9")
     (setenv "PATH"
             (concat
              "/home/dsweber/.julia/juliaup/bin" ":"
@@ -735,7 +758,7 @@ and now the actual code to be tangled into ~init.el~.
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
     (setq lsp-julia-timeout 12000)
     (setq lsp-enable-folding t)
@@ -786,13 +809,14 @@ and now the actual code to be tangled into ~init.el~.
 fixing some stuff for lsp
 #+begin_src elisp
 (after! lsp-julia
-    (setq juliaPkgVersion "1.8")
-    (setq juliaVersion "1.8.0")
+    (setq juliaPkgVersion "1.9")
+    (setq juliaVersion "1.9.2")
     (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
     (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.8" "--startup-file=no" "--history-file=no"))
-    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia"))
+    (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+    (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+    (setq lsp-julia-format-kw nil))
 #+end_src
 
 It appears that julia-repl also has some settings to adjust
@@ -822,8 +846,8 @@ and trying ess julia instead
 actually jupyter is the most reasonable
 #+begin_src elisp
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.8") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.8") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.9") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.9") (:async . no))))
 #+end_src
 
 customizing the ob-ein languages
@@ -874,8 +898,9 @@ evil numbers increments and decrements numbers. useful for adding numbers
 #+begin_src elisp
 (use-package! evil-numbers
   :config
-  (define-key evil-normal-state-map (kbd "zQ") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map (kbd "zq") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "zQ") 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map (kbd "zz") 'evil-numbers/dec-at-pt)
   )
 #+end_src
 * Elfeed settings

@@ -1,4 +1,4 @@
-personal_ws-1.1 en 294
+personal_ws-1.1 en 323
 AUCs
 Amari
 AppendixFits
@@ -90,6 +90,7 @@ allScalograms
 analyticInversion
 angleCoverage
 automata
+autoregressive
 aveDec
 aveLen
 averagingLength
@@ -119,6 +120,7 @@ convolutional
 coord
 coordinateFit
 cpus
+crimini
 cron
 cwtExs
 dapro
@@ -127,6 +129,7 @@ dev
 discretize
 discretized
 discretizing
+dmitry
 dragonborn
 dudebro
 dwarves
@@ -161,9 +164,14 @@ funders
 generalizability
 geometryBaseRect
 gifs
+gith
+githyanki
+githzerai
 gitlab
+gorlak
 gradientAlone
 gradientInputs
+grognards
 gst
 gung
 heatmap
@@ -180,7 +188,10 @@ interpretability
 invertibility
 jemisin
 jl
+jupyter
+kanban
 keweenaw
+kingfield
 kintsugi
 kobolds
 kusanagi
@@ -192,6 +203,9 @@ locat
 logeais
 mahoney's
 maximizers
+millennials
+mirin
+miso
 morl
 motherDef
 mult
@@ -213,15 +227,20 @@ oneDeltaUnnorm
 optimisation
 outputPool
 parameterizing
+planarfolk
 plotOfLogCentralFrequencies
 png
 pointwise
+pomodoro
+popato
 preprocessing
 prestructured
 propritary
 proto
 pseudoinverse
 pseudoinversion
+quantile
+quantiles
 rawMultinomialbcf
 rawMultinomialbcfRot
 rawbcfPredicts
@@ -243,6 +262,8 @@ secondOutputCylinder
 secondOutputDelta
 secondOutputNoise
 secondOutputSine
+semesterly
+serranos
 sfAlone
 shapeshifters
 sharkfin
@@ -258,6 +279,7 @@ sketchWaves
 skipgram
 sparseTree
 speedDrawring
+stormwolf
 subsampled
 subsampling
 substitions
@@ -265,6 +287,7 @@ syncthing
 tarquin
 tarquin's
 teleported
+thelyss
 theo
 theor
 they're
@@ -282,6 +305,7 @@ unrotated
 upsampling
 variousBcfResults
 ve
+verin
 vers
 vn
 wavefield
@@ -292,6 +316,9 @@ waveletWaveletTransform
 wrappedbcf
 wrappedbcfRot
 wroughten
+yanki
+yeth
 yu
+zerai
 zeroDelta
 zeroDeltaNormalized

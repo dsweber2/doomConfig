@@ -3,8 +3,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("afa47084cb0beb684281f480aa84dab7c9170b084423c7f87ba755b15f6776ef" default))
+ '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(safe-local-variable-values
-   '((+org-capture-projects-file . "~/allHail/delphi/projects.org")
+   '((foob . 3)
+     (+format-on-save-enabled-modes
+      '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode ess-r-mode poly-markdown+r-mode poly-markdown+R-mode markdown-mode))
+     (+format-on-save-enabled-modes
+      '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode ess-r-mode poly-markdown+r-mode poly-markdown+R-mode))
+     (+format-on-save-enabled-modes
+      '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode ess-r-mode poly-markdown+r-mode))
+     (+org-capture-projects-file . "~/allHail/delphi/projects.org")
      (comment-add . 0)
      (lsp--override-calculate-lisp-indent\? . t)
      (flycheck-disabled-checkers quote
