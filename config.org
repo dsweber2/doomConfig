@@ -714,6 +714,11 @@ exporting org to ipython notebooks
 #+begin_src elisp
 (use-package! ox-ipynb)
 #+end_src
+* Anaconda
+#+begin_src emacs-lisp :tangle yes
+(after! python
+  (conda-env-activate "baseEmacs"))
+#+end_src
 * ESS stuff
 #+begin_src elisp
 (after! ess
@@ -1126,5 +1131,19 @@ location
 (setq theme-changer-mode 'deftheme)
 (after! doom-themes
   (use-package! theme-changer)
-  (change-theme 'doom-solarized-light 'doom-dracula))
+  (change-theme 'doom-flatwhite 'doom-dracula))
 #+end_src
+- reasonable light themes:
+  + `doom-ayu-mirage` a bit washed out
+  + `doom-bluloco-light` kinda cotton candy
+  + `doom-earl-grey` a bit washed out
+  + `doom-feather-light` ok; headings kinda too big though
+  + `doom-flatwhite` pretty good
+  + `doom-gruvbox-light` pretty good
+- reasonable dark themes:
+  + `doom-dracula` preferred
+  + `doom-feather-dark` ok; headings kinda too big though
+  + `doom-henna` good but not current sys colorscheme
+* TODO add Ctrl-enter/ctrl-C ctrl-C behavior for julia
+* TODO turn darkmode on early
+* TODO get ESS to default to the current project, and not whichever terminal was last used

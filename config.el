@@ -341,6 +341,9 @@ that."
 
 (use-package! ox-ipynb)
 
+(after! python
+  (conda-env-activate "baseEmacs"))
+
 (after! ess
   (add-to-list 'safe-local-variable-values '(comment-add . 0)))
 
@@ -650,4 +653,4 @@ Equivalent to `where' at the R prompt."
 (setq theme-changer-mode 'deftheme)
 (after! doom-themes
   (use-package! theme-changer)
-  (change-theme 'doom-solarized-light 'doom-dracula))
+  (change-theme 'doom-flatwhite 'doom-dracula))

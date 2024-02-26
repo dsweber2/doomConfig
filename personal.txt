@@ -1,4 +1,4 @@
-personal_ws-1.1 en 323
+personal_ws-1.1 en 326
 AUCs
 Amari
 AppendixFits
@@ -119,6 +119,7 @@ convBoundary
 convolutional
 coord
 coordinateFit
+covidcast
 cpus
 crimini
 cron
@@ -137,6 +138,7 @@ ector
 elementals
 elsevier
 ephane
+epidata
 estim
 explainability
 extraOctaves
@@ -249,6 +251,7 @@ realInversion
 reconstructPiecewise
 rectLong
 ress
+rmd
 robertfeldt
 rollout
 rotRad
