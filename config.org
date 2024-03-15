@@ -1,4 +1,5 @@
 #+TITLE: Config
+#+CATEGORY: emacs
 Place your private configuration here! Remember, you do not need to run `doom
 sync` after modifying this file!
 
@@ -202,8 +203,9 @@ current buffer's, reload dir-locals."
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
 #+begin_src elisp
-(after! ace-window
-  (global-unset-key (kbd "M-o"))
+(use-package! ace-window
+  :config
+ (global-unset-key (kbd "M-o"))
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
@@ -224,6 +226,7 @@ it with the meta key of facemenu
           ))
   )
 #+End_src
+** TODO [#A] confirm this actually fixed the problem
 * Modifying doom installed packages
 ** company stuff:
 #+begin_src elisp
@@ -255,7 +258,7 @@ it with the meta key of facemenu
 #+begin_src emacs-lisp
 (after! projectile
   :config
-  (setq custom-suffixes '(".pdf" ".png" ".svg"))
+  (setq custom-suffixes '(".pdf" ".png" ".svg" ".Rd"))
   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
 #+end_src
 
@@ -356,7 +359,7 @@ Current references for putting this together are [[http://doc.norang.ca/org-mode
 Enable my todos from these files to be collected by the agenda
 #+begin_src elisp
 (after! org
-  (setq org-agenda-files (quote ("~/orgNotes")))
+  (setq org-agenda-files (quote ("~/orgNotes" "~/.doom.d")))
   (setq org-directory "~/orgNotes")
   (setq +org-capture-journal-file "~/orgNotes/journal.org")
   (setq org-priority-faces  '((?A :foreground "#FF6C6B")
@@ -736,6 +739,7 @@ There are some color problems which are currently being worked on; a workaround 
   )
 #+end_src
 
+** Debug commands
 Wall of things that are currently in a pull request so I can't be arsed to do this correctly
 #+begin_src elisp
 (after! ess-tracebug
@@ -985,6 +989,21 @@ evil numbers increments and decrements numbers. useful for adding numbers
   (define-key evil-normal-state-map (kbd "zz") 'evil-numbers/dec-at-pt)
   )
 #+end_src
+
+** Evil owl
+[[https://github.com/mamapanda/evil-owl][This]] is the thing that allows for previewing registers
+#+begin_src elisp :tangle yes
+(use-package! evil-owl
+  :after evil
+  :config
+  (setq evil-owl-max-string-length 500)
+  (add-to-list 'display-buffer-alist
+               '("evil-owl*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (window-height . 0.3)))
+  (evil-owl-mode))
+#+end_src
 * Elfeed settings
 
 The actual feed list and general settings are over at elfeedSources
@@ -1122,28 +1141,49 @@ general keybindings
 
 combine the elfeed-score-print-entry and elfeed-goodies
 * Sunrise/sunset color theme
-cribbed from [[https://github.com/hadronzoo/theme-changer][here]], which is intended for base emacs
-location
+From [[https://github.com/hadronzoo/theme-changer][here]]
 #+begin_src emacs-lisp :tangle yes
 (setq calendar-location-name "Sacramento, CA")
 (setq calendar-latitude 38.70)
 (setq calendar-longitude -121.59)
 (setq theme-changer-mode 'deftheme)
-(after! doom-themes
-  (use-package! theme-changer)
-  (change-theme 'doom-flatwhite 'doom-dracula))
+(setq theme-changer-delay-seconds -3600)
+(use-package! theme-changer
+  :after doom-themes
+)
+(after! theme-changer
+ (change-theme 'doom-bluloco-light 'doom-dracula)
+ )
 #+end_src
 - reasonable light themes:
-  + `doom-ayu-mirage` a bit washed out
-  + `doom-bluloco-light` kinda cotton candy
-  + `doom-earl-grey` a bit washed out
-  + `doom-feather-light` ok; headings kinda too big though
-  + `doom-flatwhite` pretty good
-  + `doom-gruvbox-light` pretty good
++ `doom-ayu-mirage` a bit washed out
++ `doom-bluloco-light` kinda cotton candy
++ `doom-earl-grey` a bit washed out
++ `doom-feather-light` ok; headings kinda too big though
++ `doom-flatwhite` pretty good
++ `doom-gruvbox-light` pretty good
 - reasonable dark themes:
-  + `doom-dracula` preferred
-  + `doom-feather-dark` ok; headings kinda too big though
-  + `doom-henna` good but not current sys colorscheme
++ `doom-dracula` preferred
++ `doom-feather-dark` ok; headings kinda too big though
++ `doom-henna` good but not current sys colorscheme
+** TODO [#A] this isn't running correctly at startup
 * TODO add Ctrl-enter/ctrl-C ctrl-C behavior for julia
-* TODO turn darkmode on early
 * TODO get ESS to default to the current project, and not whichever terminal was last used
+* TODO fix this
+
+Debugger entered--Lisp error: (void-function forge--tablist-columns-vector)
+(forge--tablist-columns-vector)
+(forge-sql [:select [forge id name owner] :from repository :order-by [(asc owner) (asc name)]] (forge--tablist-columns-vector))
+(mapcar #'org-forge-issues (forge-sql [:select [forge id name owner] :from repository :order-by [(asc owner) (asc name)]] (forge--tablist-columns-vector)))
+org-forge-update-repos()
+apply(org-forge-update-repos nil)
+timer-event-handler([t 26082 43130 769837 nil org-forge-update-repos nil nil 848000 nil])
+Also, fix whatever is borked when reloading the environment
+* TODO ESS spawn new process
+Like ~SPC-m-TAB~ but directly spawns a new process in this project.
+* TODO switch search default order by most frequently used
+or at the very least a hand written version of that
+* TODO [#C] ess shortcut to restart R session
+* TODO [#B] ess shortcut to exit R session
+* TODO Link from file to a remote
+There's a package for this, just need to add and configure

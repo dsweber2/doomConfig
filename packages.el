@@ -54,6 +54,7 @@
 ;; evil packages
 (package! evil-quickscope)
 (package! evil-fringe-mark)
+(package! evil-owl)
 
 (package! ess :recipe
   (:host github

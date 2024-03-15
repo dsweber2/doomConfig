@@ -1,4 +1,4 @@
-personal_ws-1.1 en 326
+personal_ws-1.1 en 332
 AUCs
 Amari
 AppendixFits
@@ -94,6 +94,7 @@ autoregressive
 aveDec
 aveLen
 averagingLength
+bacteroides
 bato
 bcf
 beamformed
@@ -198,6 +199,7 @@ kintsugi
 kobolds
 kusanagi
 kymat
+lachnospiraceae
 linearFashionMNIST
 linearMNIST
 linearization
@@ -231,6 +233,7 @@ outputPool
 parameterizing
 planarfolk
 plotOfLogCentralFrequencies
+pmmov
 png
 pointwise
 pomodoro
@@ -280,6 +283,7 @@ sinusoid's
 sinusoidFirst
 sketchWaves
 skipgram
+socrata
 sparseTree
 speedDrawring
 stormwolf
@@ -301,8 +305,10 @@ tokenization
 tranInv
 trefethen
 triAlone
+unconcentrated
 unglamored
 unionista
+unitless
 unpenalized
 unrotated
 upsampling

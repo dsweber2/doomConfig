@@ -85,8 +85,9 @@ current buffer's, reload dir-locals."
 
 (setq emacsql-sqlite-executable "/fasterHome/anaconda3/bin/sqlite3")
 
-(after! ace-window
-  (global-unset-key (kbd "M-o"))
+(use-package! ace-window
+  :config
+ (global-unset-key (kbd "M-o"))
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
@@ -127,7 +128,7 @@ current buffer's, reload dir-locals."
 
 (after! projectile
   :config
-  (setq custom-suffixes '(".pdf" ".png" ".svg"))
+  (setq custom-suffixes '(".pdf" ".png" ".svg" ".Rd"))
   (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
 
 (after! counsel
@@ -186,7 +187,7 @@ that."
   (setq org-table-convert-region-max-lines 999))
 
 (after! org
-  (setq org-agenda-files (quote ("~/orgNotes")))
+  (setq org-agenda-files (quote ("~/orgNotes" "~/.doom.d")))
   (setq org-directory "~/orgNotes")
   (setq +org-capture-journal-file "~/orgNotes/journal.org")
   (setq org-priority-faces  '((?A :foreground "#FF6C6B")
@@ -545,6 +546,17 @@ Equivalent to `where' at the R prompt."
   (define-key evil-normal-state-map (kbd "zz") 'evil-numbers/dec-at-pt)
   )
 
+(use-package! evil-owl
+  :after evil
+  :config
+  (setq evil-owl-max-string-length 500)
+  (add-to-list 'display-buffer-alist
+               '("evil-owl*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (window-height . 0.3)))
+  (evil-owl-mode))
+
 (setq rmh-elfeed-org-files (list (concat own-doom-home "elfeedSources.org")))
 
 (use-package! elfeed-goodies
@@ -651,6 +663,10 @@ Equivalent to `where' at the R prompt."
 (setq calendar-latitude 38.70)
 (setq calendar-longitude -121.59)
 (setq theme-changer-mode 'deftheme)
-(after! doom-themes
-  (use-package! theme-changer)
-  (change-theme 'doom-flatwhite 'doom-dracula))
+(setq theme-changer-delay-seconds -3600)
+(use-package! theme-changer
+  :after doom-themes
+)
+(after! theme-changer
+ (change-theme 'doom-bluloco-light 'doom-dracula)
+ )
