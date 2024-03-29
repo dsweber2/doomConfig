@@ -1167,6 +1167,8 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
 + `doom-feather-dark` ok; headings kinda too big though
 + `doom-henna` good but not current sys colorscheme
 ** TODO [#A] this isn't running correctly at startup
+** TODO [#A] the time adjust isn't working I think
+It changed at 18:13
 * TODO add Ctrl-enter/ctrl-C ctrl-C behavior for julia
 * TODO get ESS to default to the current project, and not whichever terminal was last used
 * TODO fix this
@@ -1187,3 +1189,11 @@ or at the very least a hand written version of that
 * TODO [#B] ess shortcut to exit R session
 * TODO Link from file to a remote
 There's a package for this, just need to add and configure
+* Magit
+** TODO Add stash-checkout command
+three parts to this:
+- first is stashing the current branch with an appropriate name (current branch-n probably)
+- then run the standard checkout command
+- after running checkout, check to see if there's a stashed commit with the right kind of name
+  + if there is, pop the last one (and maybe mention that there were others!)
+  + if there isn't, done!
