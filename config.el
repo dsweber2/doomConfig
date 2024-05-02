@@ -659,13 +659,14 @@ Equivalent to `where' at the R prompt."
        )
       )
 
-(setq calendar-location-name "Sacramento, CA")
-(setq calendar-latitude 38.70)
-(setq calendar-longitude -121.59)
-(setq theme-changer-mode 'deftheme)
-(setq theme-changer-delay-seconds -3600)
 (use-package! theme-changer
   :after doom-themes
+  :config
+  (setq calendar-location-name "Minneapolis, MN")
+  (setq calendar-latitude 44.883057)
+  (setq calendar-longitude -93.228889)
+  (setq theme-changer-mode 'deftheme)
+  (setq theme-changer-delay-seconds -3600)
 )
 (after! theme-changer
  (change-theme 'doom-bluloco-light 'doom-dracula)

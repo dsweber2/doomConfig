@@ -1,4 +1,4 @@
-personal_ws-1.1 en 333
+personal_ws-1.1 en 335
 AUCs
 Amari
 AppendixFits
@@ -222,6 +222,7 @@ nli
 nonlinConds
 nonlinearities
 normalWaveletTransform
+nowcasting
 olcskei
 olcskei's
 omiprazole
@@ -241,6 +242,7 @@ pomodoro
 popato
 preprocessing
 prestructured
+programmatically
 propritary
 proto
 pseudoinverse
