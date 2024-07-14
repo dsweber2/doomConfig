@@ -16,6 +16,7 @@ To ensure normal operation, you should investigate and remove the
 cause of the error in your initialization file.  Start Emacs with
 the ‘--debug-init’ option to view a complete error backtrace. Disable showing Disable logging
 #+end_quote
+
 * Overview
 Here are some additional functions/macros that could help you configure Doom:
 - `load!' for loading external *.el files relative to this one
@@ -108,6 +109,7 @@ electric pairs are better
 auto-fill mode (hard wrapping is +nice+ not nice methinks)
 #+begin_src elisp :tangle no
 (setq-default auto-fill-function nil)
+(+global-word-wrap-mode 't)
 #+end_src
 strangely enough, the fill value is still used by jupyter, so setting it to ~264, based on my current screen
 #+begin_src elisp :tangle yes
@@ -700,10 +702,39 @@ dnf install --assumeyes --setopt=install_weak_deps=False @development-tools libc
 apk add --no-cache curl-dev g++ gcc libxml2-dev linux-headers make R R-dev
 #+end_src
 https://github.com/REditorSupport/languageserver
+** TODO add lsp mode by default to ess
 * Code formatting stuff
 #+begin_src elisp :tangle no
 (after! org
   (add-to-list '+format-on-save-enabled-modes 'sgml-mode t))
+#+end_src
+
+hack from [[https://github.com/radian-software/apheleia/discussions/120][here]] to get lsp formatting on saves in buffers where that's a thing
+#+begin_src elisp :tangle yes
+(after! apheleia
+  (defun apheleia-lsp-formatter-buffer (buffer scratch)
+  (with-current-buffer buffer
+    (if (lsp-feature? "textDocument/formatting")
+        (let ((edits (lsp-request
+                      "textDocument/formatting"
+                      (lsp--make-document-formatting-params))))
+          (unless (seq-empty-p edits)
+            (with-current-buffer scratch
+              (lsp--apply-text-edits edits 'format)))))))
+
+(cl-defun apheleia-lsp-formatter
+    (&key buffer scratch formatter callback &allow-other-keys)
+  (apheleia-lsp-formatter-buffer buffer scratch)
+  (funcall callback))
+(add-to-list 'apheleia-formatters '(apheleia-lsp . apheleia-lsp-formatter))
+(setf (alist-get 'elixir-mode apheleia-mode-alist)
+      '(apheleia-lsp))
+(setf (alist-get 'python-mode apheleia-mode-alist)
+      '(apheleia-lsp)))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(after! setq '(emacs-lisp-mode))
 #+end_src
 * Ein/emacs-jupyter settings
 Note these are two different packages, ein is [[https://github.com/millejoh/emacs-ipython-notebook][here]], while [[https://github.com/nnicandro/emacs-jupyter][this is emacs-jupyter]]. Ein has a nicer 1-1 for notebooks, but emacs-jupyter has better auto-complete options.
@@ -806,8 +837,8 @@ Equivalent to `where' at the R prompt."
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
 (after! julia-repl
-  (setq juliaVersion "1.9.2")
-  (setq juliaPkgVersion "1.9")
+  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.10")
   (setenv "JULIA_NUM_THREADS" "5"))
 #+END_SRC
 
@@ -818,7 +849,7 @@ this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
 using Pkg; Pkg.add("PackageCompiler")
-juliaVersion = "1.9.2"
+juliaVersion = "1.10.3"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -833,8 +864,8 @@ and now the actual code to be tangled into ~init.el~.
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.9.2")
-  (setq juliaPkgVersion "1.9")
+  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.10")
   (setenv "PATH"
           (concat
            "/home/dsweber/.julia/juliaup/bin" ":"
@@ -844,7 +875,7 @@ and now the actual code to be tangled into ~init.el~.
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
@@ -895,12 +926,12 @@ and now the actual code to be tangled into ~init.el~.
 fixing some stuff for lsp
 #+begin_src elisp :tangle yes
 (after! lsp-julia
-  (setq juliaPkgVersion "1.9")
-  (setq juliaVersion "1.9.2")
+  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.10.3")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 #+end_src
@@ -932,8 +963,8 @@ and trying ess julia instead
 actually jupyter is the most reasonable
 #+begin_src elisp :tangle yes
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.9") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.9") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.10") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.10") (:async . no))))
 #+end_src
 
 customizing the ob-ein languages
@@ -1142,7 +1173,7 @@ general keybindings
 combine the elfeed-score-print-entry and elfeed-goodies
 * Sunrise/sunset color theme
 From [[https://github.com/hadronzoo/theme-changer][here]]
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package! theme-changer
   :after doom-themes
   :config
@@ -1153,7 +1184,7 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
   (setq theme-changer-delay-seconds -3600)
 )
 (after! theme-changer
- (change-theme 'doom-bluloco-light 'doom-dracula)
+  (change-theme 'doom-bluloco-light 'doom-dracula)
  )
 #+end_src
 - reasonable light themes:

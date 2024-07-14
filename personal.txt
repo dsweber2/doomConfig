@@ -1,4 +1,4 @@
-personal_ws-1.1 en 335
+personal_ws-1.1 en 339
 AUCs
 Amari
 AppendixFits
@@ -87,6 +87,7 @@ Welch
 Wiatowski
 Wiatowski's
 allScalograms
+alleghany
 analyticInversion
 angleCoverage
 automata
@@ -124,6 +125,7 @@ covidcast
 cpus
 crimini
 cron
+cryptozoological
 cwtExs
 dapro
 decayRates
@@ -210,6 +212,7 @@ maximizers
 millennials
 mirin
 miso
+monosemanticity
 morl
 motherDef
 mult
@@ -240,6 +243,7 @@ png
 pointwise
 pomodoro
 popato
+prepended
 preprocessing
 prestructured
 programmatically

@@ -337,6 +337,29 @@ that."
                   org-src-lang-modes :key #'car)))
   )
 
+(after! apheleia
+  (defun apheleia-lsp-formatter-buffer (buffer scratch)
+  (with-current-buffer buffer
+    (if (lsp-feature? "textDocument/formatting")
+        (let ((edits (lsp-request
+                      "textDocument/formatting"
+                      (lsp--make-document-formatting-params))))
+          (unless (seq-empty-p edits)
+            (with-current-buffer scratch
+              (lsp--apply-text-edits edits 'format)))))))
+
+(cl-defun apheleia-lsp-formatter
+    (&key buffer scratch formatter callback &allow-other-keys)
+  (apheleia-lsp-formatter-buffer buffer scratch)
+  (funcall callback))
+(add-to-list 'apheleia-formatters '(apheleia-lsp . apheleia-lsp-formatter))
+(setf (alist-get 'elixir-mode apheleia-mode-alist)
+      '(apheleia-lsp))
+(setf (alist-get 'python-mode apheleia-mode-alist)
+      '(apheleia-lsp)))
+
+(after! setq '(emacs-lisp-mode))
+
 (after! ein
   (setq ein:output-area-inlined-images t))
 
@@ -416,15 +439,15 @@ Equivalent to `where' at the R prompt."
   (define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 
 (after! julia-repl
-  (setq juliaVersion "1.9.2")
-  (setq juliaPkgVersion "1.9")
+  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.10")
   (setenv "JULIA_NUM_THREADS" "5"))
 
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.9.2")
-  (setq juliaPkgVersion "1.9")
+  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.10")
   (setenv "PATH"
           (concat
            "/home/dsweber/.julia/juliaup/bin" ":"
@@ -434,7 +457,7 @@ Equivalent to `where' at the R prompt."
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
@@ -483,12 +506,12 @@ Equivalent to `where' at the R prompt."
   )
 
 (after! lsp-julia
-  (setq juliaPkgVersion "1.9")
-  (setq juliaVersion "1.9.2")
+  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.10.3")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.9" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 
@@ -511,8 +534,8 @@ Equivalent to `where' at the R prompt."
   )
 
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.9") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.9") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.10") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.10") (:async . no))))
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
@@ -658,16 +681,3 @@ Equivalent to `where' at the R prompt."
        :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
        )
       )
-
-(use-package! theme-changer
-  :after doom-themes
-  :config
-  (setq calendar-location-name "Minneapolis, MN")
-  (setq calendar-latitude 44.883057)
-  (setq calendar-longitude -93.228889)
-  (setq theme-changer-mode 'deftheme)
-  (setq theme-changer-delay-seconds -3600)
-)
-(after! theme-changer
- (change-theme 'doom-bluloco-light 'doom-dracula)
- )
