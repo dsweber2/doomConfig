@@ -1,4 +1,4 @@
-personal_ws-1.1 en 339
+personal_ws-1.1 en 341
 AUCs
 Amari
 AppendixFits
@@ -162,6 +162,7 @@ firstOutputSine
 fitSignals
 fitSignalsScalograms
 fitSignalsSecondLayer
+fractally
 freqStd
 frobenius
 funct
@@ -212,6 +213,7 @@ maximizers
 millennials
 mirin
 miso
+modelling
 monosemanticity
 morl
 motherDef

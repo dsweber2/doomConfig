@@ -201,6 +201,16 @@ current buffer's, reload dir-locals."
 #+begin_src emacs-lisp :tangle yes
 (setq emacsql-sqlite-executable "/fasterHome/anaconda3/bin/sqlite3")
 #+end_src
+** Snipe settings
+since there's already one line stuff, going to the
+#+begin_src elisp :tangle yes
+(after! evil-snipe
+  (setq evil-snipe-scope 'visible)
+  (evil-define-key 'visual evil-snipe-local-mode-map "Z" 'evil-snipe-S)
+  (evil-define-key 'visual evil-snipe-local-mode-map "z" 'evil-snipe-s)
+  )
+
+#+end_src
 * Ace stuff
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
@@ -833,6 +843,10 @@ Equivalent to `where' at the R prompt."
   (define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
   (define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 #+end_src
+
+** Commands to add
+=styler::style_pkg=, =pkgdown::build_site()=
+
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes

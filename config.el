@@ -85,6 +85,12 @@ current buffer's, reload dir-locals."
 
 (setq emacsql-sqlite-executable "/fasterHome/anaconda3/bin/sqlite3")
 
+(after! evil-snipe
+  (setq evil-snipe-scope 'visible)
+  (evil-define-key 'visual evil-snipe-local-mode-map "Z" 'evil-snipe-S)
+  (evil-define-key 'visual evil-snipe-local-mode-map "z" 'evil-snipe-s)
+  )
+
 (use-package! ace-window
   :config
  (global-unset-key (kbd "M-o"))
