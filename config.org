@@ -846,6 +846,25 @@ Equivalent to `where' at the R prompt."
 
 ** Commands to add
 =styler::style_pkg=, =pkgdown::build_site()=
+#+begin_src elisp :tangle yes
+(after! ess-r-mode
+  (defun ess-r-style-pkg (&optional arg)
+  "Interface for `styler::style_pkg()'."
+  (interactive "P")
+  (ess-r-package-eval-linewise
+   "styler::style_pkg(%s)\n" "styling %s" arg
+   ))
+  (defun ess-r-build-site (&optional arg)
+  "Interface for `pkgdown::build_site()'.
+With no prefix ARG, build with `lazy = FALSE'."
+  (interactive "P")
+  (ess-r-package-eval-linewise
+   "pkgdown::build_site(%s, lazy=TRUE)\n" "building site for %s" arg
+   ))
+  (keymap-set ess-r-package-dev-map "f" #'ess-r-style-pkg)
+  (keymap-set ess-r-package-dev-map "S" #'ess-r-build-site)
+  )
+#+end_src
 
 * Julia Settings
 First, let's define the current version of Julia
@@ -1187,19 +1206,26 @@ general keybindings
 combine the elfeed-score-print-entry and elfeed-goodies
 * Sunrise/sunset color theme
 From [[https://github.com/hadronzoo/theme-changer][here]]
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package! theme-changer
   :after doom-themes
+  :after calendar
   :config
   (setq calendar-location-name "Minneapolis, MN")
   (setq calendar-latitude 44.883057)
   (setq calendar-longitude -93.228889)
   (setq theme-changer-mode 'deftheme)
   (setq theme-changer-delay-seconds -3600)
+  (change-theme 'doom-bluloco-light 'doom-dracula)
 )
 (after! theme-changer
+  (setq calendar-location-name "Minneapolis, MN")
+  (setq calendar-latitude 44.883057)
+  (setq calendar-longitude -93.228889)
+  (setq theme-changer-mode 'deftheme)
+  (setq theme-changer-delay-seconds -3600)
   (change-theme 'doom-bluloco-light 'doom-dracula)
- )
+  )
 #+end_src
 - reasonable light themes:
 + `doom-ayu-mirage` a bit washed out

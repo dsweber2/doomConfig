@@ -444,6 +444,24 @@ Equivalent to `where' at the R prompt."
   (define-key ess-debug-minor-mode-map (kbd "M-H") #'ess-debug-command-help)
   (define-key ess-debug-minor-mode-map (kbd "M-R") #'ess-debug-command-resume))
 
+(after! ess-r-mode
+  (defun ess-r-style-pkg (&optional arg)
+  "Interface for `styler::style_pkg()'."
+  (interactive "P")
+  (ess-r-package-eval-linewise
+   "styler::style_pkg(%s)\n" "styling %s" arg
+   ))
+  (defun ess-r-build-site (&optional arg)
+  "Interface for `pkgdown::build_site()'.
+With no prefix ARG, build with `lazy = FALSE'."
+  (interactive "P")
+  (ess-r-package-eval-linewise
+   "pkgdown::build_site(%s, lazy=TRUE)\n" "building site for %s" arg
+   ))
+  (keymap-set ess-r-package-dev-map "f" #'ess-r-style-pkg)
+  (keymap-set ess-r-package-dev-map "S" #'ess-r-build-site)
+  )
+
 (after! julia-repl
   (setq juliaVersion "1.10.3")
   (setq juliaPkgVersion "1.10")
@@ -687,3 +705,24 @@ Equivalent to `where' at the R prompt."
        :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
        )
       )
+
+(use-package! theme-changer
+  :after doom-themes
+  :after calendar
+  :config
+  (setq calendar-location-name "Minneapolis, MN")
+  (setq calendar-latitude 44.883057)
+  (setq calendar-longitude -93.228889)
+  (setq theme-changer-mode 'deftheme)
+  (setq theme-changer-delay-seconds -3600)
+  (change-theme 'doom-bluloco-light 'doom-dracula)
+)
+(after! theme-changer
+  (setq calendar-location-name "Minneapolis, MN")
+  (setq calendar-latitude 44.883057)
+  (setq calendar-longitude -93.228889)
+  (setq theme-changer-mode 'deftheme)
+  (setq theme-changer-delay-seconds -3600)
+  (change-theme 'doom-bluloco-light 'doom-dracula)
+  )
+
