@@ -55,7 +55,8 @@
        (evil +everywhere)  ; come to the dark side, we have cookies
        file-templates      ; auto-snippets for empty files
        fold                ; (nigh) universal code folding
-       (format +onsave)    ; automated prettiness
+       (format +onsave
+               +lsp)       ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors    ; editing in many places at once
@@ -95,8 +96,8 @@
        lookup              ; navigate your code and its documentation
        (lsp +peek)
        (magit +forge)      ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
+       make                ; run make tasks from Emacs
+       (pass +auth)        ; password manager for nerds
        ;;pdf                 ; pdf enhancements
        prodigy             ; FIXME managing external services & code builders
        ;;taskrunner        ; taskrunner for all your projects

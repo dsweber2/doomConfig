@@ -291,7 +291,9 @@ the ‘--debug-init’ option to view a complete error backtrace.
 ** Rainbow Mode
 #+begin_src elisp :tangle yes
 (use-package! rainbow-mode
-  :ensure t)
+  :config
+  (rainbow-mode)
+)
 #+end_src
 
 ** Indent
@@ -694,6 +696,8 @@ url-http-generic-filter(#<process api.github.com> "`_(\11\326$\32j\330\356\332N\
 #+end_src
 when initially adding a repository. Doesn't seem to actually be stopping it from adding to the repository however, so I think we're ok.
 * LSP stuff
+** R specific
+had to add these packages
 #+begin_src R :tangle no
 install.packages("styler")
 install.packages("lintr")
@@ -712,6 +716,26 @@ dnf install --assumeyes --setopt=install_weak_deps=False @development-tools libc
 apk add --no-cache curl-dev g++ gcc libxml2-dev linux-headers make R R-dev
 #+end_src
 https://github.com/REditorSupport/languageserver
+
+#+begin_src elisp :tangle yes
+(after! lsp
+  :after ess
+  (add-hook 'ess-r-mode-hook #'lsp)
+)
+#+end_src
+** General settings
+#+begin_src elisp :tangle yes
+(after! lsp
+  (setq lsp-pyright-langserver-command "basedpyright")
+  (setq lsp-ruff-lsp-ruff-path "/fasterHome/anaconda3/envs/baseEmacs/bin/ruff")
+  (add-hook 'ess-julia-mode-hook #'lsp)
+  )
+#+end_src
+
+This is the command that gets lsp working again, despite being jank
+#+begin_src elisp :tangle no
+(setq debug-on-error nil)
+#+end_src
 ** TODO add lsp mode by default to ess
 * Code formatting stuff
 #+begin_src elisp :tangle no
@@ -720,7 +744,7 @@ https://github.com/REditorSupport/languageserver
 #+end_src
 
 hack from [[https://github.com/radian-software/apheleia/discussions/120][here]] to get lsp formatting on saves in buffers where that's a thing
-#+begin_src elisp :tangle yes
+#+begin_src elisp :tangle no
 (after! apheleia
   (defun apheleia-lsp-formatter-buffer (buffer scratch)
   (with-current-buffer buffer
@@ -1208,7 +1232,6 @@ combine the elfeed-score-print-entry and elfeed-goodies
 From [[https://github.com/hadronzoo/theme-changer][here]]
 #+begin_src emacs-lisp :tangle yes
 (use-package! theme-changer
-  :after doom-themes
   :after calendar
   :config
   (setq calendar-location-name "Minneapolis, MN")
@@ -1218,14 +1241,6 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
   (setq theme-changer-delay-seconds -3600)
   (change-theme 'doom-bluloco-light 'doom-dracula)
 )
-(after! theme-changer
-  (setq calendar-location-name "Minneapolis, MN")
-  (setq calendar-latitude 44.883057)
-  (setq calendar-longitude -93.228889)
-  (setq theme-changer-mode 'deftheme)
-  (setq theme-changer-delay-seconds -3600)
-  (change-theme 'doom-bluloco-light 'doom-dracula)
-  )
 #+end_src
 - reasonable light themes:
 + `doom-ayu-mirage` a bit washed out
@@ -1238,7 +1253,7 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
 + `doom-dracula` preferred
 + `doom-feather-dark` ok; headings kinda too big though
 + `doom-henna` good but not current sys colorscheme
-** TODO [#A] this isn't running correctly at startup
+** DONE [#A] this isn't running correctly at startup
 ** TODO [#A] the time adjust isn't working I think
 It changed at 18:13
 * TODO add Ctrl-enter/ctrl-C ctrl-C behavior for julia
@@ -1269,3 +1284,20 @@ three parts to this:
 - after running checkout, check to see if there's a stashed commit with the right kind of name
   + if there is, pop the last one (and maybe mention that there were others!)
   + if there isn't, done!
+* LLM stuff
+#+begin_src elisp :tangle yes
+(use-package! gptel
+  :config
+  ;; OPTIONAL configuration
+  ;; OPTIONAL configuration
+  (setq
+   gptel-model "fastgpt"
+   gptel-backend (gptel-make-kagi "Kagi"
+                   :key (password-store-get 'api_keys/llms/kagi)))
+  (setq
+   gptel-model "claude-3-sonnet-20240229" ;  "claude-3-opus-20240229" also available
+   gptel-backend (gptel-make-anthropic "Claude"
+                   :stream t
+                   :key (password-store-get 'api_keys/llms/claude)))
+  )
+#+end_src

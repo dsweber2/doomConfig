@@ -90,3 +90,7 @@
 (package! elfeed-goodies)
 (package! elfeed-score)
 (package! elfeed-protocol)
+
+
+;; llm stuff
+(package! gptel)

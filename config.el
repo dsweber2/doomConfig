@@ -141,7 +141,9 @@ current buffer's, reload dir-locals."
   (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
 
 (use-package! rainbow-mode
-  :ensure t)
+  :config
+  (rainbow-mode)
+)
 
 (after! indent
   (setq standard-indent 4))
@@ -343,26 +345,16 @@ that."
                   org-src-lang-modes :key #'car)))
   )
 
-(after! apheleia
-  (defun apheleia-lsp-formatter-buffer (buffer scratch)
-  (with-current-buffer buffer
-    (if (lsp-feature? "textDocument/formatting")
-        (let ((edits (lsp-request
-                      "textDocument/formatting"
-                      (lsp--make-document-formatting-params))))
-          (unless (seq-empty-p edits)
-            (with-current-buffer scratch
-              (lsp--apply-text-edits edits 'format)))))))
+(after! lsp
+  :after ess
+  (add-hook 'ess-r-mode-hook #'lsp)
+)
 
-(cl-defun apheleia-lsp-formatter
-    (&key buffer scratch formatter callback &allow-other-keys)
-  (apheleia-lsp-formatter-buffer buffer scratch)
-  (funcall callback))
-(add-to-list 'apheleia-formatters '(apheleia-lsp . apheleia-lsp-formatter))
-(setf (alist-get 'elixir-mode apheleia-mode-alist)
-      '(apheleia-lsp))
-(setf (alist-get 'python-mode apheleia-mode-alist)
-      '(apheleia-lsp)))
+(after! lsp
+  (setq lsp-pyright-langserver-command "basedpyright")
+  (setq lsp-ruff-lsp-ruff-path "/fasterHome/anaconda3/envs/baseEmacs/bin/ruff")
+  (add-hook 'ess-julia-mode-hook #'lsp)
+  )
 
 (after! setq '(emacs-lisp-mode))
 
@@ -707,7 +699,6 @@ With no prefix ARG, build with `lazy = FALSE'."
       )
 
 (use-package! theme-changer
-  :after doom-themes
   :after calendar
   :config
   (setq calendar-location-name "Minneapolis, MN")
@@ -717,12 +708,18 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq theme-changer-delay-seconds -3600)
   (change-theme 'doom-bluloco-light 'doom-dracula)
 )
-(after! theme-changer
-  (setq calendar-location-name "Minneapolis, MN")
-  (setq calendar-latitude 44.883057)
-  (setq calendar-longitude -93.228889)
-  (setq theme-changer-mode 'deftheme)
-  (setq theme-changer-delay-seconds -3600)
-  (change-theme 'doom-bluloco-light 'doom-dracula)
-  )
 
+(use-package! gptel
+  :config
+  ;; OPTIONAL configuration
+  ;; OPTIONAL configuration
+  (setq
+   gptel-model "fastgpt"
+   gptel-backend (gptel-make-kagi "Kagi"
+                   :key (password-store-get 'api_keys/llms/kagi)))
+  (setq
+   gptel-model "claude-3-sonnet-20240229" ;  "claude-3-opus-20240229" also available
+   gptel-backend (gptel-make-anthropic "Claude"
+                   :stream t
+                   :key (password-store-get 'api_keys/llms/claude)))
+  )
