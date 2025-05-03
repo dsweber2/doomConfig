@@ -350,10 +350,33 @@ that."
   (add-hook 'ess-r-mode-hook #'lsp)
 )
 
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\delphi-epidata\\'")
+  ;; or
+  ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
+  (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
+  (setq lsp-ruff-ruff-args '("--preview"))
+  )
+
 (after! lsp
+  :config
+  (push "[/\\\\]\\.PlayOnLinux\\'" lsp-file-watch-ignored-directories)
   (setq lsp-pyright-langserver-command "basedpyright")
-  (setq lsp-ruff-lsp-ruff-path "/fasterHome/anaconda3/envs/baseEmacs/bin/ruff")
+  (lsp-workspace-remove-all-folders)
   (add-hook 'ess-julia-mode-hook #'lsp)
+  (add-to-list 'lsp-enabled-clients #'pylsp)
+  (add-to-list 'lsp-enabled-clients #'ruff)
+  (add-to-list 'lsp-enabled-clients #'semgrep)
+  (add-to-list 'lsp-enabled-clients #'lsp-r)
+  )
+;; (after! lsp-pyright
+;;   :config
+;;   (setq lsp-pyright-multi-root nil)
+;;   )
+
+(use-package! pet
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10)
   )
 
 (after! setq '(emacs-lisp-mode))
@@ -363,8 +386,8 @@ that."
 
 (use-package! ox-ipynb)
 
-(after! python
-  (conda-env-activate "baseEmacs"))
+(setq inferior-ess-r-program "/usr/local/bin/R")
+(setq lsp-clients-r-server-command '("/usr/local/bin/R" "-e" "languageserver::run()"))
 
 (after! ess
   (add-to-list 'safe-local-variable-values '(comment-add . 0)))
@@ -454,16 +477,19 @@ With no prefix ARG, build with `lazy = FALSE'."
   (keymap-set ess-r-package-dev-map "S" #'ess-r-build-site)
   )
 
+(use-package! quarto-mode
+  )
+
 (after! julia-repl
-  (setq juliaVersion "1.10.3")
-  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.11.0")
+  (setq juliaPkgVersion "1.11")
   (setenv "JULIA_NUM_THREADS" "5"))
 
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.10.3")
-  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.11.0")
+  (setq juliaPkgVersion "1.11")
   (setenv "PATH"
           (concat
            "/home/dsweber/.julia/juliaup/bin" ":"
@@ -473,7 +499,7 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
@@ -522,12 +548,12 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 
 (after! lsp-julia
-  (setq juliaPkgVersion "1.10")
-  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.11")
+  (setq juliaVersion "1.11.0")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 
@@ -550,8 +576,8 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.10") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.10") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.11") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.11") (:async . no))))
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)
@@ -659,7 +685,7 @@ With no prefix ARG, build with `lazy = FALSE'."
 (setq b-date 3295)
 
 (setq elfeed-log-level 'debug)
-(toggle-debug-on-error)
+;; (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
 (use-package! elfeed-protocol
   :config
@@ -706,7 +732,7 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq calendar-longitude -93.228889)
   (setq theme-changer-mode 'deftheme)
   (setq theme-changer-delay-seconds -3600)
-  (change-theme 'doom-bluloco-light 'doom-dracula)
+  (change-theme 'doom-bluloco-light 'doom-henna)
 )
 
 (use-package! gptel
@@ -714,12 +740,12 @@ With no prefix ARG, build with `lazy = FALSE'."
   ;; OPTIONAL configuration
   ;; OPTIONAL configuration
   (setq
-   gptel-model "fastgpt"
+   gptel-model 'fastgpt
    gptel-backend (gptel-make-kagi "Kagi"
                    :key (password-store-get 'api_keys/llms/kagi)))
-  (setq
-   gptel-model "claude-3-sonnet-20240229" ;  "claude-3-opus-20240229" also available
-   gptel-backend (gptel-make-anthropic "Claude"
-                   :stream t
-                   :key (password-store-get 'api_keys/llms/claude)))
+  ;; (setq
+  ;;  gptel-model "claude-3-5-sonnet-20241022" ;  "claude-3-opus-20240229" also available
+  ;;  gptel-backend (gptel-make-anthropic "Claude"
+  ;;                  :stream t
+  ;;                  :key (password-store-get 'api_keys/llms/claude)))
   )

@@ -87,7 +87,7 @@
        :tools
        ;;ansible
        debugger            ; FIXME stepping through code, to help you add bugs
-       ;;direnv
+       direnv
        docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein                 ; tame Jupyter notebooks with emacs
@@ -139,7 +139,7 @@
        javascript          ; here(enter(who(ye(abandon(hope(all))))))
        (julia +lsp)        ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       (latex +latexmk +lsp); writing papers in Emacs has never been so fun
+       (latex +latexmk +lsp +fold +cdlatex); writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs
@@ -153,8 +153,7 @@
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python +lsp +conda
-               +pyright
-               +pyenv)     ; beautiful is better than ugly python
+               +pyright)   ; beautiful 🐍 is better than ugly python
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6

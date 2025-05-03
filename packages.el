@@ -49,8 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;;(unpin! t)
 
-;; julia packages
-(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 ;; evil packages
 (package! evil-quickscope)
 (package! evil-fringe-mark)
@@ -74,6 +72,17 @@
   (:host github
    :repo "jkitchin/ox-ipynb"))
 (package! ess-view-data)
+
+;; julia packages
+(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
+
+;; python packages
+;; (package! dap-python)
+(package! pet)
+(package! lsp-jedi)
+(package! quarto-mode :recipe
+  (:host github
+   :repo "quarto-dev/quarto-emacs"))
 
 ;; emacs-jupyter for org mode needs a version switch
 (unpin! jupyter)

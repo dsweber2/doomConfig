@@ -2,7 +2,9 @@
 #+CATEGORY: emacs
 Place your private configuration here! Remember, you do not need to run `doom
 sync` after modifying this file!
-
+#begin_src elisp :tangle yes
+(setq debug-on-error t)
+#end_src
 
 Reference variables which are unique to a given computer (thus the separate file)
 #+INCLUDE: localLocations.org
@@ -724,11 +726,15 @@ https://github.com/REditorSupport/languageserver
 )
 #+end_src
 ** General settings
+
+delphi-epidata has a stupidly large number of files, and shouldn't be watched by default
 #+begin_src elisp :tangle yes
-(after! lsp
-  (setq lsp-pyright-langserver-command "basedpyright")
-  (setq lsp-ruff-lsp-ruff-path "/fasterHome/anaconda3/envs/baseEmacs/bin/ruff")
-  (add-hook 'ess-julia-mode-hook #'lsp)
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\delphi-epidata\\'")
+  ;; or
+  ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
+  (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
+  (setq lsp-ruff-ruff-args '("--preview"))
   )
 #+end_src
 
@@ -737,6 +743,62 @@ This is the command that gets lsp working again, despite being jank
 (setq debug-on-error nil)
 #+end_src
 ** TODO add lsp mode by default to ess
+* Python IDE
+Following advice from [[https://github.com/wyuenho/emacs-pet?tab=readme-ov-file][here]] and [[https://github.com/doomemacs/doomemacs/issues/1666][here]], I'm activating =direnv= (which is actually using =envrc=) as a way of managing python virtual environments.
+
+Additionally, as a way of managing developer dependencies (still need to figure out a name for that), [[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#nested-activation][nested activation]] seems like the way to go. This is set globally via =conda config --set auto_stack 1=.
+An alternative procedure to "inherit" from another environment is [[https://stackoverflow.com/questions/42352841/how-to-update-an-existing-conda-environment-with-a-yml-file][here]], which updates another env based on a yml. So explicitly =conda env update --name localEnv -f baseEnv.yml=, though apparently this struggles somewhat with removing packages.
+#+begin_src elisp :tangle yes
+(after! lsp
+  :config
+  (push "[/\\\\]\\.PlayOnLinux\\'" lsp-file-watch-ignored-directories)
+  (setq lsp-pyright-langserver-command "basedpyright")
+  (lsp-workspace-remove-all-folders)
+  (add-hook 'ess-julia-mode-hook #'lsp)
+  (add-to-list 'lsp-enabled-clients #'pylsp)
+  (add-to-list 'lsp-enabled-clients #'ruff)
+  (add-to-list 'lsp-enabled-clients #'semgrep)
+  (add-to-list 'lsp-enabled-clients #'lsp-r)
+  )
+;; (after! lsp-pyright
+;;   :config
+;;   (setq lsp-pyright-multi-root nil)
+;;   )
+#+end_src
+
+Command "pylsp" is present on the path.
+Command "pyls" is not present on the path.
+Command "semgrep lsp" is present on the path.
+Command "ruff-lsp" is present on the path.
+Command "/fasterHome/anaconda3/envs/doom/bin/basedpyright-langserver --stdio" is present on the path.
+Command "pylsp" is present on the path.
+Command "pyls" is not present on the path.
+
+
+<2024-10-11 Fri> A lot of my woes seem to stem from =pyright= and/or =basedpyright= (haven't tried =pyright= directly). Going back(?) to using [[https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/][pylsp]], which in turn depends on Jedi.
+<2024-10-20 Sun> So basedpyright is working, along with ruff and semgrep, but the type checking it uses is hyper aggressive, and the completion suggestions are slow. Actually going back See the =add-to-list='s above for how.
+#+begin_src elisp :tangle yes
+(use-package! pet
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10)
+  )
+#+end_src
+** Anaconda
+#+begin_src emacs-lisp :tangle yes
+(after! python
+  (conda-env-activate "doom"))
+#end_src
+*** TODO [#A] function to build dependency file
+Conda doesn't seem to have a great way to do this; it's export does a bit much, and I'm not sure it has a way to pull in imports from files. Also, automating inheriting from the development file would also be useful. That's probably actually the first thing to do.
+At the moment I'm doing this via a bash alias condaup, but that isn't accessible here for some reason. I should add a command that calls it from inside emacs.
+*** TODO [#A] write update conda environment function
+** Troubleshooting
+basedpyright, and actually most of the others are a bit overeager about adding to the watch-list. it is located at [[file:~/.emacs.d/.local/cache/lsp-session]], and is a very long string. There's actually several functions for clearing this: =lsp-workspace-folders-remove=, lsp-workspace-remove-all-folders. there's also an add (seems redundant), an open (goes to the directory), and a switch
+* LaTeX stuff
+Used to work, seems to have borked since the re-install unfortunately.
+#+begin_src elisp :tangle yes
+(setq +latex-viewers '(Okular))
+#+end_src
 * Code formatting stuff
 #+begin_src elisp :tangle no
 (after! org
@@ -782,12 +844,14 @@ exporting org to ipython notebooks
 #+begin_src elisp :tangle yes
 (use-package! ox-ipynb)
 #+end_src
-* Anaconda
-#+begin_src emacs-lisp :tangle yes
-(after! python
-  (conda-env-activate "baseEmacs"))
 #+end_src
 * ESS stuff
+switching to `rig`:
+#+begin_src elisp :tangle yes
+(setq inferior-ess-r-program "/usr/local/bin/R")
+(setq lsp-clients-r-server-command '("/usr/local/bin/R" "-e" "languageserver::run()"))
+#+end_src
+
 #+begin_src elisp :tangle yes
 (after! ess
   (add-to-list 'safe-local-variable-values '(comment-add . 0)))
@@ -890,12 +954,17 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 #+end_src
 
+** Quarto mode
+#+begin_src elisp :tangle yes
+(use-package! quarto-mode
+  )
+#+end_src
 * Julia Settings
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
 (after! julia-repl
-  (setq juliaVersion "1.10.3")
-  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.11.0")
+  (setq juliaPkgVersion "1.11")
   (setenv "JULIA_NUM_THREADS" "5"))
 #+END_SRC
 
@@ -906,7 +975,7 @@ this julia code doesn't actually need to be tangled, but should be run
 beforehand.
 #+BEGIN_SRC julia :tangle no
 using Pkg; Pkg.add("PackageCompiler")
-juliaVersion = "1.10.3"
+juliaVersion = "1.11.0"
 using Pkg, PackageCompiler
 Pkg.activate("~/.julia/environments/newBase")
 Pkg.add("LanguageServer")
@@ -921,8 +990,8 @@ and now the actual code to be tangled into ~init.el~.
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.10.3")
-  (setq juliaPkgVersion "1.10")
+  (setq juliaVersion "1.11.0")
+  (setq juliaPkgVersion "1.11")
   (setenv "PATH"
           (concat
            "/home/dsweber/.julia/juliaup/bin" ":"
@@ -932,7 +1001,7 @@ and now the actual code to be tangled into ~init.el~.
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
@@ -983,12 +1052,12 @@ and now the actual code to be tangled into ~init.el~.
 fixing some stuff for lsp
 #+begin_src elisp :tangle yes
 (after! lsp-julia
-  (setq juliaPkgVersion "1.10")
-  (setq juliaVersion "1.10.3")
+  (setq juliaPkgVersion "1.11")
+  (setq juliaVersion "1.11.0")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.10" "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 #+end_src
@@ -1020,8 +1089,8 @@ and trying ess julia instead
 actually jupyter is the most reasonable
 #+begin_src elisp :tangle yes
 (after! ein
-  (setq org-babel-header-args '((:kernel . "julia-1.10") (:async . no)))
-  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.10") (:async . no))))
+  (setq org-babel-header-args '((:kernel . "julia-1.11") (:async . no)))
+  (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.11") (:async . no))))
 #+end_src
 
 customizing the ob-ein languages
@@ -1171,7 +1240,7 @@ Display the date
 getting another server to handle fetching data from other servers and phone access.
 #+begin_src emacs-lisp :tangle yes
 (setq elfeed-log-level 'debug)
-(toggle-debug-on-error)
+;; (toggle-debug-on-error)
 (setq elfeed-protocol-log-trace t)
 (use-package! elfeed-protocol
   :config
@@ -1239,7 +1308,7 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
   (setq calendar-longitude -93.228889)
   (setq theme-changer-mode 'deftheme)
   (setq theme-changer-delay-seconds -3600)
-  (change-theme 'doom-bluloco-light 'doom-dracula)
+  (change-theme 'doom-bluloco-light 'doom-henna)
 )
 #+end_src
 - reasonable light themes:
@@ -1253,6 +1322,7 @@ From [[https://github.com/hadronzoo/theme-changer][here]]
 + `doom-dracula` preferred
 + `doom-feather-dark` ok; headings kinda too big though
 + `doom-henna` good but not current sys colorscheme
++ `doom-acario` good but not current sys colorscheme
 ** DONE [#A] this isn't running correctly at startup
 ** TODO [#A] the time adjust isn't working I think
 It changed at 18:13
@@ -1291,13 +1361,15 @@ three parts to this:
   ;; OPTIONAL configuration
   ;; OPTIONAL configuration
   (setq
-   gptel-model "fastgpt"
+   gptel-model 'fastgpt
    gptel-backend (gptel-make-kagi "Kagi"
                    :key (password-store-get 'api_keys/llms/kagi)))
-  (setq
-   gptel-model "claude-3-sonnet-20240229" ;  "claude-3-opus-20240229" also available
-   gptel-backend (gptel-make-anthropic "Claude"
-                   :stream t
-                   :key (password-store-get 'api_keys/llms/claude)))
+  ;; (setq
+  ;;  gptel-model "claude-3-5-sonnet-20241022" ;  "claude-3-opus-20240229" also available
+  ;;  gptel-backend (gptel-make-anthropic "Claude"
+  ;;                  :stream t
+  ;;                  :key (password-store-get 'api_keys/llms/claude)))
   )
 #+end_src
+** potential sources
+https://blog.jetbrains.com/blog/2024/04/04/full-line-code-completion-in-jetbrains-ides-all-you-need-to-know/#under-the-hood

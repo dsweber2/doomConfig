@@ -1,4 +1,4 @@
-personal_ws-1.1 en 341
+personal_ws-1.1 en 356
 AUCs
 Amari
 AppendixFits
@@ -86,8 +86,10 @@ WaveletExamples
 Welch
 Wiatowski
 Wiatowski's
+aheads
 allScalograms
 alleghany
+amaris
 analyticInversion
 angleCoverage
 automata
@@ -95,6 +97,7 @@ autoregressive
 aveDec
 aveLen
 averagingLength
+backtest
 bacteroides
 bato
 bcf
@@ -113,6 +116,7 @@ bumpsScatteredMorlet
 bumpsUnnormal
 calderonCond
 cbf
+conda
 confMatSynth
 confMatSynthCla
 confMatSynthRot
@@ -129,6 +133,7 @@ cryptozoological
 cwtExs
 dapro
 decayRates
+delphiepidata
 dev
 discretize
 discretized
@@ -137,11 +142,16 @@ dmitry
 dragonborn
 dudebro
 dwarves
+ebenezer
 ector
 elementals
 elsevier
 ephane
+epi
 epidata
+epidatr
+epipredict
+epiprocess
 estim
 explainability
 extraOctaves
@@ -162,6 +172,7 @@ firstOutputSine
 fitSignals
 fitSignalsScalograms
 fitSignalsSecondLayer
+flatline
 fractally
 freqStd
 frobenius
@@ -186,12 +197,14 @@ heavisineMorl
 heavisineScalogram
 heavisineScatteredMorlet
 homecare
+hotspot
 htb
 https
 inputGradientSecond
 inputSignal
 interpretability
 invertibility
+jank
 jemisin
 jl
 jupyter
@@ -211,6 +224,7 @@ logeais
 mahoney's
 maximizers
 millennials
+minh
 mirin
 miso
 modelling
@@ -234,6 +248,7 @@ omiprazole
 oneDelta
 oneDeltaNormalized
 oneDeltaUnnorm
+onwards
 optimisation
 outputPool
 parameterizing

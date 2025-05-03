@@ -1,0 +1,28 @@
+# This is a list of python packages required for using doom effectively
+name: doom
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - pip
+  - ruff
+  - ruff-lsp
+  - prettier
+  - debugpy
+  - jedi
+  - ipython
+  - latexindent.pl
+  - jupyter-lsp
+  - pytest
+  # python-lsp-server and it's quasi-dependencies
+  - python-lsp-server
+  - rope
+  - pyflakes
+  - mccabe
+  - pycodestyle
+  - yapf
+  - pip:
+      - semgrep
+      - basedpyright
+      - jedi-language-server
