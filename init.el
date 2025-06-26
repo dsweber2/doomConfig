@@ -25,8 +25,9 @@
        (corfu +orderless)  ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ivy                 ; a search engine for love and life
-       (vertico +icons)    ; the search engine of the future
+       (vertico 
+	 +icons 
+	 +childframe)      ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -69,12 +70,13 @@
        word-wrap           ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +dirvish +icons) ; making dired pretty [functional]
-       electric          ; smarter, keyword-based electric-indent
+       (dired +dirvish 
+	      +icons)      ; making dired pretty [functional]
+       electric            ; smarter, keyword-based electric-indent
        ;;eww               ; the internet is gross
-       ibuffer           ; interactive buffer management
-       (undo +tree)      ; persistent, smarter undo for your inevitable mistakes undo
-       vc                ; version-control and Emacs, sitting in a tree
+       ibuffer             ; interactive buffer management
+       (undo +tree)        ; persistent, smarter undo for your inevitable mistakes undo
+       vc                  ; version-control and Emacs, sitting in a tree
 
        :term
        eshell              ; the elisp shell that works everywhere

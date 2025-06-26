@@ -277,6 +277,7 @@ that."
   ;; or
   ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
+  (setq lsp-file-watch-threshold 5000)
   )
 
 (after! lsp
