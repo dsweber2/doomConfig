@@ -15,6 +15,17 @@ dependencies:
   - latexindent.pl
   - jupyter-lsp
   - pytest
+  - apache-airflow-providers-slack
+  - us
+  - epiweeks
+  - sodapy
+  - numpy
+  - pandas
+  - importlib_resources
+  - apache-airflow-providers-postgres
+  - apache-airflow-providers-openlineage
+  - apache-airflow-providers-amazon
+  - python-dotenv
   # python-lsp-server and it's quasi-dependencies
   - python-lsp-server
   - rope

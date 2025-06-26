@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Jupyter source block with session
+# uuid:
+# key: jup+
+# condition: t                         
+# --
+#+begin-src jupyter-python :session *`(buffer-name)`
+
+#+end-src

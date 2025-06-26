@@ -267,84 +267,6 @@ that."
   (setq org-log-into-drawer t)
   (setq org-log-state-notes-into-drawer t))
 
-(after! org
-  (setq forge-org-list (file-name-concat org-directory "forge.org"))
-
-  (defun forge-add-column (which-table)
-    "add a column indicating whether it has been added to `\\[forge-org-list]'"
-    (condition-case nil
-        (forge-sql [:alter-table $s1 :add :column is-in-org] which-table)
-      (emacsql-error t)))
-
-  (defun forge-capture-find-headline ()
-    "In large part adapted from org-capture-set-target-location, which can't handle substituting a function for a string for the headline"
-    (set-buffer (org-capture-target-buffer forge-org-list))
-    ;; Org expects the target file to be in Org mode, otherwise
-    ;; it throws an error.  However, the default notes files
-    ;; should work out of the box.  In this case, we switch it to
-    ;; Org mode.
-    (unless (derived-mode-p 'org-mode)
-      (org-display-warning
-       (format "Capture requirement: switching buffer %S to Org mode"
-	       (current-buffer)))
-      (org-mode))
-    (org-capture-put-target-region-and-position)
-    (widen)
-    (goto-char (point-min))
-    (let ((headline (nth 0 forge-global-tmp)))
-      (if (re-search-forward (format org-complex-heading-regexp-format
-			             (regexp-quote headline))
-			     nil t)
-          (beginning-of-line)
-        (goto-char (point-max))
-        (unless (bolp) (insert "\n"))
-        (insert "* " headline "\n")
-        (insert ":PROPERTIES:\n:CATEGORY: " headline "\n:END:")
-        (beginning-of-line 0)))
-    )
-  ;; add a template for issues and pull requests
-  (nconc org-capture-templates '(("f" "Forge")
-                                 ("fi" "Forge issue" entry (function  forge-capture-find-headline) "* %(nth 6 forge-global-tmp) [#A] Issue #%(number-to-string (nth 2 forge-global-tmp)): %(nth 3 forge-global-tmp)\n\nAuthor: %(nth 4 forge-global-tmp)\nCreated: %(nth 5 forge-global-tmp) \n[[orgit-topic:%(nth 7 forge-global-tmp)]]\n" :heading (nth 1 forge-global-tmp) :immediate-finish t)
-                                 ("fp" "Forge pull request" entry (function  forge-capture-find-headline) "\n* %(nth 6 forge-global-tmp) [#A] Pull-Req #%(number-to-string (nth 2 forge-global-tmp)): %(nth 3 forge-global-tmp)\n\nAuthor: %(nth 4 forge-global-tmp)\nCreated: %(nth 5 forge-global-tmp)\n" :heading (nth 1 forge-global-tmp) :immediate-finish t :prepend nil)))
-  (defun org-add-forge (org-template-type forge-item-type repo-name repo-owner repo-id number title author created state id)
-    "add a particular issue to the org-forge file."
-    (let ((todo-state (if (equal state 'open) "TODO" "DONE"))
-          (created-date (concat "<" (substring created 0 10) ">")))
-      (setq forge-global-tmp (list repo-name repo-owner number title author created-date todo-state id repo-id))
-      (if (org-capture 4 org-template-type) ; add to the list
-          (emacsql (forge-db) [:update $s3 :set is-in-org := 't :where (= id $s2)]
-                   (forge--tablist-columns-vector) id forge-item-type)
-        (signal 'error "org capture failed for some reason"))
-      ))
-  (defun org-forge-issues (repo)
-    "make a list of org-forge issues that haven't been added yet"
-    (let* ((forge (nth 0 repo))
-           (repo-id (nth 1 repo))
-           (repo-name (nth 2 repo))
-           (repo-owner (nth 3 repo))
-           (issues (forge-sql [:select [number title author created state id] :from issue :where (and (= repository $s2) (is is-in-org nil))] (forge--tablist-columns-vector) repo-id))
-           (pullreqs (forge-sql [:select [number title author created state id] :from pullreq :where (and (= repository $s2) (is is-in-org nil))] (forge--tablist-columns-vector) repo-id))
-           )
-      (mapcar (lambda (issue) (apply 'org-add-forge "fi" 'issue repo-name repo-owner repo-id issue)) issues) ; apply org-add to each issue
-      (mapcar (lambda (pullreq) (apply 'org-add-forge "fp" 'pullreq repo-name repo-owner repo-id pullreq)) pullreqs) ; apply org-add to each pull request
-      ))
-  (defun org-forge-update-repos ()
-    (mapcar #'org-forge-issues (forge-sql [:select [forge id name owner] :from repository :order-by [(asc owner) (asc name)]] (forge--tablist-columns-vector)))
-    )
-  (defun update-forge-org-timer (&optional interval)
-    (let ((interval (or interval "1 hour")))
-      (condition-case nil
-          (cancel-timer forge-org-timer)
-        (void-variable "void variable"))
-      (setq forge-org-timer (run-at-time interval nil #'org-forge-update-repos))))
-  (update-forge-org-timer "1 hour")
-
-  (after! (:and ob-async org-src)
-    (dolist (lang '(python r julia)) ;; FIXME: Replace your prefer language for jupyter.
-      (cl-pushnew (cons (format "jupyter-%s" lang) lang)
-                  org-src-lang-modes :key #'car)))
-  )
-
 (after! lsp
   :after ess
   (add-hook 'ess-r-mode-hook #'lsp)
@@ -355,7 +277,6 @@ that."
   ;; or
   ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
-  (setq lsp-ruff-ruff-args '("--preview"))
   )
 
 (after! lsp
@@ -377,6 +298,9 @@ that."
 (use-package! pet
   :config
   (add-hook 'python-base-mode-hook 'pet-mode -10)
+  (pet-def-config-accessor pre-commit-config
+                         :file-name "DISABLED.yaml"
+                         :parser pet-parse-config-file)
   )
 
 (after! setq '(emacs-lisp-mode))
@@ -578,6 +502,10 @@ With no prefix ARG, build with `lazy = FALSE'."
 (after! ein
   (setq org-babel-header-args '((:kernel . "julia-1.11") (:async . no)))
   (setq org-babel-default-header-args:jupyter-julia '((:kernel . "julia-1.11") (:async . no))))
+
+(map! :after julia-repl
+      :map julia-repl-mode-map
+      "C-RET" #'julia-repl-send-line)
 
 (after! evil
   (define-key evil-normal-state-map "M" 'evil-scroll-line-to-center)

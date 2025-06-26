@@ -73,6 +73,12 @@
    :repo "jkitchin/ox-ipynb"))
 (package! ess-view-data)
 
+;; TEMP FIX for magit issues
+(package! glab)
+(package! gtea)
+(package! gogs)
+(package! buck)
+
 ;; julia packages
 (package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 

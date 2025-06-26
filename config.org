@@ -213,6 +213,12 @@ since there's already one line stuff, going to the
   )
 
 #+end_src
+** Dired/dirvish settings
+#+begin_src emacs-lisp :tangle no
+;; (after! dirvish
+;;   (add-hook 'dired-mode-hook
+;;         (lambda (dired-hide-details-mode 1))))
+#+end_src
 * Ace stuff
 So the default switch windows binding is too deep for my taste, so I'm switching
 it with the meta key of facemenu
@@ -537,7 +543,7 @@ Created:
 orgit-topic
 
 The pull requests don't get a link ([[https://github.com/magit/orgit-forge][see orgit-forge]] for why).
-#+begin_src elisp :tangle yes
+#+begin_src elisp :tangle no
 (after! org
   (setq forge-org-list (file-name-concat org-directory "forge.org"))
 
@@ -734,7 +740,6 @@ delphi-epidata has a stupidly large number of files, and shouldn't be watched by
   ;; or
   ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
-  (setq lsp-ruff-ruff-args '("--preview"))
   )
 #+end_src
 
@@ -781,6 +786,9 @@ Command "pyls" is not present on the path.
 (use-package! pet
   :config
   (add-hook 'python-base-mode-hook 'pet-mode -10)
+  (pet-def-config-accessor pre-commit-config
+                         :file-name "DISABLED.yaml"
+                         :parser pet-parse-config-file)
   )
 #+end_src
 ** Anaconda
@@ -1100,6 +1108,11 @@ customizing the ob-ein languages
   )
 #+end_src
 
+#+begin_src elisp :tangle yes
+(map! :after julia-repl
+      :map julia-repl-mode-map
+      "C-RET" #'julia-repl-send-line)
+#+end_src
 * Evil Settings
 
 because I have some odd preferences about how top middle bottom should work

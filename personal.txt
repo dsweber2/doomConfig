@@ -1,4 +1,4 @@
-personal_ws-1.1 en 356
+personal_ws-1.1 en 362
 AUCs
 Amari
 AppendixFits
@@ -173,6 +173,7 @@ fitSignals
 fitSignalsScalograms
 fitSignalsSecondLayer
 flatline
+forecasted
 fractally
 freqStd
 frobenius
@@ -216,6 +217,7 @@ kobolds
 kusanagi
 kymat
 lachnospiraceae
+lamaitre
 linearFashionMNIST
 linearMNIST
 linearization
@@ -223,6 +225,7 @@ locat
 logeais
 mahoney's
 maximizers
+michala
 millennials
 minh
 mirin
@@ -278,9 +281,12 @@ realInversion
 reconstructPiecewise
 rectLong
 ress
+revisioning
+ritesh
 rmd
 robertfeldt
 rollout
+roni
 rotRad
 scalograms
 scatSparse
