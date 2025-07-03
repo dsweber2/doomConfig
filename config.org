@@ -7,7 +7,7 @@ sync` after modifying this file!
 #end_src
 
 Reference variables which are unique to a given computer (thus the separate file)
-#+INCLUDE: localLocations.org
+#+INCLUDE: localConfig.org
 * TO be debugged
 #+begin_quote
 Warning (initialization): An error occurred while loading ‘/home/dsweber/.emacs.d/.local/etc/@/init.28.elc’:
@@ -72,10 +72,6 @@ numbers are disabled. For relative line numbers, set this to `relative'.
 -
 
 * Useful variables
-doom folder location
-#+begin_src elisp :tangle yes
-(setq own-doom-home "/home/dsweber/.doom.d/")
-#+end_src
 * Base Settings and new functions
 handling reloading magit-status buffers
 #+begin_src emacs-lisp :tangle yes
@@ -269,7 +265,6 @@ it with the meta key of facemenu
 ** aspell dictionary spell whatever you want to call it:
 #+begin_src elisp :tangle yes
 (after! spell-fu
-  (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 #+end_src
@@ -740,7 +735,7 @@ delphi-epidata has a stupidly large number of files, and shouldn't be watched by
   ;; or
   ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
-  (setq lsp-file-watch-threshold 5000)
+  (setq lsp-file-watch-threshold 9000)
   )
 #+end_src
 
@@ -1003,15 +998,15 @@ and now the actual code to be tangled into ~init.el~.
   (setq juliaPkgVersion "1.11")
   (setenv "PATH"
           (concat
-           "/home/dsweber/.julia/juliaup/bin" ":"
+           julia-root "bin:"
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp)
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command julia-binary)
+  (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command julia-binary)
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
@@ -1065,9 +1060,9 @@ fixing some stuff for lsp
   (setq juliaVersion "1.11.0")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command julia-binary)
+  (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command "/home/dsweber/.juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 #+end_src
 
@@ -1085,8 +1080,8 @@ It appears that julia-repl also has some settings to adjust
 you know what else would be nice? org-babel
 #+begin_src elisp :tangle yes
 (after! ob-julia
-  (setq org-babel-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq inferior-julia-program-name "/home/dsweber/.julia/juliaup/bin/julia"))
+  (setq org-babel-julia-command julia-binary)
+  (setq inferior-julia-program-name julia-binary))
 #+end_src
 and trying ess julia instead
 #+begin_src elisp :tangle yes
@@ -1261,8 +1256,8 @@ getting another server to handle fetching data from other servers and phone acce
   (setq elfeed-use-curl t)
   (elfeed-set-timeout 36000)
   (setq elfeed-protocol-newsblur-maxpages 20)
-  (setq elfeed-curl-extra-arguments '("--cookie-jar" "/home/dsweber/tmp/newsblur-cookie"
-                                      "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
+  (setq elfeed-curl-extra-arguments (list "--cookie-jar" (concat home "tmp/newsblur-cookie")
+                                      "--cookie" (concat home "tmp/newsblur-cookie"))
   (setq elfeed-protocol-tags elfeed-feeds)
   (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
                          :password-file "~/.newsblur"
@@ -1312,16 +1307,13 @@ general keybindings
 
 combine the elfeed-score-print-entry and elfeed-goodies
 * Sunrise/sunset color theme
-From [[https://github.com/hadronzoo/theme-changer][here]]
+From [[https://github.com/hadronzoo/theme-changer][here]]. For actual location data, see localLocations.org
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! theme-changer
   :after calendar
   :config
-  (setq calendar-location-name "Minneapolis, MN")
-  (setq calendar-latitude 44.883057)
-  (setq calendar-longitude -93.228889)
   (setq theme-changer-mode 'deftheme)
-  (setq theme-changer-delay-seconds -3600)
   (change-theme 'doom-bluloco-light 'doom-henna)
 )
 #+end_src
@@ -1387,3 +1379,5 @@ three parts to this:
 #+end_src
 ** potential sources
 https://blog.jetbrains.com/blog/2024/04/04/full-line-code-completion-in-jetbrains-ides-all-you-need-to-know/#under-the-hood
+** llama powered copilot
+https://github.com/mjrusso/wingman/

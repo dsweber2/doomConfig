@@ -2,8 +2,6 @@
 
 (setq display-line-numbers-type `relative)
 
-(setq own-doom-home "/home/dsweber/.doom.d/")
-
 (after! persp-mode
   (persp-def-buffer-save/load
    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
@@ -93,7 +91,7 @@ current buffer's, reload dir-locals."
 
 (use-package! ace-window
   :config
- (global-unset-key (kbd "M-o"))
+  (global-unset-key (kbd "M-o"))
   (global-set-key (kbd "M-o") 'ace-window)
   ;;(global-set-key (kbd "C-x o") 'facemenu-menu)
   (setq aw-dispatch-always 3)
@@ -128,7 +126,6 @@ current buffer's, reload dir-locals."
   )
 
 (after! spell-fu
-  (setq ispell-dictionary "en-custom")
   (setq ispell-personal-dictionary (concat own-doom-home "personal.txt"))
   )
 
@@ -143,7 +140,7 @@ current buffer's, reload dir-locals."
 (use-package! rainbow-mode
   :config
   (rainbow-mode)
-)
+  )
 
 (after! indent
   (setq standard-indent 4))
@@ -270,14 +267,14 @@ that."
 (after! lsp
   :after ess
   (add-hook 'ess-r-mode-hook #'lsp)
-)
+  )
 
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\delphi-epidata\\'")
   ;; or
   ;; (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'")
   (setq lsp-ruff-server-command '("ruff" "server" "--preview"))
-  (setq lsp-file-watch-threshold 5000)
+  (setq lsp-file-watch-threshold 9000)
   )
 
 (after! lsp
@@ -300,8 +297,8 @@ that."
   :config
   (add-hook 'python-base-mode-hook 'pet-mode -10)
   (pet-def-config-accessor pre-commit-config
-                         :file-name "DISABLED.yaml"
-                         :parser pet-parse-config-file)
+                           :file-name "DISABLED.yaml"
+                           :parser pet-parse-config-file)
   )
 
 (after! setq '(emacs-lisp-mode))
@@ -386,18 +383,18 @@ Equivalent to `where' at the R prompt."
 
 (after! ess-r-mode
   (defun ess-r-style-pkg (&optional arg)
-  "Interface for `styler::style_pkg()'."
-  (interactive "P")
-  (ess-r-package-eval-linewise
-   "styler::style_pkg(%s)\n" "styling %s" arg
-   ))
+    "Interface for `styler::style_pkg()'."
+    (interactive "P")
+    (ess-r-package-eval-linewise
+     "styler::style_pkg(%s)\n" "styling %s" arg
+     ))
   (defun ess-r-build-site (&optional arg)
-  "Interface for `pkgdown::build_site()'.
+    "Interface for `pkgdown::build_site()'.
 With no prefix ARG, build with `lazy = FALSE'."
-  (interactive "P")
-  (ess-r-package-eval-linewise
-   "pkgdown::build_site(%s, lazy=TRUE)\n" "building site for %s" arg
-   ))
+    (interactive "P")
+    (ess-r-package-eval-linewise
+     "pkgdown::build_site(%s, lazy=TRUE)\n" "building site for %s" arg
+     ))
   (keymap-set ess-r-package-dev-map "f" #'ess-r-style-pkg)
   (keymap-set ess-r-package-dev-map "S" #'ess-r-build-site)
   )
@@ -417,15 +414,15 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq juliaPkgVersion "1.11")
   (setenv "PATH"
           (concat
-           "/home/dsweber/.julia/juliaup/bin" ":"
+           julia-root "bin:"
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp)
   (add-hook 'ess-julia-mode-hook #'lsp)
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command julia-binary)
+  (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command julia-binary)
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
@@ -477,9 +474,9 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq juliaVersion "1.11.0")
   (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq lsp-julia-flags '("--project=/home/dsweber/.julia/environments/v1.11" "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
+  (setq lsp-julia-command julia-binary)
+  (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
+  (setq lsp-julia-command "/home/dsweber/.juliaup/bin/julia")
   (setq lsp-julia-format-kw nil))
 
 (after! julia-repl
@@ -492,8 +489,8 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 
 (after! ob-julia
-  (setq org-babel-julia-command "/home/dsweber/.julia/juliaup/bin/julia")
-  (setq inferior-julia-program-name "/home/dsweber/.julia/juliaup/bin/julia"))
+  (setq org-babel-julia-command julia-binary)
+  (setq inferior-julia-program-name julia-binary))
 
 (after! ob-ess-julia
   (org-babel-do-load-languages 'org-babel-load-languages (append org-babel-load-languages '((ess-julia . t))))
@@ -621,60 +618,56 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq elfeed-use-curl t)
   (elfeed-set-timeout 36000)
   (setq elfeed-protocol-newsblur-maxpages 20)
-  (setq elfeed-curl-extra-arguments '("--cookie-jar" "/home/dsweber/tmp/newsblur-cookie"
-                                      "--cookie" "/home/dsweber/tmp/newsblur-cookie"))
-  (setq elfeed-protocol-tags elfeed-feeds)
-  (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
-                         :password-file "~/.newsblur"
-                         :autotags elfeed-protocol-tags)))
-  (defadvice elfeed (after configure-elfeed-feeds activate)
-    "Make elfeed-org autotags rules works with elfeed-protocol."
-    (setq elfeed-protocol-tags elfeed-feeds)
-    (setq elfeed-feeds (list
-                        (list "newsblur+https://HerCarverBidesDew@newsblur.com"
-                              :password-file "~/.newsblur"
-                              :autotags elfeed-protocol-tags))))
-  (elfeed-protocol-enable)
-  )
+  (setq elfeed-curl-extra-arguments (list "--cookie-jar" (concat home "tmp/newsblur-cookie")
+                                          "--cookie" (concat home "tmp/newsblur-cookie"))
+        (setq elfeed-protocol-tags elfeed-feeds)
+        (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
+                               :password-file "~/.newsblur"
+                               :autotags elfeed-protocol-tags)))
+        (defadvice elfeed (after configure-elfeed-feeds activate)
+          "Make elfeed-org autotags rules works with elfeed-protocol."
+          (setq elfeed-protocol-tags elfeed-feeds)
+          (setq elfeed-feeds (list
+                              (list "newsblur+https://HerCarverBidesDew@newsblur.com"
+                                    :password-file "~/.newsblur"
+                                    :autotags elfeed-protocol-tags))))
+        (elfeed-protocol-enable)
+        )
 
-(defun elfeed-score/toggle-debug-warn-level ()
-  (if (eq elfeed-score-log-level 'debug)
-      (setq elfeed-score-log-level 'warn)
-    (setq elfeed-score-log-level 'debug)))
+  (defun elfeed-score/toggle-debug-warn-level ()
+    (if (eq elfeed-score-log-level 'debug)
+        (setq elfeed-score-log-level 'warn)
+      (setq elfeed-score-log-level 'debug)))
 
-(map! :leader
-      (:prefix ("e" . "elfeed")
-       :desc "elfeed-score-map" "m" #'elfeed-score-map
-       :desc "open feed"        "f" #'elfeed
-       :desc "update elfeed"    "u" #'elfeed-update
-       :desc "score entries"    "s" #'elfeed-score/score
-       :desc "add score rules"  "r" #'elfeed-score-load-score-file
-       :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
-       )
-      )
+  (map! :leader
+        (:prefix ("e" . "elfeed")
+         :desc "elfeed-score-map" "m" #'elfeed-score-map
+         :desc "open feed"        "f" #'elfeed
+         :desc "update elfeed"    "u" #'elfeed-update
+         :desc "score entries"    "s" #'elfeed-score/score
+         :desc "add score rules"  "r" #'elfeed-score-load-score-file
+         :desc "toggle debug"     "d" #'elfeed-score/toggle-debug-warn-level
+         )
+        )
 
-(use-package! theme-changer
-  :after calendar
-  :config
-  (setq calendar-location-name "Minneapolis, MN")
-  (setq calendar-latitude 44.883057)
-  (setq calendar-longitude -93.228889)
-  (setq theme-changer-mode 'deftheme)
-  (setq theme-changer-delay-seconds -3600)
-  (change-theme 'doom-bluloco-light 'doom-henna)
-)
+  (use-package! theme-changer
+    :after calendar
+    :config
+    (setq theme-changer-mode 'deftheme)
+    (change-theme 'doom-bluloco-light 'doom-henna)
+    )
 
-(use-package! gptel
-  :config
-  ;; OPTIONAL configuration
-  ;; OPTIONAL configuration
-  (setq
-   gptel-model 'fastgpt
-   gptel-backend (gptel-make-kagi "Kagi"
-                   :key (password-store-get 'api_keys/llms/kagi)))
-  ;; (setq
-  ;;  gptel-model "claude-3-5-sonnet-20241022" ;  "claude-3-opus-20240229" also available
-  ;;  gptel-backend (gptel-make-anthropic "Claude"
-  ;;                  :stream t
-  ;;                  :key (password-store-get 'api_keys/llms/claude)))
-  )
+  (use-package! gptel
+    :config
+    ;; OPTIONAL configuration
+    ;; OPTIONAL configuration
+    (setq
+     gptel-model 'fastgpt
+     gptel-backend (gptel-make-kagi "Kagi"
+                     :key (password-store-get 'api_keys/llms/kagi)))
+    ;; (setq
+    ;;  gptel-model "claude-3-5-sonnet-20241022" ;  "claude-3-opus-20240229" also available
+    ;;  gptel-backend (gptel-make-anthropic "Claude"
+    ;;                  :stream t
+    ;;                  :key (password-store-get 'api_keys/llms/claude)))
+    )
