@@ -1,4 +1,4 @@
-personal_ws-1.1 en 362
+personal_ws-1.1 en 368
 AUCs
 Amari
 AppendixFits
@@ -130,6 +130,7 @@ cpus
 crimini
 cron
 cryptozoological
+csv
 cwtExs
 dapro
 decayRates
@@ -157,6 +158,7 @@ explainability
 extraOctaves
 fatherWav
 fft
+fips
 firstDerivative
 firstLayerBumpsOutput
 firstLayerCylinderOutput
@@ -192,6 +194,7 @@ gradientInputs
 grognards
 gst
 gung
+gzip
 heatmap
 heatmaps
 heavisineMorl
@@ -255,6 +258,7 @@ onwards
 optimisation
 outputPool
 parameterizing
+pdfs
 pinker's
 planarfolk
 plotOfLogCentralFrequencies
@@ -263,6 +267,7 @@ png
 pointwise
 pomodoro
 popato
+postgres
 prepended
 preprocessing
 prestructured
@@ -288,6 +293,7 @@ robertfeldt
 rollout
 roni
 rotRad
+roxygen
 scalograms
 scatSparse
 schmidhuber

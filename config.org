@@ -111,9 +111,14 @@ electric pairs are better
 #+end_src
 
 auto-fill mode (hard wrapping is +nice+ not nice methinks)
-#+begin_src elisp :tangle no
+
+#+begin_src elisp :tangle yes
 (setq-default auto-fill-function nil)
-(+global-word-wrap-mode 't)
+#+end_src
+
+turns out I just forgot to set this
+#+begin_src elisp :tangle yes
+(+global-word-wrap-mode +1)
 #+end_src
 strangely enough, the fill value is still used by jupyter, so setting it to ~264, based on my current screen
 #+begin_src elisp :tangle yes
@@ -276,11 +281,14 @@ it with the meta key of facemenu
 #+end_src
 
 ** Projectile
+custom-suffixes is telling projectile to ignore files with this ending. Atm it's to avoid pdfs, images, and R documentation files (since those are super redundant with Roxygen).
+Caching has problems with git repositories, where any branch changes make it impossible to find the file. Also the search is super fast anyways, so turning this off by default. If a project is slow, add it to the =.dir-envs.el= in the project
 #+begin_src emacs-lisp :tangle yes
 (after! projectile
   :config
   (setq custom-suffixes '(".pdf" ".png" ".svg" ".Rd"))
-  (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+  (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
+  (setq projectile-enable-caching 'nil))
 #+end_src
 
 ** counsel/ivy

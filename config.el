@@ -21,6 +21,10 @@
 
 (setq electric-pair-mode t)
 
+(setq-default auto-fill-function nil)
+
+(+global-word-wrap-mode +1)
+
 (after! emacs
   (setq fill-column 264))
 
@@ -134,7 +138,8 @@ current buffer's, reload dir-locals."
 (after! projectile
   :config
   (setq custom-suffixes '(".pdf" ".png" ".svg" ".Rd"))
-  (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes)))
+  (setq projectile-globally-ignored-file-suffixes (append projectile-globally-ignored-file-suffixes custom-suffixes))
+  (setq projectile-enable-caching 'nil))
 
 (after! counsel
   (setq counsel-rg-base-command '("rg" "--max-columns" "900" "--with-filename" "--no-heading" "--line-number" "--color" "never" "%s")))
