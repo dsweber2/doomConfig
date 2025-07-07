@@ -1,13 +1,19 @@
 #+TITLE: Config
 #+CATEGORY: emacs
+#+SETUPFILE: localConfig.org
 Place your private configuration here! Remember, you do not need to run `doom
 sync` after modifying this file!
-#begin_src elisp :tangle yes
+#+begin_src elisp :tangle no
 (setq debug-on-error t)
-#end_src
+#+end_src
+
+Load purely local configs
+#+begin_src elisp :tangle yes
+(load-file (file-name-concat doom-user-dir "localConfig.el"))
+#+end_src
+
 
 Reference variables which are unique to a given computer (thus the separate file)
-#+INCLUDE: localConfig.org
 * TO be debugged
 #+begin_quote
 Warning (initialization): An error occurred while loading ‘/home/dsweber/.emacs.d/.local/etc/@/init.28.elc’:
@@ -967,8 +973,6 @@ With no prefix ARG, build with `lazy = FALSE'."
 First, let's define the current version of Julia
 #+begin_src elisp :tangle yes
 (after! julia-repl
-  (setq juliaVersion "1.11.0")
-  (setq juliaPkgVersion "1.11")
   (setenv "JULIA_NUM_THREADS" "5"))
 #+END_SRC
 
@@ -994,16 +998,14 @@ and now the actual code to be tangled into ~init.el~.
 (use-package! lsp-julia
   :after julia-repl eshell lsp
   :config
-  (setq juliaVersion "1.11.0")
-  (setq juliaPkgVersion "1.11")
   (setenv "PATH"
           (concat
            julia-root "bin:"
            (getenv "PATH")))
   (add-hook 'julia-mode-hook 'lsp)
   (add-hook 'ess-julia-mode-hook #'lsp)
-  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" julia-version))
+  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" julia-version))
   (setq lsp-julia-command julia-binary)
   (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
   (setq lsp-julia-command julia-binary)
@@ -1056,13 +1058,11 @@ and now the actual code to be tangled into ~init.el~.
 fixing some stuff for lsp
 #+begin_src elisp :tangle yes
 (after! lsp-julia
-  (setq juliaPkgVersion "1.11")
-  (setq juliaVersion "1.11.0")
-  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" juliaPkgVersion))
-  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" juliaPkgVersion))
+  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" julia-version))
+  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" julia-version))
   (setq lsp-julia-command julia-binary)
   (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command "/home/dsweber/.juliaup/bin/julia")
+  (setq lsp-julia-command julia-binary)
   (setq lsp-julia-format-kw nil))
 #+end_src
 
@@ -1070,7 +1070,7 @@ It appears that julia-repl also has some settings to adjust
 #+begin_src elisp :tangle yes
 (after! julia-repl
   (setq julia-repl-executable-records
-        `((default ,"/home/dsweber/.julia/juliaup/bin/julia" :basedir
+        `((default, "/home/dsweber/.julia/juliaup/bin/julia" :basedir
            nil)
           )
         )
@@ -1257,7 +1257,7 @@ getting another server to handle fetching data from other servers and phone acce
   (elfeed-set-timeout 36000)
   (setq elfeed-protocol-newsblur-maxpages 20)
   (setq elfeed-curl-extra-arguments (list "--cookie-jar" (concat home "tmp/newsblur-cookie")
-                                      "--cookie" (concat home "tmp/newsblur-cookie"))
+                                      "--cookie" (concat home "tmp/newsblur-cookie")))
   (setq elfeed-protocol-tags elfeed-feeds)
   (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
                          :password-file "~/.newsblur"
@@ -1307,7 +1307,7 @@ general keybindings
 
 combine the elfeed-score-print-entry and elfeed-goodies
 * Sunrise/sunset color theme
-From [[https://github.com/hadronzoo/theme-changer][here]]. For actual location data, see localLocations.org
+From [[https://github.com/hadronzoo/theme-changer][here]]. For actual location data, see localConfig.el
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! theme-changer
