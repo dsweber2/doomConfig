@@ -1,4 +1,4 @@
-personal_ws-1.1 en 368
+personal_ws-1.1 en 377
 AUCs
 Amari
 AppendixFits
@@ -92,6 +92,7 @@ alleghany
 amaris
 analyticInversion
 angleCoverage
+args
 automata
 autoregressive
 aveDec
@@ -125,6 +126,7 @@ convBoundary
 convolutional
 coord
 coordinateFit
+copays
 covidcast
 cpus
 crimini
@@ -133,9 +135,11 @@ cryptozoological
 csv
 cwtExs
 dapro
+dataframe
 decayRates
 delphiepidata
 dev
+dicts
 discretize
 discretized
 discretizing
@@ -211,6 +215,7 @@ invertibility
 jank
 jemisin
 jl
+json
 jupyter
 kanban
 keweenaw
@@ -244,6 +249,7 @@ multinomial
 multistep
 neglectedness
 nli
+nndss
 nonlinConds
 nonlinearities
 normalWaveletTransform
@@ -265,6 +271,8 @@ plotOfLogCentralFrequencies
 pmmov
 png
 pointwise
+polar's
+polars
 pomodoro
 popato
 postgres
@@ -341,6 +349,7 @@ tokenization
 tranInv
 trefethen
 triAlone
+ucare
 unconcentrated
 unglamored
 unionista

@@ -271,8 +271,7 @@ that."
   (setq org-log-into-drawer t)
   (setq org-log-state-notes-into-drawer t))
 
-(after! lsp
-  :after ess
+(after! (:and ess lsp-mode)
   (add-hook 'ess-r-mode-hook #'lsp)
 )
 
@@ -284,20 +283,33 @@ that."
   (setq lsp-file-watch-threshold 9000)
   )
 
-(after! lsp
-  :config
+(after! lsp-mode
+  (setq python-shell-completion-native-enable 'nil)
   (push "[/\\\\]\\.PlayOnLinux\\'" lsp-file-watch-ignored-directories)
-  (setq lsp-pyright-langserver-command "basedpyright")
   (lsp-workspace-remove-all-folders)
   (add-hook 'ess-julia-mode-hook #'lsp)
-  (add-to-list 'lsp-enabled-clients #'pylsp)
-  (add-to-list 'lsp-enabled-clients #'ruff)
-  (add-to-list 'lsp-enabled-clients #'semgrep)
-  (add-to-list 'lsp-enabled-clients #'lsp-r)
+  (setq lsp-disabled-clients 'nil)
+  (add-to-list 'lsp-disabled-clients #'(py-lsp))
+  (setq lsp-enabled-clients 'nil)
+  (add-to-list 'lsp-enabled-clients #'elsa)
+  (add-to-list 'lsp-enabled-clients #'ty-ls)     ;; python
+  (add-to-list 'lsp-enabled-clients #'pyls)      ;; python
+  (add-to-list 'lsp-enabled-clients #'ruff)      ;; python
+  (add-to-list 'lsp-enabled-clients #'semgrep-ls);; various
+  (add-to-list 'lsp-enabled-clients #'lsp-r)     ;; R
+  (add-to-list 'lsp-enabled-clients #'cmakels)   ;; C
+  (add-to-list 'lsp-enabled-clients #'marksman)  ;; markdown
+  (add-to-list 'lsp-enabled-clients #'css-ls)
+  (add-to-list 'lsp-enabled-clients #'yamlls)   ;; YAML
+  ;;(add-to-list 'lsp-enabled-clients #'postgres-ls)
+  ;;(add-to-list 'lsp-enabled-clients #'lsp-pyright)
+  (add-to-list 'lsp-enabled-clients #'julia-ls)
+  ;;(add-to-list 'lsp-enabled-clients #'pylsp)
   )
 ;; (after! lsp-pyright
 ;;   :config
 ;;   (setq lsp-pyright-multi-root nil)
+;;  (setq lsp-pyright-langserver-command "basedpyright-langserver --stdio")
 ;;   )
 
 (use-package! pet
@@ -306,6 +318,12 @@ that."
   (pet-def-config-accessor pre-commit-config
                          :file-name "DISABLED.yaml"
                          :parser pet-parse-config-file)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local python-shell-interpreter (pet-executable-find "python")
+                          python-shell-virtualenv-root (pet-virtualenv-root))
+              (setq-local python-pytest-executable (pet-executable-find "pytest"))
+              ))
   )
 
 (after! setq '(emacs-lisp-mode))

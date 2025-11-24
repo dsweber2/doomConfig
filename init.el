@@ -21,8 +21,10 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       company             ; the ultimate code completion backend
-       (corfu +orderless)  ; complete with cap(f), cape and a flying feather!
+       ;;company           ; the ultimate code completion backend
+       (corfu
+        +orderless
+        +icons)            ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (vertico 
@@ -86,7 +88,7 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       (spell +everywhere) ; tasing you for misspelling mispelling
+       (spell)             ; tasing you for misspelling mispelling
        grammar             ; tasing grammar mistake every you make
 
        :tools
@@ -165,7 +167,7 @@
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
        ;;purescript        ; javascript, but functional
-       (python +lsp +conda
+       (python +lsp +cython
                +pyright)   ; beautiful 🐍 is better than ugly python
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
