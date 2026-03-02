@@ -768,22 +768,22 @@ An alternative procedure to "inherit" from another environment is [[https://stac
   (push "[/\\\\]\\.PlayOnLinux\\'" lsp-file-watch-ignored-directories)
   (lsp-workspace-remove-all-folders)
   (add-hook 'ess-julia-mode-hook #'lsp)
-  (setq lsp-disabled-clients 'nil)
-  (add-to-list 'lsp-disabled-clients #'(py-lsp))
-  (setq lsp-enabled-clients 'nil)
-  (add-to-list 'lsp-enabled-clients #'elsa)
-  (add-to-list 'lsp-enabled-clients #'ty-ls)     ;; python
-  (add-to-list 'lsp-enabled-clients #'pyls)      ;; python
-  (add-to-list 'lsp-enabled-clients #'ruff)      ;; python
-  (add-to-list 'lsp-enabled-clients #'semgrep-ls);; various
-  (add-to-list 'lsp-enabled-clients #'lsp-r)     ;; R
-  (add-to-list 'lsp-enabled-clients #'cmakels)   ;; C
-  (add-to-list 'lsp-enabled-clients #'marksman)  ;; markdown
-  (add-to-list 'lsp-enabled-clients #'css-ls)
-  (add-to-list 'lsp-enabled-clients #'yamlls)   ;; YAML
-  ;;(add-to-list 'lsp-enabled-clients #'postgres-ls)
-  ;;(add-to-list 'lsp-enabled-clients #'lsp-pyright)
-  (add-to-list 'lsp-enabled-clients #'julia-ls)
+  ;; (setq lsp-disabled-clients 'nil)
+  ;; (add-to-list 'lsp-disabled-clients #'(py-lsp))
+  ;; (setq lsp-enabled-clients 'nil)
+  ;; (add-to-list 'lsp-enabled-clients #'elsa)
+  ;; (add-to-list 'lsp-enabled-clients #'ty-ls)     ;; python
+  ;; (add-to-list 'lsp-enabled-clients #'pyls)      ;; python
+  ;; (add-to-list 'lsp-enabled-clients #'ruff)      ;; python
+  ;; (add-to-list 'lsp-enabled-clients #'semgrep-ls);; various
+  ;; (add-to-list 'lsp-enabled-clients #'lsp-r)     ;; R
+  ;; (add-to-list 'lsp-enabled-clients #'cmakels)   ;; C
+  ;; (add-to-list 'lsp-enabled-clients #'marksman)  ;; markdown
+  ;; (add-to-list 'lsp-enabled-clients #'css-ls)
+  ;; (add-to-list 'lsp-enabled-clients #'yamlls)   ;; YAML
+  ;; (add-to-list 'lsp-enabled-clients #'postgres-ls)
+  ;; (add-to-list 'lsp-enabled-clients #'lsp-pyright)
+  ;; (add-to-list 'lsp-enabled-clients #'julia-ls)
   ;;(add-to-list 'lsp-enabled-clients #'pylsp)
   )
 ;; (after! lsp-pyright

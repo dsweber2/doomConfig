@@ -1,4 +1,4 @@
-personal_ws-1.1 en 377
+personal_ws-1.1 en 378
 AUCs
 Amari
 AppendixFits
@@ -199,6 +199,7 @@ grognards
 gst
 gung
 gzip
+harenza
 heatmap
 heatmaps
 heavisineMorl
