@@ -103,3 +103,6 @@
 
 ;; llm stuff
 (package! gptel)
+(package! inheritenv)
+(package! claude-code
+  :recipe (:host github :repo "stevemolitor/claude-code.el"))

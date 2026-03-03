@@ -1,6 +1,6 @@
 #+TITLE: Config
 #+CATEGORY: emacs
-#+SETUPFILE: localConfig.org
+
 Place your private configuration here! Remember, you do not need to run `doom
 sync` after modifying this file!
 #+begin_src elisp :tangle no
@@ -351,9 +351,8 @@ that."
   (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
   )
 (map! :leader
-      :desc "insert a helm reference"
-      "i c" 'org-ref-insert-link)
-#+END_SRC
+      :desc "insert a helm reference" "i c" 'org-ref-insert-link)
+#+end_src
 
 I would like company do to things in org-mode yes please thankyou
 #+begin_src elisp :tangle yes
@@ -820,10 +819,10 @@ Command "pyls" is not present on the path.
   )
 #+end_src
 ** Anaconda
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (after! python
   (conda-env-activate "doom"))
-#end_src
+#+end_src
 *** TODO [#A] function to build dependency file
 Conda doesn't seem to have a great way to do this; it's export does a bit much, and I'm not sure it has a way to pull in imports from files. Also, automating inheriting from the development file would also be useful. That's probably actually the first thing to do.
 At the moment I'm doing this via a bash alias condaup, but that isn't accessible here for some reason. I should add a command that calls it from inside emacs.
@@ -993,7 +992,7 @@ With no prefix ARG, build with `lazy = FALSE'."
 ** Quarto mode
 #+begin_src elisp :tangle yes
 (use-package! quarto-mode
-  )
+  :defer t)
 #+end_src
 * Julia Settings
 First, let's define the current version of Julia
@@ -1402,6 +1401,44 @@ three parts to this:
   ;;                  :stream t
   ;;                  :key (password-store-get 'api_keys/llms/claude)))
   )
+#+end_src
+** Claude Code
+#+begin_src elisp :tangle yes
+(use-package! claude-code
+  :config
+  (setq claude-code-terminal-backend 'vterm)
+  (map! :leader
+        (:prefix ("l" . "Clode")
+         ;; Start/Stop
+         :desc "Claude Code"        "c" #'claude-code
+         :desc "Start in dir"       "d" #'claude-code-start-in-directory
+         :desc "Continue"           "C" #'claude-code-continue
+         :desc "Resume session"     "R" #'claude-code-resume
+         :desc "New instance"       "i" #'claude-code-new-instance
+         :desc "Kill Claude"        "k" #'claude-code-kill
+         :desc "Kill all"           "K" #'claude-code-kill-all
+         ;; Send Commands
+         :desc "Send command"       "s" #'claude-code-send-command
+         :desc "Send with context"  "x" #'claude-code-send-command-with-context
+         :desc "Send region"        "r" #'claude-code-send-region
+         :desc "Fix error"          "e" #'claude-code-fix-error-at-point
+         :desc "Fork"               "f" #'claude-code-fork
+         :desc "Slash commands"     "/" #'claude-code-slash-commands
+         :desc "Send file"          "F" #'claude-code-send-file
+         ;; Manage Claude
+         :desc "Toggle"             "t" #'claude-code-toggle
+         :desc "Switch to buffer"   "b" #'claude-code-switch-to-buffer
+         :desc "Select buffer"      "B" #'claude-code-select-buffer
+         :desc "Toggle read-only"   "z" #'claude-code-toggle-read-only-mode
+         :desc "Cycle mode"         "M" #'claude-code-cycle-mode
+         ;; Quick Responses
+         :desc "Send return"        "y" #'claude-code-send-return
+         :desc "Send escape"        "n" #'claude-code-send-escape
+         :desc "option 1"           "1" #'claude-code-send-1
+         :desc "option 2"           "2" #'claude-code-send-2
+         :desc "option 3"           "3" #'claude-code-send-3
+         ))
+)
 #+end_src
 ** potential sources
 https://blog.jetbrains.com/blog/2024/04/04/full-line-code-completion-in-jetbrains-ides-all-you-need-to-know/#under-the-hood

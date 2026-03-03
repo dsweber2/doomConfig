@@ -177,8 +177,7 @@ that."
   (setq org-latex-pdf-process (list "latexmk -f -pdf -%latex -interaction=nonstopmode -bibtex -shell-escape -output-directory=%o %f"))
   )
 (map! :leader
-      :desc "insert a helm reference"
-      "i c" 'org-ref-insert-link)
+      :desc "insert a helm reference" "i c" 'org-ref-insert-link)
 
 (setq max-lisp-eval-depth 10000)
 (setq org-extend-today-until 2)
@@ -326,6 +325,8 @@ that."
               ))
   )
 
+(setq +latex-viewers '(Okular))
+
 (after! setq '(emacs-lisp-mode))
 
 (after! ein
@@ -425,7 +426,7 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 
 (use-package! quarto-mode
-  )
+  :defer t)
 
 (after! julia-repl
   (setenv "JULIA_NUM_THREADS" "5"))
@@ -690,3 +691,24 @@ With no prefix ARG, build with `lazy = FALSE'."
   ;;                  :stream t
   ;;                  :key (password-store-get 'api_keys/llms/claude)))
   )
+
+(use-package! claude-code
+  :config
+  (setq claude-code-terminal-backend 'vterm)
+  (map! :leader
+        (:prefix ("l" . "Clode")
+         :desc "Claude Code"   "c" #'claude-code
+         :desc "Send command"  "s" #'claude-code-send-command
+         :desc "Send region"   "r" #'claude-code-send-region
+         :desc "Toggle"        "t" #'claude-code-toggle
+         :desc "Fix error"     "e" #'claude-code-fix-error-at-point
+         :desc "option 1"      "1" #'claude-code-send-1
+         :desc "option 2"      "2" #'claude-code-send-2
+         :desc "option 3"      "3" #'claude-code-send-3
+         :desc "send a file"   "f" #'claude-code-send-file
+         :desc "confirm"       "l" #'claude-code-send-return
+         :desc "new instance"  "i" #'claude-code-new-instance
+         
+         )
+   )
+)
