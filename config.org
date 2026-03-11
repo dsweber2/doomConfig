@@ -875,6 +875,26 @@ With no prefix ARG, build with `lazy = FALSE'."
 
 ** Quarto mode
 #+begin_src elisp :tangle yes
+;; polymode has a bug: it passes old-style alist cons cells (KEY . DEF) to
+;; define-keymap, which expects flat KEY DEF pairs. This advice fixes it by
+;; expanding cons cells that appear at key position (odd slots after keywords).
+;; It avoids breaking packages like smerge that legitimately pass cons cells
+;; at DEF position (even slots), e.g. ("menu-label" . command).
+(define-advice define-keymap (:filter-args (args) flatten-polymode-alist-bindings)
+  (let (result)
+    (while (and args (keywordp (car args)) (not (eq (car args) :menu)))
+      (push (pop args) result)
+      (push (pop args) result))
+    (let ((at-key t))
+      (while args
+        (let ((item (pop args)))
+          (if (and at-key (consp item) (atom (cdr item)))
+              (progn (push (car item) result)
+                     (push (cdr item) result))
+            (progn (push item result)
+                   (setq at-key (not at-key)))))))
+    (nreverse result)))
+
 (use-package! quarto-mode
   :defer t)
 #+end_src
@@ -1278,6 +1298,11 @@ three parts to this:
 (use-package! claude-code
   :config
   (setq claude-code-terminal-backend 'vterm)
+  (setq claude-code-display-window-fn
+        (lambda (buffer)
+          (display-buffer buffer '((display-buffer-in-side-window)
+                                   (side . right)
+                                   (window-width . 0.4)))))
   (map! :leader
         (:prefix ("l" . "Clode")
          ;; Start/Stop
