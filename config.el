@@ -287,29 +287,7 @@ that."
   (push "[/\\\\]\\.PlayOnLinux\\'" lsp-file-watch-ignored-directories)
   (lsp-workspace-remove-all-folders)
   (add-hook 'ess-julia-mode-hook #'lsp)
-  ;; (setq lsp-disabled-clients 'nil)
-  ;; (add-to-list 'lsp-disabled-clients #'(py-lsp))
-  ;; (setq lsp-enabled-clients 'nil)
-  ;; (add-to-list 'lsp-enabled-clients #'elsa)
-  ;; (add-to-list 'lsp-enabled-clients #'ty-ls)     ;; python
-  ;; (add-to-list 'lsp-enabled-clients #'pyls)      ;; python
-  ;; (add-to-list 'lsp-enabled-clients #'ruff)      ;; python
-  ;; (add-to-list 'lsp-enabled-clients #'semgrep-ls);; various
-  ;; (add-to-list 'lsp-enabled-clients #'lsp-r)     ;; R
-  ;; (add-to-list 'lsp-enabled-clients #'cmakels)   ;; C
-  ;; (add-to-list 'lsp-enabled-clients #'marksman)  ;; markdown
-  ;; (add-to-list 'lsp-enabled-clients #'css-ls)
-  ;; (add-to-list 'lsp-enabled-clients #'yamlls)   ;; YAML
-  ;; (add-to-list 'lsp-enabled-clients #'postgres-ls)
-  ;; (add-to-list 'lsp-enabled-clients #'lsp-pyright)
-  ;; (add-to-list 'lsp-enabled-clients #'julia-ls)
-  ;;(add-to-list 'lsp-enabled-clients #'pylsp)
   )
-;; (after! lsp-pyright
-;;   :config
-;;   (setq lsp-pyright-multi-root nil)
-;;  (setq lsp-pyright-langserver-command "basedpyright-langserver --stdio")
-;;   )
 
 (use-package! pet
   :config
@@ -326,8 +304,6 @@ that."
   )
 
 (setq +latex-viewers '(Okular))
-
-(after! setq '(emacs-lisp-mode))
 
 (after! ein
   (setq ein:output-area-inlined-images t))
@@ -444,7 +420,6 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq lsp-julia-package-dir (concat "~/.julia/environments/v" julia-version))
   (setq lsp-julia-command julia-binary)
   (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command julia-binary)
   (setq lsp-julia-timeout 12000)
   (setq lsp-enable-folding t)
   (setq julia-indent-offset 4)
@@ -492,11 +467,6 @@ With no prefix ARG, build with `lazy = FALSE'."
   )
 
 (after! lsp-julia
-  (setq lsp-julia-default-environment (concat "~/.julia/environments/v" julia-version))
-  (setq lsp-julia-package-dir (concat "~/.julia/environments/v" julia-version))
-  (setq lsp-julia-command julia-binary)
-  (setq lsp-julia-flags (list (concat "--project=" julia-root "environments/v" julia-version) "--startup-file=no" "--history-file=no"))
-  (setq lsp-julia-command julia-binary)
   (setq lsp-julia-format-kw nil))
 
 (after! julia-repl
@@ -533,10 +503,8 @@ With no prefix ARG, build with `lazy = FALSE'."
   (define-key evil-normal-state-map "zL" 'evil-window-bottom)
   (define-key evil-normal-state-map "zH" 'evil-window-top)
   (define-key evil-normal-state-map "zl" 'evil-scroll-left)
-  (define-key evil-normal-state-map "zH" 'evil-scroll-right)
-  (define-key evil-normal-state-map "zH" 'evil-window-top)
   (setq evil-cross-lines t) ;; fF etc go beyond the current line
-  (setq evil-want-Y-yank-to-eol 'nil)
+  (setq evil-want-Y-yank-to-eol t)
   )
 
 (use-package! evil-quickscope
@@ -597,10 +565,6 @@ With no prefix ARG, build with `lazy = FALSE'."
     "how many seconds correspond to a single score point. Default is 6048 so that
          a week difference gives a score of 100"
     :group 'elfeed-equalize)
-  (defcustom elfeed-equalize-random-rate (/ (+ (log 3) (/ (log 11) 2)) 100.0)
-    "the coefficient for converting scores to softmax eval. Default maps 100 to a
-        correct sorting probability of 99%)"
-    :group 'elfeed-equalize)
 
   (defun softmax (x)
     (let ((term (exp (* 2 x))))
@@ -627,8 +591,6 @@ With no prefix ARG, build with `lazy = FALSE'."
       ))
   (setq elfeed-search-sort-function #'elfeed-score-softmax-swap)
   )
-(setq a-date 3425)
-(setq b-date 3295)
 
 (setq elfeed-log-level 'debug)
 ;; (toggle-debug-on-error)
@@ -644,13 +606,14 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq elfeed-feeds '(( "newsblur+https://HerCarverBidesDew@newsblur.com"
                          :password-file "~/.newsblur"
                          :autotags elfeed-protocol-tags)))
-  (defadvice elfeed (after configure-elfeed-feeds activate)
-    "Make elfeed-org autotags rules works with elfeed-protocol."
-    (setq elfeed-protocol-tags elfeed-feeds)
-    (setq elfeed-feeds (list
-                        (list "newsblur+https://HerCarverBidesDew@newsblur.com"
-                              :password-file "~/.newsblur"
-                              :autotags elfeed-protocol-tags))))
+  (advice-add 'elfeed :after
+    (lambda ()
+      "Make elfeed-org autotags rules works with elfeed-protocol."
+      (setq elfeed-protocol-tags elfeed-feeds)
+      (setq elfeed-feeds (list
+                          (list "newsblur+https://HerCarverBidesDew@newsblur.com"
+                                :password-file "~/.newsblur"
+                                :autotags elfeed-protocol-tags)))))
   (elfeed-protocol-enable)
   )
 
@@ -697,18 +660,33 @@ With no prefix ARG, build with `lazy = FALSE'."
   (setq claude-code-terminal-backend 'vterm)
   (map! :leader
         (:prefix ("l" . "Clode")
-         :desc "Claude Code"   "c" #'claude-code
-         :desc "Send command"  "s" #'claude-code-send-command
-         :desc "Send region"   "r" #'claude-code-send-region
-         :desc "Toggle"        "t" #'claude-code-toggle
-         :desc "Fix error"     "e" #'claude-code-fix-error-at-point
-         :desc "option 1"      "1" #'claude-code-send-1
-         :desc "option 2"      "2" #'claude-code-send-2
-         :desc "option 3"      "3" #'claude-code-send-3
-         :desc "send a file"   "f" #'claude-code-send-file
-         :desc "confirm"       "l" #'claude-code-send-return
-         :desc "new instance"  "i" #'claude-code-new-instance
-         
-         )
-   )
+         ;; Start/Stop
+         :desc "Claude Code"        "c" #'claude-code
+         :desc "Start in dir"       "d" #'claude-code-start-in-directory
+         :desc "Continue"           "C" #'claude-code-continue
+         :desc "Resume session"     "R" #'claude-code-resume
+         :desc "New instance"       "i" #'claude-code-new-instance
+         :desc "Kill Claude"        "k" #'claude-code-kill
+         :desc "Kill all"           "K" #'claude-code-kill-all
+         ;; Send Commands
+         :desc "Send command"       "s" #'claude-code-send-command
+         :desc "Send with context"  "x" #'claude-code-send-command-with-context
+         :desc "Send region"        "r" #'claude-code-send-region
+         :desc "Fix error"          "e" #'claude-code-fix-error-at-point
+         :desc "Fork"               "f" #'claude-code-fork
+         :desc "Slash commands"     "/" #'claude-code-slash-commands
+         :desc "Send file"          "F" #'claude-code-send-file
+         ;; Manage Claude
+         :desc "Toggle"             "t" #'claude-code-toggle
+         :desc "Switch to buffer"   "b" #'claude-code-switch-to-buffer
+         :desc "Select buffer"      "B" #'claude-code-select-buffer
+         :desc "Toggle read-only"   "z" #'claude-code-toggle-read-only-mode
+         :desc "Cycle mode"         "M" #'claude-code-cycle-mode
+         ;; Quick Responses
+         :desc "Send return"        "y" #'claude-code-send-return
+         :desc "Send escape"        "n" #'claude-code-send-escape
+         :desc "option 1"           "1" #'claude-code-send-1
+         :desc "option 2"           "2" #'claude-code-send-2
+         :desc "option 3"           "3" #'claude-code-send-3
+         ))
 )
