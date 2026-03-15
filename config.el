@@ -304,6 +304,11 @@ that."
   )
 
 (after! sql
+  ;; Remove password from login params so Emacs doesn't prompt for it,
+  ;; allowing ~/.pgpass to handle auth instead.
+  (setq sql-postgres-login-params '(user database server port))
+  (setq sql-password nil)
+
   (setq sql-connection-alist
         '((local
            (sql-product 'postgres)
@@ -700,6 +705,13 @@ With no prefix ARG, build with `lazy = FALSE'."
 (use-package! claude-code
   :config
   (setq claude-code-terminal-backend 'vterm)
+  ;; evil-collection puts vterm in insert state, shadowing claude-code's local
+  ;; keymap. Switch claude-code buffers to emacs state so all keys pass through
+  ;; as intended (C-g, S-return, M-return etc. all work correctly).
+  (add-hook 'claude-code-start-hook
+            (lambda ()
+              (setq-local evil-default-state 'emacs)
+              (evil-emacs-state)))
   (setq claude-code-display-window-fn
         (lambda (buffer)
           (display-buffer buffer '((display-buffer-in-side-window)

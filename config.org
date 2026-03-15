@@ -1330,6 +1330,13 @@ three parts to this:
 (use-package! claude-code
   :config
   (setq claude-code-terminal-backend 'vterm)
+  ;; evil-collection puts vterm in insert state, shadowing claude-code's local
+  ;; keymap. Switch claude-code buffers to emacs state so all keys pass through
+  ;; as intended (C-g, S-return, M-return etc. all work correctly).
+  (add-hook 'claude-code-start-hook
+            (lambda ()
+              (setq-local evil-default-state 'emacs)
+              (evil-emacs-state)))
   (setq claude-code-display-window-fn
         (lambda (buffer)
           (display-buffer buffer '((display-buffer-in-side-window)
