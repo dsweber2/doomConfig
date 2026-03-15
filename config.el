@@ -303,6 +303,28 @@ that."
               ))
   )
 
+(after! sql
+  (setq sql-connection-alist
+        '((local
+           (sql-product 'postgres)
+           (sql-server "localhost")
+           (sql-user "postgres")
+           (sql-database "postgres")
+           (sql-port 5432))))
+
+  (defun my/sql-connect (connection)
+    "Connect to a named SQL connection from `sql-connection-alist'."
+    (interactive
+     (list (intern (completing-read "Connection: "
+                                    (mapcar #'car sql-connection-alist)))))
+    (sql-connect connection))
+
+  (map! :leader
+        (:prefix ("D" . "database")
+         :desc "Connect"  "c" #'my/sql-connect
+         :desc "List"     "l" #'sql-list-table
+         :desc "Describe" "d" #'sql-describe-table)))
+
 (setq +latex-viewers '(Okular))
 
 (after! ein

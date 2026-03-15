@@ -718,6 +718,38 @@ At the moment I'm doing this via a bash alias condaup, but that isn't accessible
 *** TODO [#A] write update conda environment function
 ** Troubleshooting
 basedpyright, and actually most of the others are a bit overeager about adding to the watch-list. it is located at [[file:~/.emacs.d/.local/cache/lsp-session]], and is a very long string. There's actually several functions for clearing this: =lsp-workspace-folders-remove=, lsp-workspace-remove-all-folders. there's also an add (seems redundant), an open (goes to the directory), and a switch
+* SQL stuff
+** Connection presets
+Use =M-x sql-connect= to pick a named connection. Add entries to =sql-connection-alist= as needed.
+Passwords are intentionally omitted here — use =~/.pgpass= (format: =hostname:port:database:username:password=) so postgres skips the prompt automatically.
+#+begin_src elisp :tangle yes
+(after! sql
+  ;; Remove password from login params so Emacs doesn't prompt for it,
+  ;; allowing ~/.pgpass to handle auth instead.
+  (setq sql-postgres-login-params '(user database server port))
+  (setq sql-password nil)
+
+  (setq sql-connection-alist
+        '((local
+           (sql-product 'postgres)
+           (sql-server "localhost")
+           (sql-user "postgres")
+           (sql-database "postgres")
+           (sql-port 5432))))
+
+  (defun my/sql-connect (connection)
+    "Connect to a named SQL connection from `sql-connection-alist'."
+    (interactive
+     (list (intern (completing-read "Connection: "
+                                    (mapcar #'car sql-connection-alist)))))
+    (sql-connect connection))
+
+  (map! :leader
+        (:prefix ("D" . "database")
+         :desc "Connect"  "c" #'my/sql-connect
+         :desc "List"     "l" #'sql-list-table
+         :desc "Describe" "d" #'sql-describe-table)))
+#+end_src
 * LaTeX stuff
 Used to work, seems to have borked since the re-install unfortunately.
 #+begin_src elisp :tangle yes
